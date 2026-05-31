@@ -15,6 +15,59 @@ let addColor = document.querySelector("#submit");
 let mainDisplay = document.querySelector("#colors-display");
 let swatchBox = document.querySelector(".swatch-box");
 
+function displayColors() {
+
+	mainDisplay.textContent = ""
+
+	colorsILike.forEach(color => {
+		const swatchContainer = document.createElement("div");
+		swatchContainer.classList.add("swatch-container");
+		const swatch = document.createElement("div");
+		const header = document.createElement("h3");
+		swatch.classList.add("swatch");
+		swatch.style.backgroundColor = color;
+		header.textContent = color;
+		swatchContainer.appendChild(header);
+		swatchContainer.appendChild(swatch);
+		const dropDownMenu = document.createElement("select");
+		const menuItem = ["Delete Swatch", "Add Color Name", "Move Swatch", "Edit Swatch"]
+
+		menuItem.forEach(item => {
+			const option = document.createElement("option");
+			option.textContent = item;
+			dropDownMenu.appendChild(option);
+
+			dropDownMenu.addEventListener("change", function () {
+				let action = dropDownMenu.value;
+				switch (action) {
+					case "Delete Swatch":
+						colorsILike.splice(colorsILike.indexOf(color), 1);
+					displayColors();
+
+					break;
+				case "Add Color Name":
+
+					break;
+				case "Move Swatch":
+
+					break;
+				case "Edit Swatch":
+
+					break;
+				default:
+					break;
+			}
+		})
+		})
+		swatchContainer.appendChild(dropDownMenu);
+		mainDisplay.appendChild(swatchContainer);
+
+
+
+	});
+	localStorage.setItem("colorsILike", JSON.stringify(colorsILike));
+
+}
 
 
 addColor.addEventListener("click", function () {
@@ -31,53 +84,6 @@ addColor.addEventListener("click", function () {
 	colorsILike.push(color);
 	alert(`You added ${color} to your list!`);
 	input.value = "";
-
-	mainDisplay.textContent = ""
-
-	colorsILike.forEach(color => {
-		const swatchContainer = document.createElement("div");
-		swatchContainer.classList.add("swatch-container");
-		const swatch = document.createElement("div");
-		const header = document.createElement("h3");
-		swatch.classList.add("swatch");
-		swatch.style.backgroundColor = color;
-		header.textContent = color;
-		swatchContainer.appendChild(header);
-		swatchContainer.appendChild(swatch);
-		const dropDownMenu = document.createElement("select");
-		const menuItem = ["Delete Swatch", "Add Color Name", "Move Swatch", "Edit Swatch"]
-		menuItem.forEach(item => {
-			const option = document.createElement("option");
-			option.textContent = item;
-			dropDownMenu.appendChild(option);
-
-			dropDownMenu.addEventListener("change", function () {
-				let action = dropDownMenu.value;
-				switch (action) {
-					case "Delete Swatch":
-						colorsILike.splice(colorsILike.indexOf(color), 1);
-						break;
-					case "Add Color Name":
-
-						break;
-					case "Move Swatch":
-
-						break;
-					case "Edit Swatch":
-
-						break;
-					default:
-						break;
-				}
-			})
-		})
-		swatchContainer.appendChild(dropDownMenu);
-		mainDisplay.appendChild(swatchContainer);
-
-
-
-	});
-	localStorage.setItem("colorsILike", JSON.stringify(colorsILike));
 
 });
 
