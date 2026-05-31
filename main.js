@@ -69,6 +69,7 @@ function displayColors() {
 
 }
 
+displayColors();
 
 addColor.addEventListener("click", function () {
 	color = input.value.toLowerCase();
@@ -84,7 +85,7 @@ addColor.addEventListener("click", function () {
 	colorsILike.push(color);
 	alert(`You added ${color} to your list!`);
 	input.value = "";
-
+	displayColors();
 });
 
 
