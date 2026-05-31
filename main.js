@@ -30,18 +30,19 @@ function displayColors() {
 		swatchContainer.appendChild(header);
 		swatchContainer.appendChild(swatch);
 		const dropDownMenu = document.createElement("select");
-		const menuItem = ["Delete Swatch", "Add Color Name", "Move Swatch", "Edit Swatch"]
+		const menuItem = ["--Select --", "Delete Swatch", "Add Color Name", "Move Swatch", "Edit Swatch"]
 
 		menuItem.forEach(item => {
 			const option = document.createElement("option");
 			option.textContent = item;
 			dropDownMenu.appendChild(option);
 
-			dropDownMenu.addEventListener("change", function () {
-				let action = dropDownMenu.value;
-				switch (action) {
-					case "Delete Swatch":
-						colorsILike.splice(colorsILike.indexOf(color), 1);
+		})
+		dropDownMenu.addEventListener("change", function () {
+			let action = dropDownMenu.value;
+			switch (action) {
+				case "Delete Swatch":
+					colorsILike.splice(colorsILike.indexOf(color), 1);
 					displayColors();
 
 					break;
@@ -57,7 +58,6 @@ function displayColors() {
 				default:
 					break;
 			}
-		})
 		})
 		swatchContainer.appendChild(dropDownMenu);
 		mainDisplay.appendChild(swatchContainer);
@@ -83,7 +83,7 @@ addColor.addEventListener("click", function () {
 		return;
 	}
 	colorsILike.push(color);
-	alert(`You added ${color} to your list!`);
+	// alert(`You added ${color} to your list!`);
 	input.value = "";
 	displayColors();
 });
