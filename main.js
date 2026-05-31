@@ -2,9 +2,9 @@
 // this line will retrieve the saved array from local storage
 let colorsILike;
 if (localStorage.getItem("colorsILike") !== null) {
-  colorsILike = JSON.parse(localStorage.getItem("colorsILike"));
+	colorsILike = JSON.parse(localStorage.getItem("colorsILike"));
 } else {
-  colorsILike = [];
+	colorsILike = [];
 }
 
 let color;
@@ -15,36 +15,57 @@ let addColor = document.querySelector("#submit");
 let mainDisplay = document.querySelector("#colors-display");
 
 addColor.addEventListener("click", function () {
-  color = input.value.toLowerCase();
-  color = color.trim();
-  if (color === "") {
-    alert("Please enter a color");
-    return;
-  }
-  if (colorsILike.includes(color)) {
-    alert("You already have this color");
-    return;
-  }
-  colorsILike.push(color);
-    alert(`You added ${color} to your list!`);
-  input.value = "";
+	color = input.value.toLowerCase();
+	color = color.trim();
 
-  mainDisplay.textContent = ""
-  
-  colorsILike.forEach(color => {
-    let container = document.createElement("div");
-    container.classList.add("swatch-container");  
-    let swatch = document.createElement("div");
-    let header = document.createElement("h3");
-    swatch.classList.add("swatch");
-    swatch.style.backgroundColor = color;
-    header.textContent = color;
-    container.appendChild(header);
-    container.appendChild(swatch);
-    mainDisplay.appendChild(container); 
-  });
-    localStorage.setItem("colorsILike", JSON.stringify(colorsILike)); 
+	if (color === "") {
+		alert("Please enter a color");
+		return;
+	}
 
+	if (colorsILike.includes(color)) {
+		alert("You already have this color");
+		return;
+	}
+
+	// Check hex value for valid length
+	let validHexLength = 7
+	if color.length > validHexLength {
+		alert("Please enter a valid hex color value");
+		return;
+	}
+
+	// Check hex values are numerically valid
+	// Starts at 1 due to `#` at start
+	for (let i = 1; i < color.length; i += 2) {
+		let hexSlice = color.slice(i, i + 2);
+		let decValue = parseInt(hexSlice, 16);
+		if (isNaN(decValue)) {
+			alert("Please enter a valid hex color value");
+			return;
+		}
+	}
+
+	colorsILike.push(color);
+	alert(`You added ${color} to your list!`);
+	input.value = "";
+
+	mainDisplay.textContent = "";
+
+	colorsILike.forEach((color) => {
+		let container = document.createElement("div");
+		container.classList.add("swatch-container");
+		let swatch = document.createElement("div");
+		let header = document.createElement("h3");
+		swatch.classList.add("swatch");
+		swatch.style.backgroundColor = color;
+		header.textContent = color;
+		container.appendChild(header);
+		container.appendChild(swatch);
+		mainDisplay.appendChild(container);
+	});
+
+	localStorage.setItem("colorsILike", JSON.stringify(colorsILike));
 });
 
 // let test1Colors = [
