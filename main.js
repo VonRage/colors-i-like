@@ -29,8 +29,8 @@ addColor.addEventListener("click", function () {
 	}
 
 	// Check hex value for valid length
-	let validHexLength = 7
-	if color.length > validHexLength {
+	let validHexLength = 7;
+	if (color.length > validHexLength) {
 		alert("Please enter a valid hex color value");
 		return;
 	}
@@ -77,10 +77,9 @@ addColor.addEventListener("click", function () {
 // ];
 
 function displayColors() {
+	mainDisplay.textContent = "";
 
-	mainDisplay.textContent = ""
-
-	colorsILike.forEach(color => {
+	colorsILike.forEach((color) => {
 		const swatchContainer = document.createElement("div");
 		swatchContainer.classList.add("swatch-container");
 		const swatch = document.createElement("div");
@@ -91,14 +90,19 @@ function displayColors() {
 		swatchContainer.appendChild(header);
 		swatchContainer.appendChild(swatch);
 		const dropDownMenu = document.createElement("select");
-		const menuItem = ["--Select --", "Delete Swatch", "Add Color Name", "Move Swatch", "Edit Swatch"]
+		const menuItem = [
+			"--Select --",
+			"Delete Swatch",
+			"Add Color Name",
+			"Move Swatch",
+			"Edit Swatch",
+		];
 
-		menuItem.forEach(item => {
+		menuItem.forEach((item) => {
 			const option = document.createElement("option");
 			option.textContent = item;
 			dropDownMenu.appendChild(option);
-
-		})
+		});
 		dropDownMenu.addEventListener("change", function () {
 			let action = dropDownMenu.value;
 			switch (action) {
@@ -108,26 +112,19 @@ function displayColors() {
 
 					break;
 				case "Add Color Name":
-
 					break;
 				case "Move Swatch":
-
 					break;
 				case "Edit Swatch":
-
 					break;
 				default:
 					break;
 			}
-		})
+		});
 		swatchContainer.appendChild(dropDownMenu);
 		mainDisplay.appendChild(swatchContainer);
-
-
-
 	});
 	localStorage.setItem("colorsILike", JSON.stringify(colorsILike));
-
 }
 
 displayColors();
@@ -148,5 +145,3 @@ addColor.addEventListener("click", function () {
 	input.value = "";
 	displayColors();
 });
-
-
