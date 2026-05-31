@@ -74,7 +74,12 @@ displayColors();
 addColor.addEventListener("click", function () {
 	color = input.value.toLowerCase();
 	color = color.trim();
-	let validHexLength = 7;
+
+	if (!color.startsWith("#")) {
+		color = "#" + color;
+	}
+
+	// checks if input box is empty and if colorsILike array already has color
 	if (color === "") {
 		alert("Please enter a color");
 		return;
@@ -84,23 +89,27 @@ addColor.addEventListener("click", function () {
 	}
 
 	// Check hex value for valid length
-	else if (color.length > validHexLength) {
+	else if (color.length !== 7 && color.length !== 4) {
 		alert("Please enter a valid hex color value");
 		return;
 	}
 
 	// Check hex values are numerically valid
-	// Starts at 1 due to `#` at start
-	for (let i = 1; i < color.length; i += 2) {
-		let hexSlice = color.slice(i, i + 2);
-		let decValue = parseInt(hexSlice, 16);
-		if (isNaN(decValue)) {
+
+
+	const typedColor = color.slice(1);
+
+
+
+	for (const char of typedColor) {
+		if ((char < 'a' || char > 'f') && (char < '0' || char > '9')) {
 			alert("Please enter a valid hex color value");
 			return;
 		}
 	}
+
+
 	colorsILike.push(color);
-	// alert(`You added ${color} to your list!`);
 	input.value = "";
 	displayColors();
 });
