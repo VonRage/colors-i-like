@@ -25,8 +25,8 @@ function displayColors() {
 		const swatch = document.createElement("div");
 		const header = document.createElement("h3");
 		swatch.classList.add("swatch");
-		swatch.style.backgroundColor = color;
-		header.textContent = color;
+		swatch.style.backgroundColor = color.hexValue;
+		header.textContent = color.customName || color.hexValue;
 		swatchContainer.appendChild(header);
 		swatchContainer.appendChild(swatch);
 		const dropDownMenu = document.createElement("select");
@@ -47,6 +47,33 @@ function displayColors() {
 
 					break;
 				case "Add Color Name":
+					const colorNameDiv = document.createElement("div")
+					colorNameDiv.classList.add("color-name-box")
+					const nameInput = document.createElement("input")
+					nameInput.classList.add("color-name-input")
+					nameInput.placeholder = "Enter Color Name"
+					colorNameDiv.appendChild(nameInput);
+					const colorNameSubmitBtn = document.createElement("button")
+					colorNameSubmitBtn.textContent = "Submit"
+					colorNameDiv.appendChild(colorNameSubmitBtn);
+					const colorNameCancelBtn = document.createElement("button")
+					colorNameCancelBtn.textContent = "Cancel"
+					colorNameDiv.appendChild(colorNameCancelBtn);
+
+					colorNameSubmitBtn.addEventListener("click", function () {
+						const colorName = nameInput.value;
+						color.customName = colorName;
+						displayColors();
+					})
+					colorNameCancelBtn.addEventListener("click", function () {
+						nameInput.value = "";
+						colorNameDiv.removeChild(nameInput);
+						colorNameDiv.removeChild(colorNameSubmitBtn);
+						colorNameDiv.removeChild(colorNameCancelBtn);
+						displayColors();
+					})
+
+					swatchContainer.appendChild(colorNameDiv);
 
 					break;
 				case "Move Swatch":
@@ -109,7 +136,10 @@ addColor.addEventListener("click", function () {
 	}
 
 
-	colorsILike.push(color);
+	colorsILike.push({
+		hexValue: color,
+		customName: ""
+	});
 	input.value = "";
 	displayColors();
 });
