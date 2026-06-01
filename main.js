@@ -110,7 +110,7 @@ addColor.addEventListener("click", function () {
 	if (color === "") {
 		alert("Please enter a color");
 		return;
-	} else if (colorsILike.includes(color)) {
+	} else if (colorsILike.some(colorObject => colorObject.hexValue === color)) {
 		alert("You already have this color");
 		return;
 	}
