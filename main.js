@@ -1,5 +1,6 @@
 // global variables and initilizations
 // this line will retrieve the saved array from local storage
+// localStorage.clear()
 let colorsILike;
 if (localStorage.getItem("colorsILike") !== null) {
 	colorsILike = JSON.parse(localStorage.getItem("colorsILike"));
@@ -25,12 +26,18 @@ function displayColors() {
 		const swatch = document.createElement("div");
 		const header = document.createElement("h3");
 		swatch.classList.add("swatch");
-		swatch.style.backgroundColor = color.hexValue;
-		header.textContent = color.customName || color.hexValue;
+		swatch.style.backgroundColor = color.hexValue
+		header.textContent = color.hexValue;
 		swatchContainer.appendChild(header);
+
+		if (color.customName !== "") {
+			const colorName = document.createElement("p");
+			colorName.textContent = color.customName;
+			swatchContainer.appendChild(colorName);
+		}
 		swatchContainer.appendChild(swatch);
 		const dropDownMenu = document.createElement("select");
-		const menuItem = ["--Select --", "Delete Swatch", "Add Color Name", "Move Swatch", "Edit Swatch"]
+		const menuItem = ["--Select --", "Delete Swatch", "Add Color Name", "Reorder", "Edit Swatch", "Make New List"]
 
 		menuItem.forEach(item => {
 			const option = document.createElement("option");
@@ -54,15 +61,14 @@ function displayColors() {
 					nameInput.placeholder = "Enter Color Name"
 					colorNameDiv.appendChild(nameInput);
 					const colorNameSubmitBtn = document.createElement("button")
-					colorNameSubmitBtn.textContent = "Submit"
+					colorNameSubmitBtn.textContent = "Add"
 					colorNameDiv.appendChild(colorNameSubmitBtn);
 					const colorNameCancelBtn = document.createElement("button")
 					colorNameCancelBtn.textContent = "Cancel"
 					colorNameDiv.appendChild(colorNameCancelBtn);
 
 					colorNameSubmitBtn.addEventListener("click", function () {
-						const colorName = nameInput.value;
-						color.customName = colorName;
+						color.customName = nameInput.value;
 						displayColors();
 					})
 					colorNameCancelBtn.addEventListener("click", function () {
@@ -76,10 +82,14 @@ function displayColors() {
 					swatchContainer.appendChild(colorNameDiv);
 
 					break;
-				case "Move Swatch":
+				case "Reorder":
 
 					break;
 				case "Edit Swatch":
+
+					break;
+				case "Make New List":
+
 
 					break;
 				default:
