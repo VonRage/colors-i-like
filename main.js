@@ -97,8 +97,35 @@ function displayColors() {
 
 						break;
 					case "Make New List":
+						const newListDiv = document.createElement("div")
+						newListDiv.classList.add("new-list-box")
+						const newListInput = document.createElement("input")
+						newListInput.classList.add("new-list-input")
+						newListInput.placeholder = "Name of New List"
+						newListDiv.appendChild(newListInput);
+						const newListSubmitBtn = document.createElement("button")
+						newListSubmitBtn.textContent = "Create"
+						newListDiv.appendChild(newListSubmitBtn);
+						const newListCancelBtn = document.createElement("button")
+						newListCancelBtn.textContent = "Cancel"
+						newListDiv.appendChild(newListCancelBtn);
 
+						newListSubmitBtn.addEventListener("click", function () {
+							colorsILike[newListInput.value] = [];
+							colorsILike[newListInput.value].push(color);
+							currentList = newListInput.value;
+							displayColors();
 
+						})
+						newListCancelBtn.addEventListener("click", function () {
+							newListInput.value = "";
+							newListDiv.removeChild(newListInput);
+							newListDiv.removeChild(newListSubmitBtn);
+							newListDiv.removeChild(newListCancelBtn);
+							displayColors();
+						})
+
+						swatchContainer.appendChild(newListDiv);
 						break;
 					case "Move to List":
 
