@@ -12,7 +12,7 @@ let color;
 // push input box to array
 // transfer and clean string to useable data
 let input = document.querySelector("#input");
-let addColor = document.querySelector("#submit");
+let addToMyColors = document.querySelector("#submit");
 let mainDisplay = document.querySelector("#colors-display");
 let swatchBox = document.querySelector(".swatch-box");
 
@@ -44,11 +44,35 @@ function displayColors() {
 
 					break;
 				case "Rename List":
+					const editListName = document.createElement("input")
+					editListName.classList.add("edit-list-name-input")
+					editListName.value = listName;
+					const editListNameSubmitBtn = document.createElement("button")
+					editListNameSubmitBtn.textContent = "Confirm"
+					listDiv.appendChild(editListName);
+					listDiv.appendChild(editListNameSubmitBtn);
+
+					editListNameSubmitBtn.addEventListener("click", function () {
+						if (editListName.value === "") {
+							alert("Please add a name for the list")
+							return;
+						}
+						else if (editListName.value !== listName) {
+							// this line is replacing the key value 
+							colorsILike[editListName.value] = colorsILike[listName];
+							delete colorsILike[listName];
+							currentList = editListName.value;
+						}
+
+						displayColors()
+
+					})
 
 					break;
 				case "Add Color":
 
 					break;
+
 				default:
 					break;
 			}
@@ -178,7 +202,7 @@ function displayColors() {
 
 displayColors();
 
-addColor.addEventListener("click", function () {
+addToMyColors.addEventListener("click", function () {
 	if (colorsILike[currentList] === undefined) {
 		colorsILike[currentList] = [];
 	}
