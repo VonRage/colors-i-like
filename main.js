@@ -112,8 +112,9 @@ function displayColors() {
 
 						newListSubmitBtn.addEventListener("click", function () {
 							colorsILike[newListInput.value] = [];
-							colorsILike[newListInput.value].push(color);
 							currentList = newListInput.value;
+							colorsILike[listName].splice(colorsILike[listName].indexOf(color), 1);
+							colorsILike[currentList].push(structuredClone(color));
 							displayColors();
 
 						})
@@ -192,6 +193,7 @@ addColor.addEventListener("click", function () {
 		hexValue: color,
 		customName: ""
 	});
+
 	input.value = "";
 	displayColors();
 });
