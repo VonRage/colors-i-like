@@ -5,9 +5,9 @@ let colorsILike;
 if (localStorage.getItem("colorsILike") !== null) {
 	colorsILike = JSON.parse(localStorage.getItem("colorsILike"));
 } else {
-	colorsILike = [];
+	colorsILike = {};
 }
-
+let currentList = "My Colors";
 let color;
 // push input box to array
 // transfer and clean string to useable data
@@ -20,95 +20,111 @@ function displayColors() {
 
 	mainDisplay.textContent = ""
 
-	colorsILike.forEach(color => {
-		const swatchContainer = document.createElement("div");
-		swatchContainer.classList.add("swatch-container");
-		const swatch = document.createElement("div");
-		const header = document.createElement("h3");
-		swatch.classList.add("swatch");
-		swatch.style.backgroundColor = color.hexValue
-		header.textContent = color.hexValue;
-		swatchContainer.appendChild(header);
+	Object.keys(colorsILike).forEach(listName => {
+		const listDiv = document.createElement("div");
+		listDiv.classList.add("list-div");
+		const listHeader = document.createElement("h2");
+		listHeader.textContent = listName;
+		listDiv.appendChild(listHeader);
 
-		if (color.customName !== "") {
-			const colorName = document.createElement("p");
-			colorName.textContent = color.customName;
-			swatchContainer.appendChild(colorName);
-		}
-		swatchContainer.appendChild(swatch);
-		const dropDownMenu = document.createElement("select");
-		const menuItem = ["--Select --", "Delete Swatch", "Add Color Name", "Reorder", "Edit Swatch", "Make New List"]
+		colorsILike[listName].forEach(color => {
+			const swatchContainer = document.createElement("div");
+			swatchContainer.classList.add("swatch-container");
+			const swatch = document.createElement("div");
+			const header = document.createElement("h3");
+			swatch.classList.add("swatch");
+			swatch.style.backgroundColor = color.hexValue
+			header.textContent = color.hexValue;
+			swatchContainer.appendChild(header);
 
-		menuItem.forEach(item => {
-			const option = document.createElement("option");
-			option.textContent = item;
-			dropDownMenu.appendChild(option);
-
-		})
-		dropDownMenu.addEventListener("change", function () {
-			let action = dropDownMenu.value;
-			switch (action) {
-				case "Delete Swatch":
-					colorsILike.splice(colorsILike.indexOf(color), 1);
-					displayColors();
-
-					break;
-				case "Add Color Name":
-					const colorNameDiv = document.createElement("div")
-					colorNameDiv.classList.add("color-name-box")
-					const nameInput = document.createElement("input")
-					nameInput.classList.add("color-name-input")
-					nameInput.placeholder = "Enter Color Name"
-					colorNameDiv.appendChild(nameInput);
-					const colorNameSubmitBtn = document.createElement("button")
-					colorNameSubmitBtn.textContent = "Add"
-					colorNameDiv.appendChild(colorNameSubmitBtn);
-					const colorNameCancelBtn = document.createElement("button")
-					colorNameCancelBtn.textContent = "Cancel"
-					colorNameDiv.appendChild(colorNameCancelBtn);
-
-					colorNameSubmitBtn.addEventListener("click", function () {
-						color.customName = nameInput.value;
-						displayColors();
-					})
-					colorNameCancelBtn.addEventListener("click", function () {
-						nameInput.value = "";
-						colorNameDiv.removeChild(nameInput);
-						colorNameDiv.removeChild(colorNameSubmitBtn);
-						colorNameDiv.removeChild(colorNameCancelBtn);
-						displayColors();
-					})
-
-					swatchContainer.appendChild(colorNameDiv);
-
-					break;
-				case "Reorder":
-
-					break;
-				case "Edit Swatch":
-
-					break;
-				case "Make New List":
-
-
-					break;
-				default:
-					break;
+			if (color.customName !== "") {
+				const colorName = document.createElement("p");
+				colorName.textContent = color.customName;
+				swatchContainer.appendChild(colorName);
 			}
-		})
-		swatchContainer.appendChild(dropDownMenu);
-		mainDisplay.appendChild(swatchContainer);
+			swatchContainer.appendChild(swatch);
+			const dropDownMenu = document.createElement("select");
+			const menuItem = ["--Select --", "Delete Swatch", "Add Color Name", "Reorder", "Edit Swatch", "Make New List", "Move to List"]
 
 
+			menuItem.forEach(item => {
+				const option = document.createElement("option");
+				option.textContent = item;
+				dropDownMenu.appendChild(option);
+
+			})
+			dropDownMenu.addEventListener("change", function () {
+				let action = dropDownMenu.value;
+				switch (action) {
+					case "Delete Swatch":
+						colorsILike[listName].splice(colorsILike[listName].indexOf(color), 1);
+						displayColors();
+
+						break;
+					case "Add Color Name":
+						const colorNameDiv = document.createElement("div")
+						colorNameDiv.classList.add("color-name-box")
+						const nameInput = document.createElement("input")
+						nameInput.classList.add("color-name-input")
+						nameInput.placeholder = "Enter Color Name"
+						colorNameDiv.appendChild(nameInput);
+						const colorNameSubmitBtn = document.createElement("button")
+						colorNameSubmitBtn.textContent = "Add"
+						colorNameDiv.appendChild(colorNameSubmitBtn);
+						const colorNameCancelBtn = document.createElement("button")
+						colorNameCancelBtn.textContent = "Cancel"
+						colorNameDiv.appendChild(colorNameCancelBtn);
+
+						colorNameSubmitBtn.addEventListener("click", function () {
+							color.customName = nameInput.value;
+							displayColors();
+						})
+						colorNameCancelBtn.addEventListener("click", function () {
+							nameInput.value = "";
+							colorNameDiv.removeChild(nameInput);
+							colorNameDiv.removeChild(colorNameSubmitBtn);
+							colorNameDiv.removeChild(colorNameCancelBtn);
+							displayColors();
+						})
+
+						swatchContainer.appendChild(colorNameDiv);
+
+						break;
+					case "Reorder":
+
+						break;
+					case "Edit Swatch":
+
+						break;
+					case "Make New List":
+
+
+						break;
+					case "Move to List":
+
+						break;
+					default:
+						break;
+				}
+			})
+			swatchContainer.appendChild(dropDownMenu);
+			listDiv.appendChild(swatchContainer);
+
+
+
+		});
+		mainDisplay.appendChild(listDiv);
 
 	});
 	localStorage.setItem("colorsILike", JSON.stringify(colorsILike));
-
 }
 
 displayColors();
 
 addColor.addEventListener("click", function () {
+	if (colorsILike[currentList] === undefined) {
+		colorsILike[currentList] = [];
+	}
 	color = input.value.toLowerCase();
 	color = color.trim();
 
@@ -120,7 +136,7 @@ addColor.addEventListener("click", function () {
 	if (color === "") {
 		alert("Please enter a color");
 		return;
-	} else if (colorsILike.some(colorObject => colorObject.hexValue === color)) {
+	} else if (colorsILike[currentList].some(colorObject => colorObject.hexValue === color)) {
 		alert("You already have this color");
 		return;
 	}
@@ -131,7 +147,6 @@ addColor.addEventListener("click", function () {
 		return;
 	}
 
-	// Check hex values are numerically valid
 
 
 	const typedColor = color.slice(1);
@@ -146,7 +161,7 @@ addColor.addEventListener("click", function () {
 	}
 
 
-	colorsILike.push({
+	colorsILike[currentList].push({
 		hexValue: color,
 		customName: ""
 	});
