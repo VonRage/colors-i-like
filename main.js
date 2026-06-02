@@ -27,7 +27,7 @@ function displayColors() {
 		listHeader.textContent = listName;
 		listDiv.appendChild(listHeader);
 		const listHeaderDropDownMenu = document.createElement("select");
-		const listHeaderMenuItem = ["--Select--", "Delete List", "Rename List", "Add Color"]
+		const listHeaderMenuItem = ["--Edit List--", "Delete List", "Rename List", "Add Color to List"]
 
 		listHeaderMenuItem.forEach(item => {
 			const listOption = document.createElement("option");
@@ -73,7 +73,7 @@ function displayColors() {
 			}
 			swatchContainer.appendChild(swatch);
 			const swatchDropDownMenu = document.createElement("select");
-			const swatchMenuItem = ["--Select --", "Delete Swatch", "Add Color Name", "Reorder", "Edit Swatch", "Make New List", "Move to List"]
+			const swatchMenuItem = ["--Edit Swatch--", "Delete Swatch", "Add Color Name", "Reorder", "Edit Swatch", "Make New List", "Move to List"]
 
 
 			swatchMenuItem.forEach(item => {
@@ -164,7 +164,7 @@ function displayColors() {
 						break;
 				}
 			})
-			swatchContainer.appendChild(dropDownMenu);
+			swatchContainer.appendChild(swatchDropDownMenu);
 			listDiv.appendChild(swatchContainer);
 
 
