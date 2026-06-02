@@ -26,6 +26,35 @@ function displayColors() {
 		const listHeader = document.createElement("h2");
 		listHeader.textContent = listName;
 		listDiv.appendChild(listHeader);
+		const listHeaderDropDownMenu = document.createElement("select");
+		const listHeaderMenuItem = ["--Select--", "Delete List", "Rename List", "Add Color"]
+
+		listHeaderMenuItem.forEach(item => {
+			const listOption = document.createElement("option");
+			listOption.textContent = item;
+			listHeaderDropDownMenu.appendChild(listOption);
+
+		})
+		listHeaderDropDownMenu.addEventListener("change", function () {
+			let action = listHeaderDropDownMenu.value;
+			switch (action) {
+				case "Delete List":
+					delete colorsILike[listName];
+					displayColors();
+
+					break;
+				case "Rename List":
+
+					break;
+				case "Add Color":
+
+					break;
+				default:
+					break;
+			}
+		})
+		listDiv.appendChild(listHeaderDropDownMenu);	
+
 
 		colorsILike[listName].forEach(color => {
 			const swatchContainer = document.createElement("div");
@@ -43,18 +72,18 @@ function displayColors() {
 				swatchContainer.appendChild(colorName);
 			}
 			swatchContainer.appendChild(swatch);
-			const dropDownMenu = document.createElement("select");
-			const menuItem = ["--Select --", "Delete Swatch", "Add Color Name", "Reorder", "Edit Swatch", "Make New List", "Move to List"]
+			const swatchDropDownMenu = document.createElement("select");
+			const swatchMenuItem = ["--Select --", "Delete Swatch", "Add Color Name", "Reorder", "Edit Swatch", "Make New List", "Move to List"]
 
 
-			menuItem.forEach(item => {
-				const option = document.createElement("option");
-				option.textContent = item;
-				dropDownMenu.appendChild(option);
+			swatchMenuItem.forEach(item => {
+				const swatchOption = document.createElement("option");
+				swatchOption.textContent = item;
+				swatchDropDownMenu.appendChild(swatchOption);
 
 			})
-			dropDownMenu.addEventListener("change", function () {
-				let action = dropDownMenu.value;
+			swatchDropDownMenu.addEventListener("change", function () {
+				let action = swatchDropDownMenu.value;
 				switch (action) {
 					case "Delete Swatch":
 						colorsILike[listName].splice(colorsILike[listName].indexOf(color), 1);
