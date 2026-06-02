@@ -8,7 +8,7 @@ if (localStorage.getItem("colorsILike") !== null) {
 	colorsILike = {};
 }
 let currentList = "My Colors";
-let color;
+
 // push input box to array
 // transfer and clean string to useable data
 let input = document.querySelector("#input");
@@ -69,7 +69,7 @@ function displayColors() {
 					})
 
 					break;
-				case "Add Color":
+				case "Add Color to List":
 
 					break;
 
@@ -191,8 +191,6 @@ function displayColors() {
 			swatchContainer.appendChild(swatchDropDownMenu);
 			listDiv.appendChild(swatchContainer);
 
-
-
 		});
 		mainDisplay.appendChild(listDiv);
 
@@ -200,14 +198,11 @@ function displayColors() {
 	localStorage.setItem("colorsILike", JSON.stringify(colorsILike));
 }
 
-displayColors();
-
-addToMyColors.addEventListener("click", function () {
-	if (colorsILike[currentList] === undefined) {
-		colorsILike[currentList] = [];
+function addColor(selectedList, selectedColor) {
+	let color = selectedColor.trim().toLowerCase();
+	if (colorsILike[selectedList] === undefined) {
+		colorsILike[selectedList] = [];
 	}
-	color = input.value.toLowerCase();
-	color = color.trim();
 
 	if (!color.startsWith("#")) {
 		color = "#" + color;
@@ -217,7 +212,7 @@ addToMyColors.addEventListener("click", function () {
 	if (color === "") {
 		alert("Please enter a color");
 		return;
-	} else if (colorsILike[currentList].some(colorObject => colorObject.hexValue === color)) {
+	} else if (colorsILike[selectedList].some(colorObject => colorObject.hexValue === color)) {
 		alert("You already have this color");
 		return;
 	}
@@ -227,13 +222,9 @@ addToMyColors.addEventListener("click", function () {
 		alert("Please enter a valid hex color value");
 		return;
 	}
-
-
-
+	// removes # from hex value
 	const typedColor = color.slice(1);
-
-
-
+	// checks if hex value contains valid characters
 	for (const char of typedColor) {
 		if ((char < 'a' || char > 'f') && (char < '0' || char > '9')) {
 			alert("Please enter a valid hex color value");
@@ -241,14 +232,19 @@ addToMyColors.addEventListener("click", function () {
 		}
 	}
 
-
-	colorsILike[currentList].push({
+	colorsILike[selectedList].push({
 		hexValue: color,
 		customName: ""
 	});
-
 	input.value = "";
 	displayColors();
+
+}
+
+displayColors();
+
+addToMyColors.addEventListener("click", function () {
+	addColor(currentList, input.value);
 });
 
 
