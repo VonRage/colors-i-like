@@ -26,6 +26,9 @@ function displayColors() {
 		const listHeader = document.createElement("h2");
 		listHeader.textContent = listName;
 		listDiv.appendChild(listHeader);
+		const listEditDiv = document.createElement("div")
+		listEditDiv.classList.add("list-edit-div")
+		listDiv.appendChild(listEditDiv);
 		const listHeaderDropDownMenu = document.createElement("select");
 		const listHeaderMenuItem = ["--Edit List--", "Delete List", "Rename List", "Add Color to List"]
 
@@ -49,8 +52,8 @@ function displayColors() {
 					editListName.value = listName;
 					const editListNameSubmitBtn = document.createElement("button")
 					editListNameSubmitBtn.textContent = "Confirm"
-					listDiv.appendChild(editListName);
-					listDiv.appendChild(editListNameSubmitBtn);
+					listEditDiv.appendChild(editListName);
+					listEditDiv.appendChild(editListNameSubmitBtn);
 
 					editListNameSubmitBtn.addEventListener("click", function () {
 						if (editListName.value === "") {
@@ -70,6 +73,26 @@ function displayColors() {
 
 					break;
 				case "Add Color to List":
+					let listAddColor = document.createElement("input");
+					listAddColor.placeholder = "Enter Color"
+					let listAddColorSubmit = document.createElement("button");
+					listAddColorSubmit.textContent = "Add Color";
+					let listAddColorCancel = document.createElement("button");
+					listAddColorCancel.textContent = "Cancel";
+					listEditDiv.appendChild(listAddColor);
+					listEditDiv.appendChild(listAddColorSubmit);
+					listEditDiv.appendChild(listAddColorCancel);
+
+					listAddColorSubmit.addEventListener("click", function () {
+
+						addColor(listName, listAddColor.value);
+					})
+					listAddColorCancel.addEventListener("click", function () {
+						listAddColor.value = "";
+						listAddColorSubmit.remove();
+						listAddColorCancel.remove();
+						displayColors();
+					})
 
 					break;
 
@@ -182,6 +205,7 @@ function displayColors() {
 						swatchContainer.appendChild(newListDiv);
 						break;
 					case "Move to List":
+
 
 						break;
 					default:
