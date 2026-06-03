@@ -30,7 +30,7 @@ function displayColors() {
 		listEditDiv.classList.add("list-edit-div")
 		listDiv.appendChild(listEditDiv);
 		const listHeaderDropDownMenu = document.createElement("select");
-		const listHeaderMenuItem = ["--Edit List--", "Delete List", "Rename List", "Add Color to List"]
+		const listHeaderMenuItem = ["--Edit List--", "Rename List", "Add Color to List", "Delete List",]
 
 		listHeaderMenuItem.forEach(item => {
 			const listOption = document.createElement("option");
@@ -120,7 +120,7 @@ function displayColors() {
 			}
 			swatchContainer.appendChild(swatch);
 			const swatchDropDownMenu = document.createElement("select");
-			const swatchMenuItem = ["--Edit Swatch--", "Delete Swatch", "Add Color Name", "Reorder", "Edit Swatch", "Make New List", "Move to List"]
+			const swatchMenuItem = ["--Edit Swatch--", "Add Color Name", "Reorder", "Edit Swatch", "Make New List", "Move to List", "Delete Swatch"] 
 
 
 			swatchMenuItem.forEach(item => {
@@ -170,7 +170,32 @@ function displayColors() {
 
 						break;
 					case "Edit Swatch":
+						const editSwatchDiv = document.createElement("div")
+						editSwatchDiv.classList.add("edit-swatch-box")
+						const editSwatchInput = document.createElement("input")
+						editSwatchInput.classList.add("edit-swatch-input")
+						editSwatchInput.value = color.hexValue;
+						editSwatchDiv.appendChild(editSwatchInput);
+						const editSwatchSubmitBtn = document.createElement("button")
+						editSwatchSubmitBtn.textContent = "Confirm"
+						editSwatchDiv.appendChild(editSwatchSubmitBtn);
+						const editSwatchCancelBtn = document.createElement("button")
+						editSwatchCancelBtn.textContent = "Cancel"
+						editSwatchDiv.appendChild(editSwatchCancelBtn);
 
+						editSwatchSubmitBtn.addEventListener("click", function () {
+							color.hexValue = editSwatchInput.value;
+							displayColors();
+						})
+						editSwatchCancelBtn.addEventListener("click", function () {
+							editSwatchInput.value = "";
+							editSwatchDiv.removeChild(editSwatchInput);
+							editSwatchDiv.removeChild(editSwatchSubmitBtn);
+							editSwatchDiv.removeChild(editSwatchCancelBtn);
+							displayColors();
+						})
+
+						swatchContainer.appendChild(editSwatchDiv);
 						break;
 					case "Make New List":
 						const newListDiv = document.createElement("div")
