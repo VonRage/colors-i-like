@@ -205,7 +205,31 @@ function displayColors() {
 						swatchContainer.appendChild(newListDiv);
 						break;
 					case "Move to List":
+						const listMoveDropDownMenu = document.createElement("select");
+						listMoveDropDownMenu.id = "list-move-dropdown-menu";
+						const listMovePlaceholder = document.createElement("option");
+						listMovePlaceholder.textContent = "--Pick One--";
+						listMoveDropDownMenu.appendChild(listMovePlaceholder);
 
+						for (const list of Object.keys(colorsILike)) {
+							const listMoveDropDownOption = document.createElement("option");
+							if (list === listName) {
+								continue;
+							}
+							listMoveDropDownOption.textContent = list;
+							listMoveDropDownMenu.appendChild(listMoveDropDownOption);
+						}
+						listMoveDropDownMenu.addEventListener("change", function () {
+							if (listMoveDropDownMenu.value === "--Pick One--") {
+								return;
+							}
+							const newList = listMoveDropDownMenu.value;
+							colorsILike[newList].push(structuredClone(color));
+							colorsILike[listName].splice(colorsILike[listName].indexOf(color), 1);
+							displayColors();
+						})
+
+						swatchContainer.appendChild(listMoveDropDownMenu);
 
 						break;
 					default:
