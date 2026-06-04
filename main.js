@@ -45,7 +45,7 @@ function displayColors() {
 			listHeaderDropDownMenu.classList.toggle("open");
 		})
 
-		const listHeaderMenuItem = ["Rename List", "Add Color to List", "Delete List",]
+		const listHeaderMenuItem = ["Rename List", "Add Color to List", "Move List", "Change List Background", "Delete List"]
 
 		listHeaderMenuItem.forEach(item => {
 			const listOption = document.createElement("div");
@@ -55,8 +55,11 @@ function displayColors() {
 
 			listOption.addEventListener("click", function () {
 
-
 				let action = item;
+
+				if (listEditDiv.children.length > 0 && action !== "Delete List") {
+					return;
+				}
 				switch (action) {
 					case "Delete List":
 						delete colorsILike[listName];
@@ -97,25 +100,22 @@ function displayColors() {
 						const listAddColorSubmit = document.createElement("button");
 						listAddColorSubmit.classList.add("list-add-color-submit-button")
 						listAddColorSubmit.textContent = "Add Color";
-						const listAddColorCancel = document.createElement("button");
-						listAddColorCancel.classList.add("list-add-color-cancel-button")
-						listAddColorCancel.textContent = "Cancel";
+
 						listEditDiv.appendChild(listAddColor);
 						listEditDiv.appendChild(listAddColorSubmit);
-						listEditDiv.appendChild(listAddColorCancel);
 
 						listAddColorSubmit.addEventListener("click", function () {
 
 							addColor(listName, listAddColor.value);
 						})
-						listAddColorCancel.addEventListener("click", function () {
-							listAddColor.value = "";
-							listAddColorSubmit.remove();
-							listAddColorCancel.remove();
-						})
 
-					break;
+						break;
+					case "Move List":
 
+						break;
+					case "Change List Background":
+
+						break;
 					default:
 						break;
 				}
@@ -159,7 +159,14 @@ function displayColors() {
 				swatchDropDownMenu.classList.toggle("open");
 			})
 
-			const swatchMenuItem = ["Add Color Name", "Reorder", "Edit Swatch", "Make New List", "Move to List", "Delete Swatch"] 
+			const swatchMenuItem = ["Add Color Name",
+				"Edit Swatch",
+				"Move Swatch",
+				"Copy to List",
+				"Change Background",
+				"Make New List",
+				"Move to List",
+				"Delete Swatch"] 
 
 
 			swatchMenuItem.forEach(item => {
@@ -171,6 +178,14 @@ function displayColors() {
 				swatchOption.addEventListener("click", function () {
 
 					let action = item;
+					if (swatchContainer.querySelector(
+						`.swatch-add-name-container,
+						.edit-swatch-container,
+						.new-list-container,
+						.list-move-menu`
+					) && action !== "Delete Swatch") {
+						return;
+					}
 					switch (action) {
 						case "Delete Swatch":
 						colorsILike[listName].splice(colorsILike[listName].indexOf(color), 1);
@@ -183,31 +198,23 @@ function displayColors() {
 							const nameInput = document.createElement("input")
 							nameInput.classList.add("swatch-add-name-input")
 							nameInput.placeholder = "Enter Color Name"
+							nameInput.value = "Enter Color Name"
 							colorNameDiv.appendChild(nameInput);
 							const colorNameSubmitBtn = document.createElement("button")
 							colorNameSubmitBtn.classList.add("swatch-add-name-button")
 							colorNameSubmitBtn.textContent = "Add"
 							colorNameDiv.appendChild(colorNameSubmitBtn);
-							const colorNameCancelBtn = document.createElement("button")
-							colorNameCancelBtn.classList.add("swatch-add-name-button")
-							colorNameCancelBtn.textContent = "Cancel"
-							colorNameDiv.appendChild(colorNameCancelBtn);
+
 
 							colorNameSubmitBtn.addEventListener("click", function () {
 								color.customName = nameInput.value;
 								displayColors();
 							})
-							colorNameCancelBtn.addEventListener("click", function () {
-								nameInput.value = "";
-								colorNameDiv.removeChild(nameInput);
-								colorNameDiv.removeChild(colorNameSubmitBtn);
-								colorNameDiv.removeChild(colorNameCancelBtn);
-						})
 
 						swatchContainer.appendChild(colorNameDiv);
 
 						break;
-						case "Reorder":
+						case "Move Swatch":
 
 							break;
 						case "Edit Swatch":
@@ -221,21 +228,13 @@ function displayColors() {
 							editSwatchSubmitBtn.textContent = "Confirm"
 							editSwatchSubmitBtn.classList.add("edit-swatch-button")
 							editSwatchDiv.appendChild(editSwatchSubmitBtn);
-							const editSwatchCancelBtn = document.createElement("button")
-							editSwatchCancelBtn.textContent = "Cancel"
-							editSwatchCancelBtn.classList.add("edit-swatch-button")
-							editSwatchDiv.appendChild(editSwatchCancelBtn);
+
 
 							editSwatchSubmitBtn.addEventListener("click", function () {
 								color.hexValue = editSwatchInput.value;
 								displayColors();
 							})
-						editSwatchCancelBtn.addEventListener("click", function () {
-							editSwatchInput.value = "";
-							editSwatchDiv.removeChild(editSwatchInput);
-							editSwatchDiv.removeChild(editSwatchSubmitBtn);
-							editSwatchDiv.removeChild(editSwatchCancelBtn);
-						})
+
 
 						swatchContainer.appendChild(editSwatchDiv);
 						break;
@@ -250,10 +249,7 @@ function displayColors() {
 							newListSubmitBtn.textContent = "Create"
 							newListSubmitBtn.classList.add("new-list-button")
 							newListDiv.appendChild(newListSubmitBtn);
-							const newListCancelBtn = document.createElement("button")
-							newListCancelBtn.textContent = "Cancel"
-							newListCancelBtn.classList.add("new-list-button")
-							newListDiv.appendChild(newListCancelBtn);
+
 
 							newListSubmitBtn.addEventListener("click", function () {
 								colorsILike[newListInput.value] = [];
@@ -263,12 +259,7 @@ function displayColors() {
 							displayColors();
 
 						})
-						newListCancelBtn.addEventListener("click", function () {
-							newListInput.value = "";
-							newListDiv.removeChild(newListInput);
-							newListDiv.removeChild(newListSubmitBtn);
-							newListDiv.removeChild(newListCancelBtn);
-						})
+
 
 						swatchContainer.appendChild(newListDiv);
 						break;
@@ -305,6 +296,18 @@ function displayColors() {
 							swatchContainer.appendChild(listMoveDropDownMenu);
 
 							break;
+						case "Change Background":
+
+
+
+
+							break;
+						case "Copy to List":
+
+
+
+							break;
+
 						default:
 							break;
 					}
