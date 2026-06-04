@@ -8,6 +8,55 @@ if (localStorage.getItem("colorsILike") !== null) {
 	colorsILike = {};
 }
 let currentList = "My Colors";
+const genericListNames = [
+	"Bathroom",
+	"Kitchen",
+	"Bedroom",
+	"Living Room",
+	"Dining Room",
+	"Office",
+	"Exterior",
+	"Garage",
+	"Laundry Room",
+	"Nursery",
+	"Patio",
+	"webDesign"];
+
+const genericColorNames = [
+	"Red",
+	"Orange",
+	"Yellow",
+	"Green",
+	"Blue",
+	"Purple",
+	"Pink",
+	"Cyan",
+	"Magenta",
+	"Black",
+	"White",
+	"Gray",
+]
+
+const genericColors = [
+	"#ff0000",
+	"#ff7f00",
+	"#ffff00",
+	"#7fff00",
+	"#00ff00",
+	"#00ff7f",
+	"#00ffff",
+	"#007fff",
+	"#0000ff",
+	"#7f00ff",
+	"#ff00ff",
+	"#ff007f",
+]
+
+function getRandomItem(arr) {
+	return arr[Math.floor(Math.random() * arr.length)];
+}
+
+
 
 // push input box to array
 // transfer and clean string to useable data
@@ -97,6 +146,7 @@ function displayColors() {
 						const listAddColor = document.createElement("input");
 						listAddColor.classList.add("list-add-color-input")
 						listAddColor.placeholder = "Enter Color"
+						listAddColor.value = getRandomItem(genericColors);
 						const listAddColorSubmit = document.createElement("button");
 						listAddColorSubmit.classList.add("list-add-color-submit-button")
 						listAddColorSubmit.textContent = "Add Color";
@@ -198,7 +248,12 @@ function displayColors() {
 							const nameInput = document.createElement("input")
 							nameInput.classList.add("swatch-add-name-input")
 							nameInput.placeholder = "Enter Color Name"
-							nameInput.value = "Enter Color Name"
+
+							if (color.customName === "") {
+								nameInput.value = getRandomItem(genericColorNames)
+							} else {
+								nameInput.value = color.customName
+							}
 							colorNameDiv.appendChild(nameInput);
 							const colorNameSubmitBtn = document.createElement("button")
 							colorNameSubmitBtn.classList.add("swatch-add-name-button")
@@ -244,6 +299,7 @@ function displayColors() {
 							const newListInput = document.createElement("input")
 							newListInput.classList.add("new-list-input")
 							newListInput.placeholder = "Name of New List"
+							newListInput.value = getRandomItem(genericListNames);
 							newListDiv.appendChild(newListInput);
 							const newListSubmitBtn = document.createElement("button")
 							newListSubmitBtn.textContent = "Create"
@@ -277,15 +333,12 @@ function displayColors() {
 
 							for (const list of Object.keys(colorsILike)) {
 								const listMoveDropDownOption = document.createElement("div");
-								listMoveDropDownOption.classList.add("list-move-option")
-
-								if (list === listName) {
-									continue;
-								}
+								listMoveDropDownOption.classList.add("list-move-option");
 								listMoveDropDownOption.textContent = list;
 								listMoveDropDownMenu.appendChild(listMoveDropDownOption);
-								listMoveDropDownOption.addEventListener("click", function () {
 
+
+								listMoveDropDownOption.addEventListener("click", function () {
 									const newList = listMoveDropDownOption.textContent;
 									colorsILike[newList].push(structuredClone(color));
 									colorsILike[listName].splice(colorsILike[listName].indexOf(color), 1);
