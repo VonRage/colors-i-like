@@ -25,7 +25,7 @@ function displayColors() {
 		listDiv.classList.add("list-div");
 		const listHeaderContainer = document.createElement("div")
 		listHeaderContainer.classList.add("list-header-container")
-		const listHeader = document.createElement("h2");
+		const listHeader = document.createElement("h3");
 		listHeader.textContent = listName;
 		listHeader.classList.add("list-header");
 		listHeaderContainer.appendChild(listHeader)
@@ -65,20 +65,20 @@ function displayColors() {
 						break;
 					case "Rename List":
 						const editListName = document.createElement("input")
-						editListName.classList.add("edit-list-input")
-					editListName.value = listName;
-					const editListNameSubmitBtn = document.createElement("button")
-					editListNameSubmitBtn.textContent = "Confirm"
-						editListNameSubmitBtn.classList.add("edit-list-button")
-					listEditDiv.appendChild(editListName);
-					listEditDiv.appendChild(editListNameSubmitBtn);
+						editListName.classList.add("list-rename-input")
+						editListName.value = listName;
+						const editListNameSubmitBtn = document.createElement("button")
+						editListNameSubmitBtn.textContent = "Confirm"
+						editListNameSubmitBtn.classList.add("list-rename-submit-button")
+						listEditDiv.appendChild(editListName);
+						listEditDiv.appendChild(editListNameSubmitBtn);
 
-					editListNameSubmitBtn.addEventListener("click", function () {
-						if (editListName.value === "") {
-							alert("Please add a name for the list")
-							return;
-						}
-						else if (editListName.value !== listName) {
+						editListNameSubmitBtn.addEventListener("click", function () {
+							if (editListName.value === "") {
+								alert("Please add a name for the list")
+								return;
+							}
+							else if (editListName.value !== listName) {
 							// this line is replacing the key value 
 							colorsILike[editListName.value] = colorsILike[listName];
 							delete colorsILike[listName];
@@ -91,29 +91,28 @@ function displayColors() {
 
 					break;
 					case "Add Color to List":
-						let listAddColor = document.createElement("input");
-						listAddColor.classList.add("edit-list-input")
+						const listAddColor = document.createElement("input");
+						listAddColor.classList.add("list-add-color-input")
 						listAddColor.placeholder = "Enter Color"
-						let listAddColorSubmit = document.createElement("button");
-						listAddColorSubmit.classList.add("edit-list-button")
-					listAddColorSubmit.textContent = "Add Color";
-					let listAddColorCancel = document.createElement("button");
-						listAddColorCancel.classList.add("edit-list-button")
-					listAddColorCancel.textContent = "Cancel";
-					listEditDiv.appendChild(listAddColor);
-					listEditDiv.appendChild(listAddColorSubmit);
-					listEditDiv.appendChild(listAddColorCancel);
+						const listAddColorSubmit = document.createElement("button");
+						listAddColorSubmit.classList.add("list-add-color-submit-button")
+						listAddColorSubmit.textContent = "Add Color";
+						const listAddColorCancel = document.createElement("button");
+						listAddColorCancel.classList.add("list-add-color-cancel-button")
+						listAddColorCancel.textContent = "Cancel";
+						listEditDiv.appendChild(listAddColor);
+						listEditDiv.appendChild(listAddColorSubmit);
+						listEditDiv.appendChild(listAddColorCancel);
 
-					listAddColorSubmit.addEventListener("click", function () {
+						listAddColorSubmit.addEventListener("click", function () {
 
-						addColor(listName, listAddColor.value);
-					})
-					listAddColorCancel.addEventListener("click", function () {
-						listAddColor.value = "";
-						listAddColorSubmit.remove();
-						listAddColorCancel.remove();
-						displayColors();
-					})
+							addColor(listName, listAddColor.value);
+						})
+						listAddColorCancel.addEventListener("click", function () {
+							listAddColor.value = "";
+							listAddColorSubmit.remove();
+							listAddColorCancel.remove();
+						})
 
 					break;
 
@@ -133,17 +132,19 @@ function displayColors() {
 			swatchContainer.classList.add("swatch-container");
 			const swatchColor = document.createElement("div");
 			swatchColor.classList.add("swatch-color");
-			const swatchHeader = document.createElement("h3");
+			const swatchHeader = document.createElement("h4");
 			swatchHeader.classList.add("swatch-header")
 			swatchColor.style.backgroundColor = color.hexValue
 			swatchHeader.textContent = color.hexValue;
 			swatchContainer.appendChild(swatchHeader);
+			const colorName = document.createElement("h5");
+			colorName.classList.add("swatch-new-name");
+			colorName.textContent = "\u00A0"
+			swatchContainer.appendChild(colorName);
+
 
 			if (color.customName !== "") {
-				const colorName = document.createElement("p");
-				colorName.classList.add("swatch-new-name")
 				colorName.textContent = color.customName;
-				swatchContainer.appendChild(colorName);
 			}
 			swatchContainer.appendChild(swatchColor);
 
@@ -201,7 +202,6 @@ function displayColors() {
 								colorNameDiv.removeChild(nameInput);
 								colorNameDiv.removeChild(colorNameSubmitBtn);
 								colorNameDiv.removeChild(colorNameCancelBtn);
-								displayColors();
 						})
 
 						swatchContainer.appendChild(colorNameDiv);
@@ -235,7 +235,6 @@ function displayColors() {
 							editSwatchDiv.removeChild(editSwatchInput);
 							editSwatchDiv.removeChild(editSwatchSubmitBtn);
 							editSwatchDiv.removeChild(editSwatchCancelBtn);
-							displayColors();
 						})
 
 						swatchContainer.appendChild(editSwatchDiv);
@@ -269,7 +268,6 @@ function displayColors() {
 							newListDiv.removeChild(newListInput);
 							newListDiv.removeChild(newListSubmitBtn);
 							newListDiv.removeChild(newListCancelBtn);
-							displayColors();
 						})
 
 						swatchContainer.appendChild(newListDiv);
