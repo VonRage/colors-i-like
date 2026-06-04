@@ -205,37 +205,48 @@ input:hover {
   outline: 0.125rem solid #37b0f7;
 }
 
-.swatch-option,
-.list-option,
-.list-move-option {
+.edit-swatch-option,
+.edit-list-option,
+.list-move-option,
+.copy-to-list-option {
   display: none;
   background-color: #fdcfff;
   color: #194f95;
   border-radius: 0.3125rem;
 }
 
-.swatch-menu-placeholder,
+.edit-swatch-menu-placeholder,
 .edit-list-menu-placeholder,
-.list-move-placeholder {
+.list-move-placeholder,
+.copy-to-list-placeholder {
   background-color: #f3b7f5;
   color: #1f4076;
   border-radius: 0.3125rem;
 
 }
 
-.swatch-menu.open .swatch-option,
-.edit-list-menu.open .list-option,
-.list-move-menu.open .list-move-option {
+.edit-swatch-menu.open .edit-swatch-option,
+.edit-list-menu.open .edit-list-option,
+.list-move-menu.open .list-move-option,
+.copy-to-list-menu.open .copy-to-list-option {
   display: block;
 }
 
-.swatch-menu-placeholder:hover, 
+.edit-swatch-menu-placeholder:hover, 
 .edit-list-menu-placeholder:hover, 
 .list-move-placeholder:hover,
-.swatch-option:hover,
-.list-option:hover,
-.list-move-option:hover {
+.copy-to-list-placeholder:hover {
   background-color: #ce8dad;
   color: #102344;
+  cursor: pointer;
+}
+
+
+.edit-swatch-option:hover,
+.edit-list-option:hover,
+.list-move-option:hover,
+.copy-to-list-option:hover {
+  background-color: #d7a8c5;
+  color: #1d3058;
   cursor: pointer;
 }
