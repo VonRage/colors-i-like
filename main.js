@@ -23,35 +23,53 @@ function displayColors() {
 	Object.keys(colorsILike).forEach(listName => {
 		const listDiv = document.createElement("div");
 		listDiv.classList.add("list-div");
+		const listHeaderContainer = document.createElement("div")
+		listHeaderContainer.classList.add("list-header-container")
 		const listHeader = document.createElement("h2");
 		listHeader.textContent = listName;
-		listDiv.appendChild(listHeader);
+		listHeader.classList.add("list-header");
+		listHeaderContainer.appendChild(listHeader)
+		listDiv.appendChild(listHeaderContainer);
 		const listEditDiv = document.createElement("div")
-		listEditDiv.classList.add("list-edit-div")
-		listDiv.appendChild(listEditDiv);
-		const listHeaderDropDownMenu = document.createElement("select");
-		const listHeaderMenuItem = ["--Edit List--", "Rename List", "Add Color to List", "Delete List",]
+		listEditDiv.classList.add("edit-list-container")
+		listHeaderContainer.appendChild(listEditDiv);
+
+		const listHeaderDropDownMenu = document.createElement("div");
+		listHeaderDropDownMenu.classList.add("edit-list-menu")
+		const listHeaderDropDownMenuPlaceholder = document.createElement("div")
+		listHeaderDropDownMenuPlaceholder.textContent = "--Edit List--"
+		listHeaderDropDownMenuPlaceholder.classList.add("edit-list-menu-placeholder")
+		listHeaderDropDownMenu.appendChild(listHeaderDropDownMenuPlaceholder);
+
+		listHeaderDropDownMenuPlaceholder.addEventListener("click", function () {
+			listHeaderDropDownMenu.classList.toggle("open");
+		})
+
+		const listHeaderMenuItem = ["Rename List", "Add Color to List", "Delete List",]
 
 		listHeaderMenuItem.forEach(item => {
-			const listOption = document.createElement("option");
+			const listOption = document.createElement("div");
+			listOption.classList.add("list-option")
 			listOption.textContent = item;
 			listHeaderDropDownMenu.appendChild(listOption);
 
-		})
-		listHeaderDropDownMenu.addEventListener("change", function () {
-			let action = listHeaderDropDownMenu.value;
-			switch (action) {
-				case "Delete List":
-					delete colorsILike[listName];
-					displayColors();
+			listOption.addEventListener("click", function () {
 
-					break;
-				case "Rename List":
-					const editListName = document.createElement("input")
-					editListName.classList.add("edit-list-name-input")
+
+				let action = item;
+				switch (action) {
+					case "Delete List":
+						delete colorsILike[listName];
+						displayColors();
+
+						break;
+					case "Rename List":
+						const editListName = document.createElement("input")
+						editListName.classList.add("edit-list-input")
 					editListName.value = listName;
 					const editListNameSubmitBtn = document.createElement("button")
 					editListNameSubmitBtn.textContent = "Confirm"
+						editListNameSubmitBtn.classList.add("edit-list-button")
 					listEditDiv.appendChild(editListName);
 					listEditDiv.appendChild(editListNameSubmitBtn);
 
@@ -72,12 +90,15 @@ function displayColors() {
 					})
 
 					break;
-				case "Add Color to List":
-					let listAddColor = document.createElement("input");
-					listAddColor.placeholder = "Enter Color"
-					let listAddColorSubmit = document.createElement("button");
+					case "Add Color to List":
+						let listAddColor = document.createElement("input");
+						listAddColor.classList.add("edit-list-input")
+						listAddColor.placeholder = "Enter Color"
+						let listAddColorSubmit = document.createElement("button");
+						listAddColorSubmit.classList.add("edit-list-button")
 					listAddColorSubmit.textContent = "Add Color";
 					let listAddColorCancel = document.createElement("button");
+						listAddColorCancel.classList.add("edit-list-button")
 					listAddColorCancel.textContent = "Cancel";
 					listEditDiv.appendChild(listAddColor);
 					listEditDiv.appendChild(listAddColorSubmit);
@@ -96,97 +117,119 @@ function displayColors() {
 
 					break;
 
-				default:
-					break;
-			}
-		})
-		listDiv.appendChild(listHeaderDropDownMenu);	
+					default:
+						break;
+				}
+			})
 
+		})
+		listHeaderContainer.appendChild(listHeaderDropDownMenu);
+
+		const swatchContainerWrapper = document.createElement("div")
+		swatchContainerWrapper.classList.add("swatch-container-wrapper")	
 
 		colorsILike[listName].forEach(color => {
 			const swatchContainer = document.createElement("div");
 			swatchContainer.classList.add("swatch-container");
-			const swatch = document.createElement("div");
-			const header = document.createElement("h3");
-			swatch.classList.add("swatch");
-			swatch.style.backgroundColor = color.hexValue
-			header.textContent = color.hexValue;
-			swatchContainer.appendChild(header);
+			const swatchColor = document.createElement("div");
+			swatchColor.classList.add("swatch-color");
+			const swatchHeader = document.createElement("h3");
+			swatchHeader.classList.add("swatch-header")
+			swatchColor.style.backgroundColor = color.hexValue
+			swatchHeader.textContent = color.hexValue;
+			swatchContainer.appendChild(swatchHeader);
 
 			if (color.customName !== "") {
 				const colorName = document.createElement("p");
+				colorName.classList.add("swatch-new-name")
 				colorName.textContent = color.customName;
 				swatchContainer.appendChild(colorName);
 			}
-			swatchContainer.appendChild(swatch);
-			const swatchDropDownMenu = document.createElement("select");
-			const swatchMenuItem = ["--Edit Swatch--", "Add Color Name", "Reorder", "Edit Swatch", "Make New List", "Move to List", "Delete Swatch"] 
+			swatchContainer.appendChild(swatchColor);
+
+			const swatchDropDownMenu = document.createElement("div");
+			swatchDropDownMenu.classList.add("swatch-menu")
+			const swatchMenuPlaceholder = document.createElement("div")
+			swatchMenuPlaceholder.textContent = "--Edit Swatch--"
+			swatchMenuPlaceholder.classList.add("swatch-menu-placeholder")
+			swatchDropDownMenu.appendChild(swatchMenuPlaceholder);
+
+			swatchMenuPlaceholder.addEventListener("click", function () {
+				swatchDropDownMenu.classList.toggle("open");
+			})
+
+			const swatchMenuItem = ["Add Color Name", "Reorder", "Edit Swatch", "Make New List", "Move to List", "Delete Swatch"] 
 
 
 			swatchMenuItem.forEach(item => {
-				const swatchOption = document.createElement("option");
+				const swatchOption = document.createElement("div");
+				swatchOption.classList.add("swatch-option")
 				swatchOption.textContent = item;
 				swatchDropDownMenu.appendChild(swatchOption);
 
-			})
-			swatchDropDownMenu.addEventListener("change", function () {
-				let action = swatchDropDownMenu.value;
-				switch (action) {
-					case "Delete Swatch":
+				swatchOption.addEventListener("click", function () {
+
+					let action = item;
+					switch (action) {
+						case "Delete Swatch":
 						colorsILike[listName].splice(colorsILike[listName].indexOf(color), 1);
 						displayColors();
 
 						break;
-					case "Add Color Name":
-						const colorNameDiv = document.createElement("div")
-						colorNameDiv.classList.add("color-name-box")
-						const nameInput = document.createElement("input")
-						nameInput.classList.add("color-name-input")
-						nameInput.placeholder = "Enter Color Name"
-						colorNameDiv.appendChild(nameInput);
-						const colorNameSubmitBtn = document.createElement("button")
-						colorNameSubmitBtn.textContent = "Add"
-						colorNameDiv.appendChild(colorNameSubmitBtn);
-						const colorNameCancelBtn = document.createElement("button")
-						colorNameCancelBtn.textContent = "Cancel"
-						colorNameDiv.appendChild(colorNameCancelBtn);
+						case "Add Color Name":
+							const colorNameDiv = document.createElement("div")
+							colorNameDiv.classList.add("swatch-add-name-container")
+							const nameInput = document.createElement("input")
+							nameInput.classList.add("swatch-add-name-input")
+							nameInput.placeholder = "Enter Color Name"
+							colorNameDiv.appendChild(nameInput);
+							const colorNameSubmitBtn = document.createElement("button")
+							colorNameSubmitBtn.classList.add("swatch-add-name-button")
+							colorNameSubmitBtn.textContent = "Add"
+							colorNameDiv.appendChild(colorNameSubmitBtn);
+							const colorNameCancelBtn = document.createElement("button")
+							colorNameCancelBtn.classList.add("swatch-add-name-button")
+							colorNameCancelBtn.textContent = "Cancel"
+							colorNameDiv.appendChild(colorNameCancelBtn);
 
-						colorNameSubmitBtn.addEventListener("click", function () {
-							color.customName = nameInput.value;
-							displayColors();
-						})
-						colorNameCancelBtn.addEventListener("click", function () {
-							nameInput.value = "";
-							colorNameDiv.removeChild(nameInput);
-							colorNameDiv.removeChild(colorNameSubmitBtn);
-							colorNameDiv.removeChild(colorNameCancelBtn);
-							displayColors();
+							colorNameSubmitBtn.addEventListener("click", function () {
+								color.customName = nameInput.value;
+								displayColors();
+							})
+							colorNameCancelBtn.addEventListener("click", function () {
+								nameInput.value = "";
+								colorNameDiv.removeChild(nameInput);
+								colorNameDiv.removeChild(colorNameSubmitBtn);
+								colorNameDiv.removeChild(colorNameCancelBtn);
+								displayColors();
 						})
 
 						swatchContainer.appendChild(colorNameDiv);
 
 						break;
-					case "Reorder":
+						case "Reorder":
 
-						break;
-					case "Edit Swatch":
-						const editSwatchDiv = document.createElement("div")
-						editSwatchDiv.classList.add("edit-swatch-box")
-						const editSwatchInput = document.createElement("input")
-						editSwatchInput.classList.add("edit-swatch-input")
-						editSwatchInput.value = color.hexValue;
-						editSwatchDiv.appendChild(editSwatchInput);
-						const editSwatchSubmitBtn = document.createElement("button")
-						editSwatchSubmitBtn.textContent = "Confirm"
-						editSwatchDiv.appendChild(editSwatchSubmitBtn);
-						const editSwatchCancelBtn = document.createElement("button")
-						editSwatchCancelBtn.textContent = "Cancel"
-						editSwatchDiv.appendChild(editSwatchCancelBtn);
+							break;
+						case "Edit Swatch":
+							const editSwatchDiv = document.createElement("div")
+							editSwatchDiv.classList.add("edit-swatch-container")
+							const editSwatchInput = document.createElement("input")
+							editSwatchInput.classList.add("edit-swatch-input")
+							editSwatchInput.value = color.hexValue;
+							editSwatchDiv.appendChild(editSwatchInput);
+							const editSwatchSubmitBtn = document.createElement("button")
+							editSwatchSubmitBtn.textContent = "Confirm"
+							editSwatchSubmitBtn.classList.add("edit-swatch-button")
+							editSwatchDiv.appendChild(editSwatchSubmitBtn);
+							const editSwatchCancelBtn = document.createElement("button")
+							editSwatchCancelBtn.textContent = "Cancel"
+							editSwatchCancelBtn.classList.add("edit-swatch-button")
+							editSwatchDiv.appendChild(editSwatchCancelBtn);
 
-						editSwatchSubmitBtn.addEventListener("click", function () {
-							color.hexValue = editSwatchInput.value;
-							displayColors();
-						})
+							editSwatchSubmitBtn.addEventListener("click", function () {
+								color.hexValue = editSwatchInput.value;
+								displayColors();
+							})
 						editSwatchCancelBtn.addEventListener("click", function () {
 							editSwatchInput.value = "";
 							editSwatchDiv.removeChild(editSwatchInput);
@@ -197,23 +240,25 @@ function displayColors() {
 
 						swatchContainer.appendChild(editSwatchDiv);
 						break;
-					case "Make New List":
-						const newListDiv = document.createElement("div")
-						newListDiv.classList.add("new-list-box")
-						const newListInput = document.createElement("input")
-						newListInput.classList.add("new-list-input")
-						newListInput.placeholder = "Name of New List"
-						newListDiv.appendChild(newListInput);
-						const newListSubmitBtn = document.createElement("button")
-						newListSubmitBtn.textContent = "Create"
-						newListDiv.appendChild(newListSubmitBtn);
-						const newListCancelBtn = document.createElement("button")
-						newListCancelBtn.textContent = "Cancel"
-						newListDiv.appendChild(newListCancelBtn);
+						case "Make New List":
+							const newListDiv = document.createElement("div")
+							newListDiv.classList.add("new-list-container")
+							const newListInput = document.createElement("input")
+							newListInput.classList.add("new-list-input")
+							newListInput.placeholder = "Name of New List"
+							newListDiv.appendChild(newListInput);
+							const newListSubmitBtn = document.createElement("button")
+							newListSubmitBtn.textContent = "Create"
+							newListSubmitBtn.classList.add("new-list-button")
+							newListDiv.appendChild(newListSubmitBtn);
+							const newListCancelBtn = document.createElement("button")
+							newListCancelBtn.textContent = "Cancel"
+							newListCancelBtn.classList.add("new-list-button")
+							newListDiv.appendChild(newListCancelBtn);
 
-						newListSubmitBtn.addEventListener("click", function () {
-							colorsILike[newListInput.value] = [];
-							currentList = newListInput.value;
+							newListSubmitBtn.addEventListener("click", function () {
+								colorsILike[newListInput.value] = [];
+								currentList = newListInput.value;
 							colorsILike[listName].splice(colorsILike[listName].indexOf(color), 1);
 							colorsILike[currentList].push(structuredClone(color));
 							displayColors();
@@ -229,42 +274,50 @@ function displayColors() {
 
 						swatchContainer.appendChild(newListDiv);
 						break;
-					case "Move to List":
-						const listMoveDropDownMenu = document.createElement("select");
-						listMoveDropDownMenu.id = "list-move-dropdown-menu";
-						const listMovePlaceholder = document.createElement("option");
-						listMovePlaceholder.textContent = "--Pick One--";
-						listMoveDropDownMenu.appendChild(listMovePlaceholder);
+						case "Move to List":
+							const listMoveDropDownMenu = document.createElement("div");
+							listMoveDropDownMenu.classList.add("list-move-menu")
+							const listMovePlaceholder = document.createElement("div");
+							listMovePlaceholder.textContent = "--Pick One--";
+							listMovePlaceholder.classList.add("list-move-placeholder")
+							listMoveDropDownMenu.appendChild(listMovePlaceholder);
 
-						for (const list of Object.keys(colorsILike)) {
-							const listMoveDropDownOption = document.createElement("option");
-							if (list === listName) {
-								continue;
+							listMovePlaceholder.addEventListener("click", function () {
+								listMoveDropDownMenu.classList.toggle("open");
+							})
+
+							for (const list of Object.keys(colorsILike)) {
+								const listMoveDropDownOption = document.createElement("div");
+								listMoveDropDownOption.classList.add("list-move-option")
+
+								if (list === listName) {
+									continue;
+								}
+								listMoveDropDownOption.textContent = list;
+								listMoveDropDownMenu.appendChild(listMoveDropDownOption);
+								listMoveDropDownOption.addEventListener("click", function () {
+
+									const newList = listMoveDropDownOption.textContent;
+									colorsILike[newList].push(structuredClone(color));
+									colorsILike[listName].splice(colorsILike[listName].indexOf(color), 1);
+									displayColors();
+								})
 							}
-							listMoveDropDownOption.textContent = list;
-							listMoveDropDownMenu.appendChild(listMoveDropDownOption);
-						}
-						listMoveDropDownMenu.addEventListener("change", function () {
-							if (listMoveDropDownMenu.value === "--Pick One--") {
-								return;
-							}
-							const newList = listMoveDropDownMenu.value;
-							colorsILike[newList].push(structuredClone(color));
-							colorsILike[listName].splice(colorsILike[listName].indexOf(color), 1);
-							displayColors();
-						})
 
-						swatchContainer.appendChild(listMoveDropDownMenu);
+							swatchContainer.appendChild(listMoveDropDownMenu);
 
-						break;
-					default:
-						break;
-				}
+							break;
+						default:
+							break;
+					}
+				})
+
 			})
 			swatchContainer.appendChild(swatchDropDownMenu);
-			listDiv.appendChild(swatchContainer);
+			swatchContainerWrapper.appendChild(swatchContainer);
 
 		});
+		listDiv.appendChild(swatchContainerWrapper);
 		mainDisplay.appendChild(listDiv);
 
 	});
