@@ -56,6 +56,33 @@ function getRandomItem(arr) {
 	return arr[Math.floor(Math.random() * arr.length)];
 }
 
+function customDropDownMenuMaker(arr, callbackFunction, classPrefix) {
+	const dropDownMenu = document.createElement("div")
+	dropDownMenu.classList.add(classPrefix + "-menu")
+	const dropDownMenuPlaceholder = document.createElement("div")
+	dropDownMenuPlaceholder.textContent = arr[0];
+	dropDownMenuPlaceholder.classList.add(classPrefix + "-menu-placeholder")
+	dropDownMenu.appendChild(dropDownMenuPlaceholder)
+
+	dropDownMenuPlaceholder.addEventListener("click", function () {
+		dropDownMenu.classList.toggle("open")
+	})
+
+
+	arr.slice(1).forEach(item => {
+		const dropDownOption = document.createElement("div")
+		dropDownOption.classList.add(classPrefix + "-option")
+		dropDownOption.textContent = item
+		dropDownMenu.appendChild(dropDownOption)
+
+		dropDownOption.addEventListener("click", function () {
+			callbackFunction(item)
+		})
+	})
+
+	return dropDownMenu;
+}
+
 
 
 // push input box to array
@@ -83,31 +110,18 @@ function displayColors() {
 		listEditDiv.classList.add("edit-list-container")
 		listHeaderContainer.appendChild(listEditDiv);
 
-		const listHeaderDropDownMenu = document.createElement("div");
-		listHeaderDropDownMenu.classList.add("edit-list-menu")
-		const listHeaderDropDownMenuPlaceholder = document.createElement("div")
-		listHeaderDropDownMenuPlaceholder.textContent = "--Edit List--"
-		listHeaderDropDownMenuPlaceholder.classList.add("edit-list-menu-placeholder")
-		listHeaderDropDownMenu.appendChild(listHeaderDropDownMenuPlaceholder);
+		const listHeaderMenuItem = [
+			"--Edit List--",
+			"Rename List",
+			"Add Color to List",
+			"Move List",
+			"Change List Background",
+			"Delete List"]
+		const listHeaderDropDownMenu = customDropDownMenuMaker(listHeaderMenuItem, function (item) {
+			let action = item;
 
-		listHeaderDropDownMenuPlaceholder.addEventListener("click", function () {
-			listHeaderDropDownMenu.classList.toggle("open");
-		})
-
-		const listHeaderMenuItem = ["Rename List", "Add Color to List", "Move List", "Change List Background", "Delete List"]
-
-		listHeaderMenuItem.forEach(item => {
-			const listOption = document.createElement("div");
-			listOption.classList.add("list-option")
-			listOption.textContent = item;
-			listHeaderDropDownMenu.appendChild(listOption);
-
-			listOption.addEventListener("click", function () {
-
-				let action = item;
-
-				if (listEditDiv.children.length > 0 && action !== "Delete List") {
-					return;
+			if (listEditDiv.children.length > 0 && action !== "Delete List") {
+				return;
 				}
 				switch (action) {
 					case "Delete List":
@@ -169,9 +183,8 @@ function displayColors() {
 					default:
 						break;
 				}
-			})
+		}, "edit-list")
 
-		})
 		listHeaderContainer.appendChild(listHeaderDropDownMenu);
 
 		const swatchContainerWrapper = document.createElement("div")
@@ -198,36 +211,22 @@ function displayColors() {
 			}
 			swatchContainer.appendChild(swatchColor);
 
-			const swatchDropDownMenu = document.createElement("div");
-			swatchDropDownMenu.classList.add("swatch-menu")
-			const swatchMenuPlaceholder = document.createElement("div")
-			swatchMenuPlaceholder.textContent = "--Edit Swatch--"
-			swatchMenuPlaceholder.classList.add("swatch-menu-placeholder")
-			swatchDropDownMenu.appendChild(swatchMenuPlaceholder);
 
-			swatchMenuPlaceholder.addEventListener("click", function () {
-				swatchDropDownMenu.classList.toggle("open");
-			})
 
-			const swatchMenuItem = ["Add Color Name",
+			const swatchMenuItem = [
+				"--Edit Swatch--",
+				"Add Color Name",
 				"Edit Swatch",
 				"Move Swatch",
 				"Copy to List",
 				"Change Background",
 				"Make New List",
 				"Move to List",
-				"Delete Swatch"] 
+				"Delete Swatch"];
 
+			const editSwatchDropDownMenu = customDropDownMenuMaker(swatchMenuItem, function (item) {
+				let action = item;
 
-			swatchMenuItem.forEach(item => {
-				const swatchOption = document.createElement("div");
-				swatchOption.classList.add("swatch-option")
-				swatchOption.textContent = item;
-				swatchDropDownMenu.appendChild(swatchOption);
-
-				swatchOption.addEventListener("click", function () {
-
-					let action = item;
 					if (swatchContainer.querySelector(
 						`.swatch-add-name-container,
 						.edit-swatch-container,
@@ -236,7 +235,8 @@ function displayColors() {
 					) && action !== "Delete Swatch") {
 						return;
 					}
-					switch (action) {
+
+				switch (action) {
 						case "Delete Swatch":
 						colorsILike[listName].splice(colorsILike[listName].indexOf(color), 1);
 						displayColors();
@@ -319,55 +319,52 @@ function displayColors() {
 
 						swatchContainer.appendChild(newListDiv);
 						break;
-						case "Move to List":
-							const listMoveDropDownMenu = document.createElement("div");
-							listMoveDropDownMenu.classList.add("list-move-menu")
-							const listMovePlaceholder = document.createElement("div");
-							listMovePlaceholder.textContent = "--Pick One--";
-							listMovePlaceholder.classList.add("list-move-placeholder")
-							listMoveDropDownMenu.appendChild(listMovePlaceholder);
+					case "Move to List":
+						const listMoveMenuItem = [
+							"--Pick One--",
+							...Object.keys(colorsILike)
+						]
+						const listMoveDropDownMenu = customDropDownMenuMaker(listMoveMenuItem, function (item) {
 
-							listMovePlaceholder.addEventListener("click", function () {
-								listMoveDropDownMenu.classList.toggle("open");
-							})
+							const newList = item;
+							colorsILike[newList].push(structuredClone(color));
+							colorsILike[listName].splice(colorsILike[listName].indexOf(color), 1);
+							displayColors();
 
-							for (const list of Object.keys(colorsILike)) {
-								const listMoveDropDownOption = document.createElement("div");
-								listMoveDropDownOption.classList.add("list-move-option");
-								listMoveDropDownOption.textContent = list;
-								listMoveDropDownMenu.appendChild(listMoveDropDownOption);
-
-
-								listMoveDropDownOption.addEventListener("click", function () {
-									const newList = listMoveDropDownOption.textContent;
-									colorsILike[newList].push(structuredClone(color));
-									colorsILike[listName].splice(colorsILike[listName].indexOf(color), 1);
-									displayColors();
-								})
-							}
+						}, "list-move")
 
 							swatchContainer.appendChild(listMoveDropDownMenu);
 
-							break;
-						case "Change Background":
+						break;
+
+					case "Change Background":
 
 
 
 
-							break;
+						break;
 						case "Copy to List":
+						const copyToListMenuItem = [
+							"--Pick One--",
+							...Object.keys(colorsILike)
+						]
+						const copyToListDropDownMenu = customDropDownMenuMaker(copyToListMenuItem, function (item) {
 
+							const newList = item;
+							colorsILike[newList].push(structuredClone(color));
+							displayColors();
 
+						}, "copy-to-list")
 
+						swatchContainer.appendChild(copyToListDropDownMenu);
 							break;
 
 						default:
 							break;
 					}
-				})
+			}, "edit-swatch")
 
-			})
-			swatchContainer.appendChild(swatchDropDownMenu);
+			swatchContainer.appendChild(editSwatchDropDownMenu);
 			swatchContainerWrapper.appendChild(swatchContainer);
 
 		});
