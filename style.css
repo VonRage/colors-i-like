@@ -156,6 +156,19 @@ submit respectively */
   width: 12.5rem;
   
 }
+.list-rename-container,
+.list-add-color-container,
+.change-list-background-container,
+.edit-swatch-container,
+.new-list-container,
+.change-card-background-container,
+.add-color-name-container  {
+		display: flex;
+		flex-direction: column;
+		
+}
+
+
 
 /* no children */
 
@@ -217,8 +230,8 @@ input:hover {
 
 .edit-swatch-menu-placeholder,
 .edit-list-menu-placeholder,
-.list-move-placeholder,
-.copy-to-list-placeholder {
+.list-move-menu-placeholder,
+.copy-to-list-menu-placeholder {
   background-color: #f3b7f5;
   color: #1f4076;
   border-radius: 0.3125rem;
@@ -234,8 +247,8 @@ input:hover {
 
 .edit-swatch-menu-placeholder:hover, 
 .edit-list-menu-placeholder:hover, 
-.list-move-placeholder:hover,
-.copy-to-list-placeholder:hover {
+.list-move-menu-placeholder:hover,
+.copy-to-list-menu-placeholder:hover {
   background-color: #ce8dad;
   color: #102344;
   cursor: pointer;
