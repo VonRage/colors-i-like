@@ -1,3 +1,4 @@
+/* CSS Reset */
 /* 1. Use a more-intuitive box-sizing model */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -53,16 +54,212 @@ h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
-/* these two block control the color swatches and the way they're displayed   
-*/
+/* End of CSS Reset */
 
+/* Added styles */
+/* child of html */
+body {
+  background-color: #f1d9f4;
+}
+/* parents of page title and page 
+subtitle and static input and static 
+submit respectively */
+/* child of body */
+.page-header,
+.static-input-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+	gap: 0.625rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-header {
+  flex-direction: column;
+  
+}
+
+.static-input-wrapper {
+  flex-direction: row;
+	
+}
+/* children of static input wrapper */
+/* no children */
+
+.static-submit {
+	width: 12.5rem;
+}
+/* children of page header */
+/* no children */
+.page-title,
+.page-subtitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* parent of swatch container wrapper, list div, header container */
+/* child of body */
 .display {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column
+}
+/* parent of swatch container and list header container  */
+/* child of display */
+.swatch-container-wrapper {
+  border:0.3125rem solid #a8b5e1;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	gap: 0.625rem;
+  padding:0.3125rem;
+  flex-grow: 1;
+}
+/* parent of swatch color, swatch header, swatch drop down menu */
+/* child of swatch container wrapper */
+.swatch-container {
+  border: 0.125rem solid #ce8dad;
+  border-radius: 0.3125rem;
+}
+  
+/* child of swatch container */
+/* no children */
+.swatch-color {
+  height: 6.25rem;
+  width: 6.25rem;
+  margin: 0.625rem;
 }
 
-.swatch {
-  height: 100px;
-  width: 100px;
-  margin: 10px;
+/* parent of list header container and list edit div */
+/* child of display */
+.list-div {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: #f1d9f4;
+  border-top: 0.3125rem solid #e2e6f8;
+  border-bottom: 0.3125rem solid #cdd5f5;
+
+}
+/* parent of list header and list edit div  */
+/* child of list div */
+.list-header-container {
+  display: flex;
+  flex-direction: column;
+  border: 0.3125rem solid #bcc7f5;
+}
+/* parent of edit list input, edit list submit button, edit list cancel button */
+/* child of list div */
+.edit-list-menu {
+  display: flex;
+  flex-direction: column;
+  width: 12.5rem;
+  
+}
+.list-rename-container,
+.list-add-color-container,
+.change-list-background-container,
+.edit-swatch-container,
+.new-list-container,
+.change-card-background-container,
+.add-color-name-container  {
+		display: flex;
+		flex-direction: column;
+		
+}
+
+
+
+/* no children */
+
+.list-add-color-input,
+.edit-swatch-input,
+.static-input {
+  width: 6.25rem;
+}
+
+.list-rename-input,
+.new-list-input {
+  width: 12.5rem;
+	
+}
+
+
+input,
+button {
+  border: none;
+  border-radius: 0.3125rem;
+  text-align: center;
+}
+
+
+button {
+  background-color: #c297f2;
+  color: #102344;
+}
+
+button:hover {
+  background-color: #937ee7;
+  color: #01081a;
+  cursor: pointer;
+}
+
+input {
+  background-color: #f6e7f8;
+  color: #1f4687;
+}
+
+input:hover {
+  background-color:#f2cbf1;
+  cursor: pointer;
+}
+
+:focus {
+  outline: 0.125rem solid #37b0f7;
+}
+
+.edit-swatch-option,
+.edit-list-option,
+.list-move-option,
+.copy-to-list-option {
+  display: none;
+  background-color: #fdcfff;
+  color: #194f95;
+  border-radius: 0.3125rem;
+}
+
+.edit-swatch-menu-placeholder,
+.edit-list-menu-placeholder,
+.list-move-menu-placeholder,
+.copy-to-list-menu-placeholder {
+  background-color: #f3b7f5;
+  color: #1f4076;
+  border-radius: 0.3125rem;
+
+}
+
+.edit-swatch-menu.open .edit-swatch-option,
+.edit-list-menu.open .edit-list-option,
+.list-move-menu.open .list-move-option,
+.copy-to-list-menu.open .copy-to-list-option {
+  display: block;
+}
+
+.edit-swatch-menu-placeholder:hover, 
+.edit-list-menu-placeholder:hover, 
+.list-move-menu-placeholder:hover,
+.copy-to-list-menu-placeholder:hover {
+  background-color: #ce8dad;
+  color: #102344;
+  cursor: pointer;
+}
+
+
+.edit-swatch-option:hover,
+.edit-list-option:hover,
+.list-move-option:hover,
+.copy-to-list-option:hover {
+  background-color: #d7a8c5;
+  color: #1d3058;
+  cursor: pointer;
 }
