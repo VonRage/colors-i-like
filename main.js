@@ -129,6 +129,7 @@ let swatchBox = document.querySelector(".swatch-box");
 
 let listEditToolsDiv = document.querySelector("#list-edit-tools");
 
+let pageBackgroundColor = localStorage.getItem("pageBackgroundColor") || "";
 
 
 
@@ -143,8 +144,9 @@ pickYourOwnColorDiv.appendChild(addYourOwnColorInputTools);
 const staticEditDropDownMenuItem = [
 	"--Colors I Like Options--",
 	"Create New List",
-	"Change Background Color",
+	"Change Page Background Color",
 	"Revert To Default",
+	"Export Page to CSS",
 	"--Delete Options--",
 	"Delete All Lists",
 	"Delete All Colors",
@@ -160,6 +162,9 @@ const staticEditDropDownMenu = customDropDownMenuMaker(staticEditDropDownMenuIte
 	listEditToolsDiv.textContent = ""
 
 	switch (action) {
+		case "Export Page to CSS":
+
+			break;
 
 		case "Randomize All Colors":
 
@@ -186,19 +191,79 @@ const staticEditDropDownMenu = customDropDownMenuMaker(staticEditDropDownMenuIte
 			listEditToolsDiv.appendChild(createNewListTools);
 
 			break;
-		case "Change Background Color":
+		case "Change Page Background Color":
+
+			const changePageBackgroundColorInputTools = inputToolMaker("", getRandomItem(genericColors), "Confirm", "change-page-background-color", function (inputColor) {
+				const validatedInput = validateInput("color", inputColor);
+				if (validatedInput === null) {
+					return;
+				}
+				pageBackgroundColor = validatedInput;
+				localStorage.setItem("pageBackgroundColor", pageBackgroundColor);
+				renderAndSync();
+			})
+
+			listEditToolsDiv.appendChild(changePageBackgroundColorInputTools);
 
 			break;
 		case "Revert To Default":
 
+			const userConfirmedRevertToDefault = confirm("Are you sure you want to revert to default settings? This action cannot be undone.");
+			if (!userConfirmedRevertToDefault) {
+				return;
+			}
+			colorsILike = {};
+			listBackgroundColors = {};
+			pageBackgroundColor = "";
+			localStorage.setItem("colorsILike", JSON.stringify(colorsILike))
+			localStorage.setItem("listBackgroundColors", JSON.stringify(listBackgroundColors))
+			localStorage.setItem("pageBackgroundColor", pageBackgroundColor)
+			renderAndSync();
+
 			break;
 		case "Delete All Lists":
+
+			const userConfirmedDeleteAllLists = confirm("Are you sure you want to delete all lists? This action cannot be undone.");
+
+			if (userConfirmedDeleteAllLists) {
+				colorsILike = {};
+				localStorage.setItem("colorsILike", JSON.stringify(colorsILike))
+				renderAndSync();
+			} else {
+				return;
+			}
 
 			break;
 		case "Delete All Colors":
 
+			const userConfirmedDeleteAllColors = confirm("Are you sure you want to delete all colors? This action cannot be undone.");
+
+			if (userConfirmedDeleteAllColors) {
+				Object.keys(colorsILike).forEach(listName => {
+					colorsILike[listName] = [];
+				});
+				localStorage.setItem("colorsILike", JSON.stringify(colorsILike))
+				renderAndSync();
+			} else {
+				return;
+			}
+
 			break;
 		case "Delete All Colors And Lists":
+
+			const userInputForDeleteAllColorsAndLists = prompt("Are you sure you want to delete all colors and lists? This action cannot be undone. Type 'yes' to confirm.");
+			if (userInputForDeleteAllColorsAndLists === null) {
+				return;
+			}
+			if (userInputForDeleteAllColorsAndLists.trim().toLowerCase() === "yes") {
+				colorsILike = {};
+				listBackgroundColors = {};
+				localStorage.setItem("colorsILike", JSON.stringify(colorsILike))
+				localStorage.setItem("listBackgroundColors", JSON.stringify(listBackgroundColors))
+				renderAndSync();
+			} else {
+				return;
+			}
 
 			break;
 
@@ -245,7 +310,7 @@ function validateInput(type, rawInput, list) {
 				errorsDisplay.textContent = "Please enter a color";
 				setTimeout(() => {
 					errorsDisplay.textContent = ""
-				}, 3000);
+				}, 5000);
 				return null;
 			}
 
@@ -257,7 +322,7 @@ function validateInput(type, rawInput, list) {
 				errorsDisplay.textContent = "The color input is too short";
 				setTimeout(() => {
 					errorsDisplay.textContent = ""
-				}, 3000);
+				}, 5000);
 				return null;
 			}
 
@@ -265,7 +330,7 @@ function validateInput(type, rawInput, list) {
 				errorsDisplay.textContent = "The color input must be either shorter or longer";
 				setTimeout(() => {
 					errorsDisplay.textContent = ""
-				}, 3000);
+				}, 5000);
 				return null;
 			}
 
@@ -273,7 +338,7 @@ function validateInput(type, rawInput, list) {
 				errorsDisplay.textContent = "The color input is too long";
 				setTimeout(() => {
 					errorsDisplay.textContent = ""
-				}, 3000);
+				}, 5000);
 				return null;
 			}
 
@@ -283,7 +348,7 @@ function validateInput(type, rawInput, list) {
 					errorsDisplay.textContent = "Hex Color values must include: a-f and 0-9";
 					setTimeout(() => {
 						errorsDisplay.textContent = ""
-					}, 3000);
+					}, 5000);
 					return null;
 				}
 			}
@@ -293,7 +358,7 @@ function validateInput(type, rawInput, list) {
 				errorsDisplay.textContent = "This color is already in this list";
 				setTimeout(() => {
 					errorsDisplay.textContent = ""
-				}, 3000);
+				}, 5000);
 				return null;
 			}
 
@@ -308,7 +373,7 @@ function validateInput(type, rawInput, list) {
 				errorsDisplay.textContent = "Please enter a name for the list";
 				setTimeout(() => {
 					errorsDisplay.textContent = ""
-				}, 3000);
+				}, 5000);
 				return null;
 			}
 
@@ -316,7 +381,7 @@ function validateInput(type, rawInput, list) {
 				errorsDisplay.textContent = "You already have this list";
 				setTimeout(() => {
 					errorsDisplay.textContent = ""
-				}, 3000);
+				}, 5000);
 				return null;
 			}
 
@@ -324,7 +389,7 @@ function validateInput(type, rawInput, list) {
 				errorsDisplay.textContent = "The list name is too long";
 				setTimeout(() => {
 					errorsDisplay.textContent = ""
-				}, 3000);
+				}, 5000);
 				return null;
 			}
 			return text;
@@ -339,7 +404,7 @@ function validateInput(type, rawInput, list) {
 				errorsDisplay.textContent = "Please enter a name for the color";
 				setTimeout(() => {
 					errorsDisplay.textContent = ""
-				}, 3000);
+				}, 5000);
 				return null;
 			}
 
@@ -347,7 +412,7 @@ function validateInput(type, rawInput, list) {
 				errorsDisplay.textContent = "The color name is too long";
 				setTimeout(() => {
 					errorsDisplay.textContent = ""
-				}, 3000);
+				}, 5000);
 				return null;
 			}
 
@@ -374,9 +439,6 @@ function addColor(selectedList, selectedColor) {
 	if (colorsILike[selectedList] === undefined) {
 		colorsILike[selectedList] = [];
 	}
-
-
-
 
 	colorsILike[selectedList].push({
 		hexValue: color,
@@ -406,8 +468,9 @@ function createListHeader(listName) {
 		"Rename List",
 		"Add Color to List",
 		"Move List",
-		"Change List Background",
+		"Change List Background Color",
 		"Revert to Default",
+		"Export List to CSS",
 		"Delete List"
 	];
 
@@ -418,13 +481,26 @@ function createListHeader(listName) {
 		listEditDiv.textContent = ""
 
 		switch (action) {
+			case "Export List to CSS":
+
+				break;
 
 			case "Revert to Default":
+
+				delete listBackgroundColors[listName];
+				localStorage.setItem("listBackgroundColors", JSON.stringify(listBackgroundColors));
+				renderAndSync();
 
 				break;
 
 
 			case "Delete List":
+
+				const userConfirmedDeleteList = confirm(`Are you sure you want to delete the list ${listName}?`);
+
+				if (!userConfirmedDeleteList) {
+					return;
+				}
 
 				if (listName === currentList) {
 					currentList = "My Colors";
@@ -487,7 +563,7 @@ function createListHeader(listName) {
 
 				break;
 
-			case "Change List Background":
+			case "Change List Background Color":
 
 
 				const changeListBackgroundInputTools = inputToolMaker(listBackgroundColors[listName] || "", getRandomItem(genericColors), "Confirm", "change-list-background", function (inputColor) {
@@ -561,9 +637,11 @@ function createColorCard(color, listName) {
 		"Add Color Name",
 		"Change Color",
 		"Move Color",
-		"Copy to List",
-		"Change Background",
+		"Change Card Background Color",
 		"Revert to Default",
+		"Suggested Color Palettes",
+		"Contrast Checker",
+		"Copy to List",
 		"Move to New List",
 		"Move to Existing List",
 		"Delete Color"
@@ -575,12 +653,28 @@ function createColorCard(color, listName) {
 
 
 		switch (action) {
+			case "Contrast Checker":
+
+				break;
+
+			case "Suggested Color Palettes":
+
+				break;
 
 			case "Revert to Default":
+				delete color.cardBackgroundColor;
+				renderAndSync();
 
 				break;
 
 			case "Delete Color":
+
+				const userConfirmedDeleteColor = confirm(`Are you sure you want to delete the color ${color.customName || color.hexValue} from the list ${listName}?`);
+
+
+				if (!userConfirmedDeleteColor) {
+					return;
+				}
 				colorsILike[listName].splice(colorsILike[listName].indexOf(color), 1);
 				renderAndSync();
 
@@ -657,7 +751,7 @@ function createColorCard(color, listName) {
 
 				break;
 
-			case "Change Background":
+			case "Change Card Background Color":
 				const changeCardBackgroundTool = inputToolMaker(color.cardBackgroundColor || "", getRandomItem(genericColors), "Confirm", "change-card-background", function (inputColor) {
 					const validatedInput = validateInput("color", inputColor);
 					if (validatedInput === null) {
@@ -702,7 +796,7 @@ function createColorCard(color, listName) {
 
 }
 
-function createLColorLlist(listName) {
+function createColorList(listName) {
 
 	const listDiv = document.createElement("div");
 	listDiv.classList.add("list-div");
@@ -730,12 +824,13 @@ function createLColorLlist(listName) {
 }
 
 function renderAndSync() {
+	document.body.style.backgroundColor = pageBackgroundColor;
 
 	listEditToolsDiv.textContent = ""
 	mainDisplay.textContent = ""
 
 	Object.keys(colorsILike).forEach(listName => {
-		const list = createLColorLlist(listName);
+		const list = createColorList(listName);
 		mainDisplay.appendChild(list);
 
 	});
