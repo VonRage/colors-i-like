@@ -160,9 +160,16 @@ function displayColors() {
 			switch (action) {
 
 				case "Delete List":
+					if (listName === currentList) {
+						currentList = "My Colors";
+						addToMyColors.textContent = "Add to My Colors";
+					}
 
-						delete colorsILike[listName];
-						displayColors();
+					delete colorsILike[listName];
+					delete listBackgroundColors[listName];
+					localStorage.setItem("colorsILike", JSON.stringify(colorsILike))
+					localStorage.setItem("listBackgroundColors", JSON.stringify(listBackgroundColors))
+					displayColors();
 
 					break;
 
@@ -170,8 +177,8 @@ function displayColors() {
 
 					const editListNameInputTools = inputToolMaker(listName, getRandomItem(genericListNames), "Confirm", "list-rename", function (newName) {
 						if (newName === "") {
-								alert("Please add a name for the list")
-								return;
+							alert("Please add a name for the list")
+							return;
 						} else if (newName !== listName) {
 							// this line is replacing the key value 
 							colorsILike[newName] = colorsILike[listName];
@@ -181,7 +188,11 @@ function displayColors() {
 							delete listBackgroundColors[listName];
 							localStorage.setItem("colorsILike", JSON.stringify(colorsILike))
 							localStorage.setItem("listBackgroundColors", JSON.stringify(listBackgroundColors))
-							currentList = newName;
+							if (listName === currentList) {
+								currentList = newName;
+								addToMyColors.textContent = `Add to ${newName}`;
+							}
+
 						}
 
 						displayColors()
@@ -436,7 +447,7 @@ function addColor(selectedList, selectedColor) {
 	}
 
 	// Check hex value for valid length
-	else if (color.length !== 7 && color.length !== 4) {
+	else if (color.length !== 7 && color.length !== 4 && color.length !== 9) {
 		alert("Please enter a valid hex color value");
 		return;
 	}
