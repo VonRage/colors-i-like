@@ -115,20 +115,95 @@ function inputToolMaker(initialValue, placeholderText, buttonText, classPrefix, 
 	return inputToolContainer;
 }
 
+let input;
+let addToMyColors;
 
 
 // push input box to array
 // transfer and clean string to useable data
-let input = document.querySelector("#input");
-let addToMyColors = document.querySelector("#submit");
 
+let addYourOwnColorEditListMenu = document.querySelector("#add-your-own-color-edit-list-menu")
+let pickYourOwnColorDiv = document.querySelector("#add-your-own-color")
 let pickBaseColorInputToolsDiv = document.querySelector("#pick-base-color-input-tools")
 let baseColorPickerDropDownMenuDiv = document.querySelector("#base-color-picker")
 
 let mainDisplay = document.querySelector("#colors-display");
 let swatchBox = document.querySelector(".swatch-box");
 
-const baseColorPickerInputTools = inputToolMaker("", "Enter Color", "Confirm", "static-base-color-picker", function (inputColor) {
+
+const addYourOwnColorInputTools = inputToolMaker("", "#00000000", `Add to ${currentList}`, "static-add-color", function (inputColor) {
+	if (inputColor === "") {
+		alert("Please add a color")
+		return;
+	}
+	addColor(currentList, inputColor)
+})
+input = addYourOwnColorInputTools.querySelector(".static-add-color-input");
+addToMyColors = addYourOwnColorInputTools.querySelector(".static-add-color-button");
+pickYourOwnColorDiv.appendChild(addYourOwnColorInputTools);
+
+const staticEditListMenuItem = [
+	"--Colors I Like Options--",
+	"Add Color to List",
+	"Change Background Color",
+	"Revert To Default",
+	"--Delete Options--",
+	"Delete All Lists",
+	"Delete All Colors",
+	"Delete All Colors And Lists",
+	"--Just For Fun--",
+	"Randomize All Colors",
+	"Random Theme",
+
+];
+
+
+
+const staticEditList = customDropDownMenuMaker(staticEditListMenuItem, function (item) {
+	let action = item;
+
+	switch (action) {
+
+		case "Randomize All Colors":
+
+			break;
+		case "Random Theme":
+
+			break;
+
+		case "Add Color to List":
+
+			break;
+		case "Change Background Color":
+
+			break;
+		case "Revert To Default":
+
+			break;
+		case "Delete All Lists":
+
+			break;
+		case "Delete All Colors":
+
+			break;
+		case "Delete All Colors And Lists":
+
+			break;
+
+		default:
+
+			break;
+
+	}
+
+
+}, "static-edit-list")
+
+
+addYourOwnColorEditListMenu.appendChild(staticEditList)
+
+
+const baseColorPickerInputTools = inputToolMaker("", getRandomItem(genericColors), "Confirm", "static-base-color-picker", function (inputColor) {
 	if (inputColor === "") {
 		alert("Please add a color")
 		return;
@@ -139,9 +214,11 @@ const baseColorPickerInputTools = inputToolMaker("", "Enter Color", "Confirm", "
 pickBaseColorInputToolsDiv.appendChild(baseColorPickerInputTools)
 
 const baseColorPickerDropDownMenu = customDropDownMenuMaker(baseColorPickerDropDownMenuOptions, function (baseColor) {
+
 	const pickerInput = baseColorPickerInputTools.querySelector(".static-base-color-picker-input")
 	pickerInput.readOnly = true;
 	pickerInput.value = baseColor;
+
 }, "static-base-color-picker")
 
 baseColorPickerDropDownMenuDiv.appendChild(baseColorPickerDropDownMenu)
@@ -162,11 +239,13 @@ function displayColors() {
 
 		const listHeaderContainer = document.createElement("div")
 		listHeaderContainer.classList.add("list-header-container")
+
 		const listHeader = document.createElement("h4");
 		listHeader.textContent = listName;
 		listHeader.classList.add("list-header");
 		listHeaderContainer.appendChild(listHeader)
 		listDiv.appendChild(listHeaderContainer);
+
 		const listEditDiv = document.createElement("div")
 		listEditDiv.classList.add("edit-list-container")
 		listHeaderContainer.appendChild(listEditDiv);
@@ -178,17 +257,27 @@ function displayColors() {
 			"Add Color to List",
 			"Move List",
 			"Change List Background",
+			"Revert to Default",
 			"Delete List"
 		];
-		const listHeaderDropDownMenu = customDropDownMenuMaker(listHeaderMenuItem, function (item) {
-			let action = item;
 
-			if (listEditDiv.children.length > 0 && action !== "Delete List") {
+
+		const listHeaderDropDownMenu = customDropDownMenuMaker(listHeaderMenuItem, function (item) {
+			if (appendContainer.children.length > 0 && action !== "Delete List") {
 				return;
-				}
+			}
 			switch (action) {
+
+				case "Revert to Default":
+
+					break;
+
+
+
 				case "Create New List":
-					const createNewListTools = inputToolMaker(getRandomItem(genericListNames), getRandomItem(genericListNames), "Confirm", "create-new-list", function (newListName) {
+
+					const createNewListTools = inputToolMaker("", getRandomItem(genericListNames), "Confirm", "create-new-list", function (newListName) {
+
 						if (newListName === "") {
 							alert("Please add a name for the list");
 							return;
@@ -200,11 +289,12 @@ function displayColors() {
 
 					})
 
-					listEditDiv.appendChild(createNewListTools);
+					appendContainer.appendChild(createNewListTools);
 
 					break;
 
 				case "Delete List":
+
 					if (listName === currentList) {
 						currentList = "My Colors";
 						addToMyColors.textContent = "Add to My Colors";
@@ -221,6 +311,7 @@ function displayColors() {
 				case "Rename List":
 
 					const editListNameInputTools = inputToolMaker(listName, getRandomItem(genericListNames), "Confirm", "list-rename", function (newName) {
+
 						if (newName === "") {
 							alert("Please add a name for the list")
 							return;
@@ -244,13 +335,13 @@ function displayColors() {
 
 					})
 
-					listEditDiv.appendChild(editListNameInputTools);
+					appendContainer.appendChild(editListNameInputTools);
 
 					break;
 
 				case "Add Color to List":
 
-					const addColorToListInputTools = inputToolMaker(getRandomItem(genericColors), "Enter Color", "Confirm", "list-add-color", function (inputColor) {
+					const addColorToListInputTools = inputToolMaker("", getRandomItem(genericColors), "Confirm", "list-add-color", function (inputColor) {
 						if (inputColor === "") {
 							alert("Please add a color")
 							return;
@@ -259,7 +350,7 @@ function displayColors() {
 
 					})
 
-					listEditDiv.appendChild(addColorToListInputTools);
+					appendContainer.appendChild(addColorToListInputTools);
 
 					break;
 
@@ -270,7 +361,7 @@ function displayColors() {
 				case "Change List Background":
 
 
-					const changeListBackgroundInputTools = inputToolMaker(listBackgroundColors[listName] || getRandomItem(genericColors), getRandomItem(genericColors), "Confirm", "change-list-background", function (inputColor) {
+					const changeListBackgroundInputTools = inputToolMaker(listBackgroundColors[listName], getRandomItem(genericColors), "Confirm", "change-list-background", function (inputColor) {
 						if (inputColor === "") {
 							alert("Please add a color")
 							return;
@@ -282,7 +373,7 @@ function displayColors() {
 
 					})
 
-					listEditDiv.appendChild(changeListBackgroundInputTools);
+					appendContainer.appendChild(changeListBackgroundInputTools);
 
 					break;
 
@@ -290,7 +381,7 @@ function displayColors() {
 
 					break;
 
-				}
+			}
 		}, "edit-list")
 
 		listHeaderContainer.appendChild(listHeaderDropDownMenu);
@@ -300,6 +391,7 @@ function displayColors() {
 
 
 		colorsILike[listName].forEach(color => {
+
 			const swatchContainer = document.createElement("div");
 			swatchContainer.classList.add("swatch-container");
 
@@ -309,11 +401,13 @@ function displayColors() {
 
 			const swatchColor = document.createElement("div");
 			swatchColor.classList.add("swatch-color");
+
 			const swatchHeader = document.createElement("h5");
 			swatchHeader.classList.add("swatch-header")
 			swatchColor.style.backgroundColor = color.hexValue
 			swatchHeader.textContent = color.hexValue;
 			swatchContainer.appendChild(swatchHeader);
+
 			const colorName = document.createElement("h6");
 			colorName.classList.add("swatch-new-name");
 			colorName.textContent = "\u00A0"
@@ -334,6 +428,7 @@ function displayColors() {
 				"Move Color",
 				"Copy to List",
 				"Change Background",
+				"Revert to Default",
 				"Move to New List",
 				"Move to Existing List",
 				"Delete Color"
@@ -347,13 +442,17 @@ function displayColors() {
 						.edit-swatch-container,
 						.new-list-container,
 						.list-move-menu`
-					) && action !== "Delete Swatch") {
+					) && action !== "Delete Color") {
 						return;
 					}
 
 				switch (action) {
 
-					case "Delete Swatch":
+					case "Revert to Default":
+
+						break;
+
+					case "Delete Color":
 						colorsILike[listName].splice(colorsILike[listName].indexOf(color), 1);
 						displayColors();
 
@@ -361,7 +460,7 @@ function displayColors() {
 
 					case "Add Color Name":
 
-						const customNameTools = inputToolMaker(color.customName || getRandomItem(genericColorNames), getRandomItem(genericColorNames), "Confirm", "add-color-name", function (inputName) {
+						const customNameTools = inputToolMaker(color.customName, getRandomItem(genericColorNames), "Confirm", "add-color-name", function (inputName) {
 							if (inputName === "") {
 								alert("Please add a name for the color");
 								return;
@@ -395,7 +494,7 @@ function displayColors() {
 
 					case "Move to New List":
 
-						const moveToNewListTools = inputToolMaker(getRandomItem(genericListNames), getRandomItem(genericListNames), "Confirm", "move-to-new-list", function (newListName) {
+						const moveToNewListTools = inputToolMaker("", getRandomItem(genericListNames), "Confirm", "move-to-new-list", function (newListName) {
 							if (newListName === "") {
 								alert("Please add a name for the list");
 								return;
@@ -430,7 +529,7 @@ function displayColors() {
 						break;
 
 					case "Change Background":
-						const changeCardBackgroundTool = inputToolMaker(color.cardBackgroundColor || getRandomItem(genericColors), "Enter a Color", "Confirm", "change-card-background", function (inputColor) {
+						const changeCardBackgroundTool = inputToolMaker(color.cardBackgroundColor, getRandomItem(genericColors), "Confirm", "change-card-background", function (inputColor) {
 							color.cardBackgroundColor = inputColor;
 							displayColors();
 						})
@@ -472,7 +571,9 @@ function displayColors() {
 }
 
 function addColor(selectedList, selectedColor) {
+
 	let color = selectedColor.trim().toLowerCase();
+
 	if (colorsILike[selectedList] === undefined) {
 		colorsILike[selectedList] = [];
 	}
@@ -516,8 +617,6 @@ function addColor(selectedList, selectedColor) {
 
 displayColors();
 
-addToMyColors.addEventListener("click", function () {
-	addColor(currentList, input.value);
-});
+
 
 
