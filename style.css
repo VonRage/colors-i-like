@@ -83,6 +83,14 @@ submit respectively */
   flex-direction: row;
 	
 }
+
+.left-section-header,
+.right-section-header {
+	display: flex;
+	flex-direction: column;
+	gap: 0.625rem;
+}
+
 /* children of static input wrapper */
 /* no children */
 
@@ -156,6 +164,8 @@ submit respectively */
   width: 12.5rem;
   
 }
+
+.static-base-color-picker-container,
 .list-rename-container,
 .list-add-color-container,
 .change-list-background-container,
@@ -171,7 +181,7 @@ submit respectively */
 
 
 /* no children */
-
+.static-base-color-picker-input,
 .list-add-color-input,
 .edit-swatch-input,
 .static-input {
@@ -217,17 +227,17 @@ input:hover {
 :focus {
   outline: 0.125rem solid #37b0f7;
 }
-
-.edit-swatch-option,
-.edit-list-option,
-.list-move-option,
-.copy-to-list-option {
+.static-base-color-picker-menu-option,
+.edit-swatch-menu-option,
+.edit-list-menu-option,
+.list-move-menu-option,
+.copy-to-list-menu-option {
   display: none;
   background-color: #fdcfff;
   color: #194f95;
   border-radius: 0.3125rem;
 }
-
+.static-base-color-picker-menu-placeholder,
 .edit-swatch-menu-placeholder,
 .edit-list-menu-placeholder,
 .list-move-menu-placeholder,
@@ -237,14 +247,14 @@ input:hover {
   border-radius: 0.3125rem;
 
 }
-
-.edit-swatch-menu.open .edit-swatch-option,
-.edit-list-menu.open .edit-list-option,
-.list-move-menu.open .list-move-option,
-.copy-to-list-menu.open .copy-to-list-option {
+.static-base-color-picker-menu.open .static-base-color-picker-menu-option,
+.edit-swatch-menu.open .edit-swatch-menu-option,
+.edit-list-menu.open .edit-list-menu-option,
+.list-move-menu.open .list-move-menu-option,
+.copy-to-list-menu.open .copy-to-list-menu-option {
   display: block;
 }
-
+.static-base-color-picker-menu-placeholder:hover, 
 .edit-swatch-menu-placeholder:hover, 
 .edit-list-menu-placeholder:hover, 
 .list-move-menu-placeholder:hover,
@@ -254,11 +264,11 @@ input:hover {
   cursor: pointer;
 }
 
-
-.edit-swatch-option:hover,
-.edit-list-option:hover,
-.list-move-option:hover,
-.copy-to-list-option:hover {
+.static-base-color-picker-menu-option:hover,
+.edit-swatch-menu-option:hover,
+.edit-list-menu-option:hover,
+.list-move-menu-option:hover,
+.copy-to-list-menu-option:hover {
   background-color: #d7a8c5;
   color: #1d3058;
   cursor: pointer;
