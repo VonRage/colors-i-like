@@ -1,6 +1,150 @@
 // global variables and initilizations
 // this line will retrieve the saved array from local storage
 // localStorage.clear()
+
+const cssColors = {
+	"#f0f8ff": "aliceblue",
+	"#faebd7": "antiquewhite",
+	"#00ffff": "aqua",
+	"#7fffd4": "aquamarine",
+	"#f0ffff": "azure",
+	"#f5f5dc": "beige",
+	"#ffe4c4": "bisque",
+	"#000000": "black",
+	"#ffebcd": "blanchedalmond",
+	"#0000ff": "blue",
+	"#8a2be2": "blueviolet",
+	"#a52a2a": "brown",
+	"#deb887": "burlywood",
+	"#5f9ea0": "cadetblue",
+	"#7fff00": "chartreuse",
+	"#d2691e": "chocolate",
+	"#ff7f50": "coral",
+	"#6495ed": "cornflowerblue",
+	"#fff8dc": "cornsilk",
+	"#dc143c": "crimson",
+	"#00008b": "darkblue",
+	"#008b8b": "darkcyan",
+	"#b8860b": "darkgoldenrod",
+	"#a9a9a9": "darkgray",
+	"#006400": "darkgreen",
+	"#bdb76b": "darkkhaki",
+	"#8b008b": "darkmagenta",
+	"#556b2f": "darkolivegreen",
+	"#ff8c00": "darkorange",
+	"#9932cc": "darkorchid",
+	"#8b0000": "darkred",
+	"#e9967a": "darksalmon",
+	"#8fbc8f": "darkseagreen",
+	"#483d8b": "darkslateblue",
+	"#2f4f4f": "darkslategray",
+	"#00ced1": "darkturquoise",
+	"#9400d3": "darkviolet",
+	"#ff1493": "deeppink",
+	"#00bfff": "deepskyblue",
+	"#696969": "dimgray",
+	"#1e90ff": "dodgerblue",
+	"#b22222": "firebrick",
+	"#fffaf0": "floralwhite",
+	"#228b22": "forestgreen",
+	"#ff00ff": "fuchsia",
+	"#dcdcdc": "gainsboro",
+	"#f8f8ff": "ghostwhite",
+	"#ffd700": "gold",
+	"#daa520": "goldenrod",
+	"#808080": "gray",
+	"#008000": "green",
+	"#adff2f": "greenyellow",
+	"#f0fff0": "honeydew",
+	"#ff69b4": "hotpink",
+	"#cd5c5c": "indianred",
+	"#4b0082": "indigo",
+	"#fffff0": "ivory",
+	"#f0e68c": "khaki",
+	"#e6e6fa": "lavender",
+	"#fff0f5": "lavenderblush",
+	"#7cfc00": "lawngreen",
+	"#fffacd": "lemonchiffon",
+	"#add8e6": "lightblue",
+	"#f08080": "lightcoral",
+	"#e0ffff": "lightcyan",
+	"#fafad2": "lightgoldenrodyellow",
+	"#d3d3d3": "lightgray",
+	"#90ee90": "lightgreen",
+	"#ffb6c1": "lightpink",
+	"#ffa07a": "lightsalmon",
+	"#20b2aa": "lightseagreen",
+	"#87cefa": "lightskyblue",
+	"#778899": "lightslategray",
+	"#b0c4de": "lightsteelblue",
+	"#ffffe0": "lightyellow",
+	"#00ff00": "lime",
+	"#32cd32": "limegreen",
+	"#faf0e6": "linen",
+	"#ff00ff": "magenta",
+	"#800000": "maroon",
+	"#66cdaa": "mediumaquamarine",
+	"#0000cd": "mediumblue",
+	"#ba55d3": "mediumorchid",
+	"#9370db": "mediumpurple",
+	"#3cb371": "mediumseagreen",
+	"#7b68ee": "mediumslateblue",
+	"#00fa9a": "mediumspringgreen",
+	"#48d1cc": "mediumturquoise",
+	"#c71585": "mediumvioletred",
+	"#191970": "midnightblue",
+	"#f5fffa": "mintcream",
+	"#ffe4e1": "mistyrose",
+	"#ffe4b5": "moccasin",
+	"#ffdead": "navajowhite",
+	"#000080": "navy",
+	"#fdf5e6": "oldlace",
+	"#808000": "olive",
+	"#6b8e23": "olivedrab",
+	"#ffa500": "orange",
+	"#ff4500": "orangered",
+	"#da70d6": "orchid",
+	"#eee8aa": "palegoldenrod",
+	"#98fb98": "palegreen",
+	"#afeeee": "paleturquoise",
+	"#db7093": "palevioletred",
+	"#ffefd5": "papayawhip",
+	"#ffdab9": "peachpuff",
+	"#cd853f": "peru",
+	"#ffc0cb": "pink",
+	"#dda0dd": "plum",
+	"#b0e0e6": "powderblue",
+	"#800080": "purple",
+	"#663399": "rebeccapurple",
+	"#ff0000": "red",
+	"#bc8f8f": "rosybrown",
+	"#4169e1": "royalblue",
+	"#8b4513": "saddlebrown",
+	"#fa8072": "salmon",
+	"#f4a460": "sandybrown",
+	"#2e8b57": "seagreen",
+	"#fff5ee": "seashell",
+	"#a0522d": "sienna",
+	"#c0c0c0": "silver",
+	"#87ceeb": "skyblue",
+	"#6a5acd": "slateblue",
+	"#708090": "slategray",
+	"#fffafa": "snow",
+	"#00ff7f": "springgreen",
+	"#4682b4": "steelblue",
+	"#d2b48c": "tan",
+	"#008080": "teal",
+	"#d8bfd8": "thistle",
+	"#ff6347": "tomato",
+	"#40e0d0": "turquoise",
+	"#ee82ee": "violet",
+	"#f5deb3": "wheat",
+	"#ffffff": "white",
+	"#f5f5f5": "whitesmoke",
+	"#ffff00": "yellow",
+	"#9acd32": "yellowgreen"
+};
+
 let colorsILike;
 let listBackgroundColors;
 if (localStorage.getItem("colorsILike") !== null) {
@@ -148,6 +292,7 @@ const staticEditDropDownMenuItem = [
 	"Revert To Default",
 	"Export Page to CSS",
 	"--Delete Options--",
+	"Revert All to Default",
 	"Delete All Lists",
 	"Delete All Colors",
 	"Delete All Colors And Lists",
@@ -162,6 +307,30 @@ const staticEditDropDownMenu = customDropDownMenuMaker(staticEditDropDownMenuIte
 	listEditToolsDiv.textContent = ""
 
 	switch (action) {
+
+		case "Revert All to Default":
+
+			const userConfirmedRevertAllToDefault = confirm("Are you sure you want to revert to default settings? This action cannot be undone.");
+			if (!userConfirmedRevertAllToDefault) {
+				return;
+			}
+
+			Object.keys(colorsILike).forEach(listName => {
+				colorsILike[listName].forEach(color => {
+					delete color.cardBackgroundColor;
+				})
+			})
+
+			listBackgroundColors = {};
+			localStorage.setItem("listBackgroundColors", JSON.stringify(listBackgroundColors))
+
+			pageBackgroundColor = "";
+			localStorage.setItem("pageBackgroundColor", pageBackgroundColor)
+
+			renderAndSync();
+
+			break;
+
 		case "Export Page to CSS":
 
 			break;
@@ -208,15 +377,7 @@ const staticEditDropDownMenu = customDropDownMenuMaker(staticEditDropDownMenuIte
 			break;
 		case "Revert To Default":
 
-			const userConfirmedRevertToDefault = confirm("Are you sure you want to revert to default settings? This action cannot be undone.");
-			if (!userConfirmedRevertToDefault) {
-				return;
-			}
-			colorsILike = {};
-			listBackgroundColors = {};
 			pageBackgroundColor = "";
-			localStorage.setItem("colorsILike", JSON.stringify(colorsILike))
-			localStorage.setItem("listBackgroundColors", JSON.stringify(listBackgroundColors))
 			localStorage.setItem("pageBackgroundColor", pageBackgroundColor)
 			renderAndSync();
 
@@ -442,6 +603,7 @@ function addColor(selectedList, selectedColor) {
 
 	colorsILike[selectedList].push({
 		hexValue: color,
+		cardBackgroundColor: undefined,
 		customName: ""
 	});
 	input.value = "";
@@ -561,6 +723,56 @@ function createListHeader(listName) {
 
 			case "Move List":
 
+				const keys = Object.keys(colorsILike);
+
+				const moveListToolsDiv = document.createElement("div");
+				moveListToolsDiv.classList.add("move-list-tools-div");
+
+				const moveUpButton = document.createElement("button");
+				moveUpButton.textContent = "▲ Move Up";
+				moveUpButton.classList.add("move-up-button");
+
+				const moveDownButton = document.createElement("button");
+				moveDownButton.textContent = "Move Down ▼";
+				moveDownButton.classList.add("move-down-button");
+
+				moveUpButton.addEventListener("click", () => {
+					let listIndex = keys.indexOf(listName);
+					let holdList = listName;
+					if (listIndex === 0) {
+						moveUpButton.disabled = true;
+						return;
+					}
+
+					keys[listIndex] = keys[listIndex - 1];
+					keys[listIndex - 1] = holdList;
+					const tempObj = {}
+					keys.forEach(key => {
+						tempObj[key] = colorsILike[key];
+					})
+					colorsILike = tempObj;
+					renderAndSync();
+				});
+
+				moveDownButton.addEventListener("click", () => {
+					let listIndex = keys.indexOf(listName);
+					let holdList = listName;
+					if (listIndex === keys.length - 1) {
+						moveDownButton.disabled = true;
+						return;
+					}
+					keys[listIndex] = keys[listIndex + 1];
+					keys[listIndex + 1] = holdList;
+					const tempObj = {}
+					keys.forEach(key => {
+						tempObj[key] = colorsILike[key];
+					})
+					colorsILike = tempObj;
+					renderAndSync();
+				});
+				moveListToolsDiv.appendChild(moveUpButton);
+				moveListToolsDiv.appendChild(moveDownButton);
+				listEditDiv.appendChild(moveListToolsDiv);
 				break;
 
 			case "Change List Background Color":
@@ -696,6 +908,54 @@ function createColorCard(color, listName) {
 				break;
 
 			case "Move Color":
+
+
+				const moveColorToolsDiv = document.createElement("div");
+				moveColorToolsDiv.classList.add("move-color-tools-div");
+
+				const moveLeftButton = document.createElement("button");
+				moveLeftButton.textContent = "◀ Move Left";
+				moveLeftButton.classList.add("move-left-button");
+
+				const moveRightButton = document.createElement("button");
+				moveRightButton.textContent = "Move Right ▶";
+				moveRightButton.classList.add("move-right-button");
+
+				let colorIndex = colorsILike[listName].indexOf(color);
+
+				moveLeftButton.addEventListener("click", function () {
+					const swatchList = colorsILike[listName];
+
+					if (colorIndex === 0) {
+						moveLeftButton.disabled = true;
+						return;
+					}
+
+					let holdColor = swatchList[colorIndex];
+
+					swatchList[colorIndex] = swatchList[colorIndex - 1];
+					swatchList[colorIndex - 1] = holdColor;
+					renderAndSync();
+				})
+
+				moveRightButton.addEventListener("click", function () {
+					const swatchList = colorsILike[listName];
+
+					if (colorIndex === swatchList.length - 1) {
+						moveRightButton.disabled = true;
+						return;
+					}
+
+					let holdColor = swatchList[colorIndex];
+
+					swatchList[colorIndex] = swatchList[colorIndex + 1];
+					swatchList[colorIndex + 1] = holdColor;
+					renderAndSync();
+				})
+
+				moveColorToolsDiv.appendChild(moveLeftButton);
+				moveColorToolsDiv.appendChild(moveRightButton);
+				cardEditContainer.appendChild(moveColorToolsDiv);
 
 				break;
 
