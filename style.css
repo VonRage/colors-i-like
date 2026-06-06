@@ -181,6 +181,7 @@ submit respectively */
 
 
 /* no children */
+.static-add-color-input,
 .static-base-color-picker-input,
 .list-add-color-input,
 .edit-swatch-input,
@@ -227,51 +228,61 @@ input:hover {
 :focus {
   outline: 0.125rem solid #37b0f7;
 }
-.static-edit-list-menu-option,
+
+
+.static-edit-menu-option,
 .static-base-color-picker-menu-option,
 .edit-swatch-menu-option,
 .edit-list-menu-option,
-.list-move-menu-option,
+.move-to-existing-list-menu-option,
 .copy-to-list-menu-option {
   display: none;
   background-color: #fdcfff;
   color: #194f95;
   border-radius: 0.3125rem;
 }
-.static-edit-list-menu-placeholder,
+
+
+.static-edit-menu-placeholder,
 .static-base-color-picker-menu-placeholder,
 .edit-swatch-menu-placeholder,
 .edit-list-menu-placeholder,
-.list-move-menu-placeholder,
+.move-to-existing-list-menu-placeholder,
 .copy-to-list-menu-placeholder {
   background-color: #f3b7f5;
   color: #1f4076;
   border-radius: 0.3125rem;
 
 }
-.static-edit-list-menu.open .static-edit-list-menu-option,
+
+
+.static-edit-menu.open .static-edit-menu-option,
 .static-base-color-picker-menu.open .static-base-color-picker-menu-option,
 .edit-swatch-menu.open .edit-swatch-menu-option,
 .edit-list-menu.open .edit-list-menu-option,
-.list-move-menu.open .list-move-menu-option,
+.move-to-existing-list-menu.open .move-to-existing-list-menu-option,
 .copy-to-list-menu.open .copy-to-list-menu-option {
   display: block;
 }
-.static-edit-list-menu-placeholder:hover, 
+
+
+.static-edit-menu-placeholder:hover,
 .static-base-color-picker-menu-placeholder:hover, 
 .edit-swatch-menu-placeholder:hover, 
 .edit-list-menu-placeholder:hover, 
-.list-move-menu-placeholder:hover,
+.move-to-existing-list-menu-placeholder:hover,
 .copy-to-list-menu-placeholder:hover {
   background-color: #ce8dad;
   color: #102344;
   cursor: pointer;
 }
-.static-edit-list-menu-option:hover,
+
+
+.static-edit-menu-option:hover,
 .static-base-color-picker-menu-option:hover,
 .edit-swatch-menu-option:hover,
 .edit-list-menu-option:hover,
-.list-move-menu-option:hover,
+.move-to-existing-list-menu-option:hover,
 .copy-to-list-menu-option:hover {
   background-color: #d7a8c5;
   color: #1d3058;
