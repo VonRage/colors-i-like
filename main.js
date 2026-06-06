@@ -367,7 +367,7 @@ const staticEditDropDownMenu = customDropDownMenuMaker(staticEditDropDownMenuIte
 				if (validatedInput === null) {
 					return;
 				}
-				pageBackgroundColor = validatedInput;
+				pageBackgroundColor = validatedInput.hexValue;
 				localStorage.setItem("pageBackgroundColor", pageBackgroundColor);
 				renderAndSync();
 			})
@@ -398,8 +398,10 @@ const staticEditDropDownMenu = customDropDownMenuMaker(staticEditDropDownMenuIte
 		case "Delete All Colors":
 
 			const userConfirmedDeleteAllColors = confirm("Are you sure you want to delete all colors? This action cannot be undone.");
-
-			if (userConfirmedDeleteAllColors) {
+			if (userConfirmedDeleteAllColors === null) {
+				return;
+			}
+			if (userConfirmedDeleteAllColors === true) {
 				Object.keys(colorsILike).forEach(listName => {
 					colorsILike[listName] = [];
 				});
@@ -475,47 +477,51 @@ function validateInput(type, rawInput, list) {
 				return null;
 			}
 
-			if (!text.startsWith("#")) {
+
+			const dummyElement = document.createElement("div")
+			document.body.appendChild(dummyElement);
+			dummyElement.style.color = text;
+
+			if (!dummyElement.style.color) {
+
 				text = "#" + text;
+				dummyElement.style.color = text
 
-			}
-			if (text.length < 4) {
-				errorsDisplay.textContent = "The color input is too short";
-				setTimeout(() => {
-					errorsDisplay.textContent = ""
-				}, 5000);
-				return null;
-			}
-
-			if ((text.length > 4 && text.length < 7) || (text.length > 7 && text.length < 9)) {
-				errorsDisplay.textContent = "The color input must be either shorter or longer";
-				setTimeout(() => {
-					errorsDisplay.textContent = ""
-				}, 5000);
-				return null;
-			}
-
-			if (text.length > 9) {
-				errorsDisplay.textContent = "The color input is too long";
-				setTimeout(() => {
-					errorsDisplay.textContent = ""
-				}, 5000);
-				return null;
-			}
-
-			const typedColor = text.slice(1);
-			for (const char of typedColor) {
-				if ((char < 'a' || char > 'f') && (char < '0' || char > '9')) {
-					errorsDisplay.textContent = "Hex Color values must include: a-f and 0-9";
+				if (!dummyElement.style.color) {
+					errorsDisplay.textContent = "The color input is not a valid color";
 					setTimeout(() => {
 						errorsDisplay.textContent = ""
 					}, 5000);
+					document.body.removeChild(dummyElement); 
 					return null;
 				}
+
 			}
 
+			const rgbaString = window.getComputedStyle(dummyElement).color;
+			const rgbaCode = rgbaString;
+			document.body.removeChild(dummyElement);
 
-			if (list !== undefined && colorsILike[list] !== undefined && colorsILike[list].some((item) => item.hexValue === text)) {
+			const rgbaArray = rgbaCode.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+			let r = Number(rgbaArray[1]);
+			let g = Number(rgbaArray[2]);
+			let b = Number(rgbaArray[3]);
+			let a = Number(rgbaArray[4] !== undefined ? Number(rgbaArray[4]) : 1);
+
+			const rHexString = r.toString(16).padStart(2, "0");
+			const gHexString = g.toString(16).padStart(2, "0");
+			const bHexString = b.toString(16).padStart(2, "0");
+			const aHexString = Math.round(a * 255).toString(16).padStart(2, "0");
+
+			let hexCode;
+
+			if (a === 1) {
+				hexCode = `#${rHexString}${gHexString}${bHexString}`;
+			} else {
+				hexCode = `#${rHexString}${gHexString}${bHexString}${aHexString}`;
+			}
+
+			if (list !== undefined && colorsILike[list] !== undefined && colorsILike[list].some((item) => item.hexValue === hexCode)) {
 				errorsDisplay.textContent = "This color is already in this list";
 				setTimeout(() => {
 					errorsDisplay.textContent = ""
@@ -523,7 +529,55 @@ function validateInput(type, rawInput, list) {
 				return null;
 			}
 
-			return text;
+			const hslDecimals = [r, g, b].map((rgbValue) => rgbValue / 255);
+
+			const hslDecimalsMax = Math.max(...hslDecimals);
+			const hslDecimalsMin = Math.min(...hslDecimals);
+			let saturation;
+			let lightness = (hslDecimalsMax + hslDecimalsMin) / 2;
+			let hue;
+			let delta = hslDecimalsMax - hslDecimalsMin;
+
+			if (hslDecimalsMax === hslDecimalsMin) {
+				saturation = 0;
+			} else if (lightness < 0.5) {
+				saturation = delta / (hslDecimalsMax + hslDecimalsMin);
+			} else {
+				saturation = delta / (2 - hslDecimalsMax - hslDecimalsMin);
+			}
+			const [R, G, B, A] = hslDecimals;
+
+			if (delta > 0) {
+
+				switch (hslDecimalsMax) {
+					case R:
+						hue = (G - B) / delta % 6;
+						break;
+					case G:
+						hue = (B - R) / delta + 2;
+						break;
+					case B:
+						hue = (R - G) / delta + 4;
+						break;
+				}
+			} else if (delta === 0) {
+				hue = 0;
+			}
+			let hslCode;
+			hue = hue / 6;
+			hue = Math.round(hue * 360);
+			saturation = Math.round(saturation * 100);
+			lightness = Math.round(lightness * 100);	
+
+			if (a === 1) {
+				hslCode = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+			} else if (a < 1) {
+				hslCode = `hsla(${hue}, ${saturation}%, ${lightness}%, ${a})`;
+			}
+
+			let cssCode = cssColors[hexCode] || "";
+
+			return { hexValue: hexCode, hslValue: hslCode, rgbaValue: rgbaCode, cssKeyword: cssCode }
 
 			break;
 
@@ -591,9 +645,9 @@ function validateInput(type, rawInput, list) {
 function addColor(selectedList, selectedColor) {
 
 
-	const color = validateInput("color", selectedColor, selectedList);
+	const colorsObject = validateInput("color", selectedColor, selectedList);
 
-	if (color === null) {
+	if (colorsObject === null) {
 		return;
 	}
 
@@ -602,7 +656,10 @@ function addColor(selectedList, selectedColor) {
 	}
 
 	colorsILike[selectedList].push({
-		hexValue: color,
+		hexValue: colorsObject.hexValue,
+		hslValue: colorsObject.hslValue,
+		rgbaValue: colorsObject.rgbaValue,
+		cssKeyword: colorsObject.cssKeyword,
 		cardBackgroundColor: undefined,
 		customName: ""
 	});
@@ -783,7 +840,7 @@ function createListHeader(listName) {
 					if (validatedInput === null) {
 						return;
 					}
-					listBackgroundColors[listName] = validatedInput
+					listBackgroundColors[listName] = validatedInput.hexValue;
 					localStorage.setItem("listBackgroundColors", JSON.stringify(listBackgroundColors))
 					renderAndSync()
 
@@ -827,20 +884,35 @@ function createColorCard(color, listName) {
 	swatchColor.classList.add("swatch-color");
 	cardBodyContainer.appendChild(swatchColor);
 
-	const swatchHeader = document.createElement("h5");
-	swatchHeader.classList.add("swatch-header")
+	const hexValue = document.createElement("h5");
+	hexValue.classList.add("swatch-hex-value")
 	swatchColor.style.backgroundColor = color.hexValue
-	swatchHeader.textContent = color.hexValue;
-	cardHeaderContainer.appendChild(swatchHeader);
+	hexValue.textContent = color.hexValue;
+	cardHeaderContainer.appendChild(hexValue);
 
-	const colorName = document.createElement("h6");
-	colorName.classList.add("swatch-new-name");
-	colorName.textContent = "\u00A0"
-	cardHeaderContainer.appendChild(colorName);
+	const hslValue = document.createElement("h5");
+	hslValue.classList.add("swatch-hsl-value")
+	hslValue.textContent = color.hslValue;
+	cardHeaderContainer.appendChild(hslValue);
+
+	const rgbaValue = document.createElement("h5");
+	rgbaValue.classList.add("swatch-rgba-value")
+	rgbaValue.textContent = color.rgbaValue;
+	cardHeaderContainer.appendChild(rgbaValue);
+
+	const cssKeyword = document.createElement("h5");
+	cssKeyword.classList.add("swatch-css-keyword")
+	cssKeyword.textContent = color.cssKeyword;
+	cardHeaderContainer.appendChild(cssKeyword);
+
+	const customName = document.createElement("h6");
+	customName.classList.add("swatch-new-name");
+	customName.textContent = "\u00A0"
+	cardHeaderContainer.appendChild(customName);
 
 
 	if (color.customName !== "") {
-		colorName.textContent = color.customName;
+		customName.textContent = color.customName;
 	}
 	cardBodyContainer.appendChild(swatchColor);
 
@@ -966,7 +1038,10 @@ function createColorCard(color, listName) {
 					if (validatedInput === null) {
 						return;
 					}
-					color.hexValue = validatedInput;
+					color.hexValue = validatedInput.hexValue;
+					color.hslValue = validatedInput.hslValue;
+					color.rgbaValue = validatedInput.rgbaValue;
+					color.cssKeyword = validatedInput.cssKeyword;
 					renderAndSync();
 				});
 
@@ -1017,7 +1092,7 @@ function createColorCard(color, listName) {
 					if (validatedInput === null) {
 						return;
 					}
-					color.cardBackgroundColor = validatedInput;
+					color.cardBackgroundColor = validatedInput.hexValue;
 					renderAndSync();
 				})
 
