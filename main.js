@@ -92,15 +92,15 @@ const staticEditDropDownMenuItem = [
 	"Create New List",
 	"Change Page Background Color",
 	"Revert To Default",
-	"Export Page to CSS",
+	"Export Page to CSS (WIP)",
 	"--Delete Options--",
 	"Revert All to Default",
 	"Delete All Lists",
 	"Delete All Colors",
 	"Delete All Colors And Lists",
 	"--Just For Fun--",
-	"Randomize All Colors",
-	"Random Theme",
+	"Randomize All Colors (WIP)",
+	"Random Theme (WIP)",
 
 ];
 
@@ -501,7 +501,7 @@ function createListHeader(listName) {
 		"Move List",
 		"Change List Background Color",
 		"Revert to Default",
-		"Export List to CSS",
+		"Export List to CSS (WIP)",
 		"Delete List"
 	];
 
@@ -741,8 +741,8 @@ function createColorCard(color, listName) {
 		"Move Color",
 		"Change Card Background Color",
 		"Revert to Default",
-		"Suggested Color Palettes",
-		"Contrast Checker",
+		"Suggested Color Palettes (WIP)",
+		"Contrast Checker (WIP)",
 		"Copy to List",
 		"Move to New List",
 		"Move to Existing List",
