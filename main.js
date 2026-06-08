@@ -2,163 +2,35 @@
 // this line will retrieve the saved array from local storage
 // localStorage.clear()
 
-const cssColors = {
-	"#f0f8ff": "aliceblue",
-	"#faebd7": "antiquewhite",
-	"#00ffff": "aqua",
-	"#7fffd4": "aquamarine",
-	"#f0ffff": "azure",
-	"#f5f5dc": "beige",
-	"#ffe4c4": "bisque",
-	"#000000": "black",
-	"#ffebcd": "blanchedalmond",
-	"#0000ff": "blue",
-	"#8a2be2": "blueviolet",
-	"#a52a2a": "brown",
-	"#deb887": "burlywood",
-	"#5f9ea0": "cadetblue",
-	"#7fff00": "chartreuse",
-	"#d2691e": "chocolate",
-	"#ff7f50": "coral",
-	"#6495ed": "cornflowerblue",
-	"#fff8dc": "cornsilk",
-	"#dc143c": "crimson",
-	"#00008b": "darkblue",
-	"#008b8b": "darkcyan",
-	"#b8860b": "darkgoldenrod",
-	"#a9a9a9": "darkgray",
-	"#006400": "darkgreen",
-	"#bdb76b": "darkkhaki",
-	"#8b008b": "darkmagenta",
-	"#556b2f": "darkolivegreen",
-	"#ff8c00": "darkorange",
-	"#9932cc": "darkorchid",
-	"#8b0000": "darkred",
-	"#e9967a": "darksalmon",
-	"#8fbc8f": "darkseagreen",
-	"#483d8b": "darkslateblue",
-	"#2f4f4f": "darkslategray",
-	"#00ced1": "darkturquoise",
-	"#9400d3": "darkviolet",
-	"#ff1493": "deeppink",
-	"#00bfff": "deepskyblue",
-	"#696969": "dimgray",
-	"#1e90ff": "dodgerblue",
-	"#b22222": "firebrick",
-	"#fffaf0": "floralwhite",
-	"#228b22": "forestgreen",
-	"#ff00ff": "fuchsia",
-	"#dcdcdc": "gainsboro",
-	"#f8f8ff": "ghostwhite",
-	"#ffd700": "gold",
-	"#daa520": "goldenrod",
-	"#808080": "gray",
-	"#008000": "green",
-	"#adff2f": "greenyellow",
-	"#f0fff0": "honeydew",
-	"#ff69b4": "hotpink",
-	"#cd5c5c": "indianred",
-	"#4b0082": "indigo",
-	"#fffff0": "ivory",
-	"#f0e68c": "khaki",
-	"#e6e6fa": "lavender",
-	"#fff0f5": "lavenderblush",
-	"#7cfc00": "lawngreen",
-	"#fffacd": "lemonchiffon",
-	"#add8e6": "lightblue",
-	"#f08080": "lightcoral",
-	"#e0ffff": "lightcyan",
-	"#fafad2": "lightgoldenrodyellow",
-	"#d3d3d3": "lightgray",
-	"#90ee90": "lightgreen",
-	"#ffb6c1": "lightpink",
-	"#ffa07a": "lightsalmon",
-	"#20b2aa": "lightseagreen",
-	"#87cefa": "lightskyblue",
-	"#778899": "lightslategray",
-	"#b0c4de": "lightsteelblue",
-	"#ffffe0": "lightyellow",
-	"#00ff00": "lime",
-	"#32cd32": "limegreen",
-	"#faf0e6": "linen",
-	"#ff00ff": "magenta",
-	"#800000": "maroon",
-	"#66cdaa": "mediumaquamarine",
-	"#0000cd": "mediumblue",
-	"#ba55d3": "mediumorchid",
-	"#9370db": "mediumpurple",
-	"#3cb371": "mediumseagreen",
-	"#7b68ee": "mediumslateblue",
-	"#00fa9a": "mediumspringgreen",
-	"#48d1cc": "mediumturquoise",
-	"#c71585": "mediumvioletred",
-	"#191970": "midnightblue",
-	"#f5fffa": "mintcream",
-	"#ffe4e1": "mistyrose",
-	"#ffe4b5": "moccasin",
-	"#ffdead": "navajowhite",
-	"#000080": "navy",
-	"#fdf5e6": "oldlace",
-	"#808000": "olive",
-	"#6b8e23": "olivedrab",
-	"#ffa500": "orange",
-	"#ff4500": "orangered",
-	"#da70d6": "orchid",
-	"#eee8aa": "palegoldenrod",
-	"#98fb98": "palegreen",
-	"#afeeee": "paleturquoise",
-	"#db7093": "palevioletred",
-	"#ffefd5": "papayawhip",
-	"#ffdab9": "peachpuff",
-	"#cd853f": "peru",
-	"#ffc0cb": "pink",
-	"#dda0dd": "plum",
-	"#b0e0e6": "powderblue",
-	"#800080": "purple",
-	"#663399": "rebeccapurple",
-	"#ff0000": "red",
-	"#bc8f8f": "rosybrown",
-	"#4169e1": "royalblue",
-	"#8b4513": "saddlebrown",
-	"#fa8072": "salmon",
-	"#f4a460": "sandybrown",
-	"#2e8b57": "seagreen",
-	"#fff5ee": "seashell",
-	"#a0522d": "sienna",
-	"#c0c0c0": "silver",
-	"#87ceeb": "skyblue",
-	"#6a5acd": "slateblue",
-	"#708090": "slategray",
-	"#fffafa": "snow",
-	"#00ff7f": "springgreen",
-	"#4682b4": "steelblue",
-	"#d2b48c": "tan",
-	"#008080": "teal",
-	"#d8bfd8": "thistle",
-	"#ff6347": "tomato",
-	"#40e0d0": "turquoise",
-	"#ee82ee": "violet",
-	"#f5deb3": "wheat",
-	"#ffffff": "white",
-	"#f5f5f5": "whitesmoke",
-	"#ffff00": "yellow",
-	"#9acd32": "yellowgreen"
-};
-
+const cssColors = { "#f0f8ff": "aliceblue", "#faebd7": "antiquewhite", "#00ffff": "aqua", "#7fffd4": "aquamarine", "#f0ffff": "azure", "#f5f5dc": "beige", "#ffe4c4": "bisque", "#000000": "black", "#ffebcd": "blanchedalmond", "#0000ff": "blue", "#8a2be2": "blueviolet", "#a52a2a": "brown", "#deb887": "burlywood", "#5f9ea0": "cadetblue", "#7fff00": "chartreuse", "#d2691e": "chocolate", "#ff7f50": "coral", "#6495ed": "cornflowerblue", "#fff8dc": "cornsilk", "#dc143c": "crimson", "#00008b": "darkblue", "#008b8b": "darkcyan", "#b8860b": "darkgoldenrod", "#a9a9a9": "darkgray", "#006400": "darkgreen", "#bdb76b": "darkkhaki", "#8b008b": "darkmagenta", "#556b2f": "darkolivegreen", "#ff8c00": "darkorange", "#9932cc": "darkorchid", "#8b0000": "darkred", "#e9967a": "darksalmon", "#8fbc8f": "darkseagreen", "#483d8b": "darkslateblue", "#2f4f4f": "darkslategray", "#00ced1": "darkturquoise", "#9400d3": "darkviolet", "#ff1493": "deeppink", "#00bfff": "deepskyblue", "#696969": "dimgray", "#1e90ff": "dodgerblue", "#b22222": "firebrick", "#fffaf0": "floralwhite", "#228b22": "forestgreen", "#ff00ff": "fuchsia", "#dcdcdc": "gainsboro", "#f8f8ff": "ghostwhite", "#ffd700": "gold", "#daa520": "goldenrod", "#808080": "gray", "#008000": "green", "#adff2f": "greenyellow", "#f0fff0": "honeydew", "#ff69b4": "hotpink", "#cd5c5c": "indianred", "#4b0082": "indigo", "#fffff0": "ivory", "#f0e68c": "khaki", "#e6e6fa": "lavender", "#fff0f5": "lavenderblush", "#7cfc00": "lawngreen", "#fffacd": "lemonchiffon", "#add8e6": "lightblue", "#f08080": "lightcoral", "#e0ffff": "lightcyan", "#fafad2": "lightgoldenrodyellow", "#d3d3d3": "lightgray", "#90ee90": "lightgreen", "#ffb6c1": "lightpink", "#ffa07a": "lightsalmon", "#20b2aa": "lightseagreen", "#87cefa": "lightskyblue", "#778899": "lightslategray", "#b0c4de": "lightsteelblue", "#ffffe0": "lightyellow", "#00ff00": "lime", "#32cd32": "limegreen", "#faf0e6": "linen", "#ff00ff": "magenta", "#800000": "maroon", "#66cdaa": "mediumaquamarine", "#0000cd": "mediumblue", "#ba55d3": "mediumorchid", "#9370db": "mediumpurple", "#3cb371": "mediumseagreen", "#7b68ee": "mediumslateblue", "#00fa9a": "mediumspringgreen", "#48d1cc": "mediumturquoise", "#c71585": "mediumvioletred", "#191970": "midnightblue", "#f5fffa": "mintcream", "#ffe4e1": "mistyrose", "#ffe4b5": "moccasin", "#ffdead": "navajowhite", "#000080": "navy", "#fdf5e6": "oldlace", "#808000": "olive", "#6b8e23": "olivedrab", "#ffa500": "orange", "#ff4500": "orangered", "#da70d6": "orchid", "#eee8aa": "palegoldenrod", "#98fb98": "palegreen", "#afeeee": "paleturquoise", "#db7093": "palevioletred", "#ffefd5": "papayawhip", "#ffdab9": "peachpuff", "#cd853f": "peru", "#ffc0cb": "pink", "#dda0dd": "plum", "#b0e0e6": "powderblue", "#800080": "purple", "#663399": "rebeccapurple", "#ff0000": "red", "#bc8f8f": "rosybrown", "#4169e1": "royalblue", "#8b4513": "saddlebrown", "#fa8072": "salmon", "#f4a460": "sandybrown", "#2e8b57": "seagreen", "#fff5ee": "seashell", "#a0522d": "sienna", "#c0c0c0": "silver", "#87ceeb": "skyblue", "#6a5acd": "slateblue", "#708090": "slategray", "#fffafa": "snow", "#00ff7f": "springgreen", "#4682b4": "steelblue", "#d2b48c": "tan", "#008080": "teal", "#d8bfd8": "thistle", "#ff6347": "tomato", "#40e0d0": "turquoise", "#ee82ee": "violet", "#f5deb3": "wheat", "#ffffff": "white", "#f5f5f5": "whitesmoke", "#ffff00": "yellow", "#9acd32": "yellowgreen" };
+const megaArray = [...Object.values(cssColors), ...Object.keys(cssColors)];
 let colorsILike;
 let listBackgroundColors;
+let defaultList;
+let input;
+let addYourOwnColor;
+let addBaseColor;
+
+
 if (localStorage.getItem("colorsILike") !== null) {
 	colorsILike = JSON.parse(localStorage.getItem("colorsILike"));
 } else {
 	colorsILike = {};
 }
+
 if (localStorage.getItem("listBackgroundColors") !== null) {
 	listBackgroundColors = JSON.parse(localStorage.getItem("listBackgroundColors"));
 } else {
 	listBackgroundColors = {};
 }
 
-let currentList = "My Colors";
+
+if (localStorage.getItem("defaultList") !== null) {
+	defaultList = JSON.parse(localStorage.getItem("defaultList"));
+} else {
+	defaultList = "My Colors";
+}
+
 const genericListNames = [
 	"Bathroom",
 	"Kitchen",
@@ -174,35 +46,26 @@ const genericListNames = [
 	"webDesign"
 ];
 
-const genericColorNames = [
-	"Red",
-	"Orange",
-	"Yellow",
-	"Green",
-	"Blue",
-	"Purple",
-	"Pink",
-	"Cyan",
-	"Magenta",
-	"Black",
-	"White",
-	"Gray",
-]
 
-const genericColors = [
-	"#ff0000",
-	"#ff7f00",
-	"#ffff00",
-	"#7fff00",
-	"#00ff00",
-	"#00ff7f",
-	"#00ffff",
-	"#007fff",
-	"#0000ff",
-	"#7f00ff",
-	"#ff00ff",
-	"#ff007f",
-]
+const genericColors = {
+	"red": "#ff0000",
+	"orange": "#ff7f00",
+	"yellow": "#ffff00",
+	"green": "#7fff00",
+	"lime": "#00ff00",
+	"springgreen": "#00ff7f",
+	"cyan": "#00ffff",
+	"blue": "#007fff",
+	"midnightblue": "#0000ff",
+	"blueviolet": "#7f00ff",
+	"indigo": "#4b0082",
+	"purple": "#800080",
+	"violet": "#ee82ee",
+	"fuchsia": "#ff00ff",
+	"hotpink": "#ff69b4",
+	"deeppink": "#ff007f",
+	"pink": "#ffc0cb",
+}
 
 
 
@@ -239,29 +102,33 @@ function customDropDownMenuMaker(arr, callbackFunction, classPrefix) {
 
 
 function inputToolMaker(initialValue, placeholderText, buttonText, classPrefix, callbackFunction,) {
+
 	const inputToolContainer = document.createElement("div");
 	inputToolContainer.classList.add(classPrefix + "-container");
+
 	const inputToolInput = document.createElement("input");
 	inputToolInput.classList.add(classPrefix + "-input");
 	inputToolInput.placeholder = placeholderText;
 	inputToolInput.value = initialValue;
+
 	const inputToolButton = document.createElement("button");
 	inputToolButton.classList.add(classPrefix + "-button");
 	inputToolButton.textContent = buttonText;
 	inputToolContainer.appendChild(inputToolInput);
 	inputToolContainer.appendChild(inputToolButton);
+
 	inputToolButton.addEventListener("click", function () {
 		callbackFunction(inputToolInput.value)
 	})
+
+	inputToolInput.addEventListener("keydown", function (e) {
+		if (e.key === "Enter") {
+			callbackFunction(inputToolInput.value)
+		}
+	});
+
 	return inputToolContainer;
 }
-
-let input;
-let addToMyColors;
-
-
-// push input box to array
-// transfer and clean string to useable data
 
 let addYourOwnColorEditListMenu = document.querySelector("#add-your-own-color-edit-list-menu")
 let pickYourOwnColorDiv = document.querySelector("#add-your-own-color")
@@ -275,14 +142,12 @@ let listEditToolsDiv = document.querySelector("#list-edit-tools");
 
 let pageBackgroundColor = localStorage.getItem("pageBackgroundColor") || "";
 
+const addYourOwnColorInputTools = inputToolMaker("", getRandomItem(megaArray), `Add to ${defaultList}`, "static-add-color", function (inputColor) {
 
-
-const addYourOwnColorInputTools = inputToolMaker("", "#00000000", `Add to ${currentList}`, "static-add-color", function (inputColor) {
-
-	addColor(currentList, inputColor)
+	addColor(defaultList, inputColor)
 })
 input = addYourOwnColorInputTools.querySelector(".static-add-color-input");
-addToMyColors = addYourOwnColorInputTools.querySelector(".static-add-color-button");
+addYourOwnColor = addYourOwnColorInputTools.querySelector(".static-add-color-button");
 pickYourOwnColorDiv.appendChild(addYourOwnColorInputTools);
 
 const staticEditDropDownMenuItem = [
@@ -362,7 +227,7 @@ const staticEditDropDownMenu = customDropDownMenuMaker(staticEditDropDownMenuIte
 			break;
 		case "Change Page Background Color":
 
-			const changePageBackgroundColorInputTools = inputToolMaker("", getRandomItem(genericColors), "Confirm", "change-page-background-color", function (inputColor) {
+			const changePageBackgroundColorInputTools = inputToolMaker("", getRandomItem(megaArray), "Confirm", "change-page-background-color", function (inputColor) {
 				const validatedInput = validateInput("color", inputColor);
 				if (validatedInput === null) {
 					return;
@@ -440,21 +305,31 @@ const staticEditDropDownMenu = customDropDownMenuMaker(staticEditDropDownMenuIte
 
 addYourOwnColorEditListMenu.appendChild(staticEditDropDownMenu)
 
-const baseColorPickerInputTools = inputToolMaker("", getRandomItem(genericColors), `Add to ${currentList}`, "static-base-color-picker", function (inputColor) {
+const baseColorPickerInputTools = inputToolMaker("", getRandomItem(megaArray), `Add to ${defaultList}`, "static-base-color-picker", function (inputColor) {
 
-	addColor(currentList, inputColor);
+	addColor(defaultList, inputColor);
 
 })
+
+
 pickBaseColorInputToolsDiv.appendChild(baseColorPickerInputTools)
+addBaseColor = baseColorPickerInputTools.querySelector(".static-base-color-picker-button")
+
+
 const baseColorPickerDropDownMenuOptions = [
 	"--Pick A Color--",
-	...genericColors
+	...Object.keys(genericColors),
 ]
+
 const baseColorPickerDropDownMenu = customDropDownMenuMaker(baseColorPickerDropDownMenuOptions, function (baseColor) {
 
 	const pickerInput = baseColorPickerInputTools.querySelector(".static-base-color-picker-input")
 	pickerInput.readOnly = true;
-	pickerInput.value = baseColor;
+	if (baseColor === "--Pick A Color--") {
+		return;
+	}
+	pickerInput.value = genericColors[baseColor];
+	pickerInput.focus();
 
 }, "static-base-color-picker")
 
@@ -721,9 +596,11 @@ function createListHeader(listName) {
 					return;
 				}
 
-				if (listName === currentList) {
-					currentList = "My Colors";
-					addToMyColors.textContent = "Add to My Colors";
+				if (listName === defaultList) {
+					defaultList = "My Colors";
+					localStorage.setItem("defaultList", JSON.stringify(defaultList));
+					addYourOwnColor.textContent = "Add to My Colors";
+					addBaseColor.textContent = "Add to My Colors";
 				}
 
 				delete colorsILike[listName];
@@ -751,9 +628,11 @@ function createListHeader(listName) {
 						delete listBackgroundColors[listName];
 						localStorage.setItem("colorsILike", JSON.stringify(colorsILike))
 						localStorage.setItem("listBackgroundColors", JSON.stringify(listBackgroundColors))
-						if (listName === currentList) {
-							currentList = newName;
-							addToMyColors.textContent = `Add to ${newName}`;
+						if (listName === defaultList) {
+							defaultList = newName;
+							localStorage.setItem("defaultList", JSON.stringify(defaultList));
+							addYourOwnColor.textContent = `Add to ${newName}`;
+							addBaseColor.textContent = `Add to ${newName}`;
 						}
 
 					}
@@ -768,7 +647,7 @@ function createListHeader(listName) {
 
 			case "Add Color to List":
 
-				const addColorToListInputTools = inputToolMaker("", getRandomItem(genericColors), "Confirm", "list-add-color", function (inputColor) {
+				const addColorToListInputTools = inputToolMaker("", getRandomItem(megaArray), "Confirm", "list-add-color", function (inputColor) {
 
 					addColor(listName, inputColor);
 
@@ -835,7 +714,7 @@ function createListHeader(listName) {
 			case "Change List Background Color":
 
 
-				const changeListBackgroundInputTools = inputToolMaker(listBackgroundColors[listName] || "", getRandomItem(genericColors), "Confirm", "change-list-background", function (inputColor) {
+				const changeListBackgroundInputTools = inputToolMaker(listBackgroundColors[listName] || "", getRandomItem(megaArray), "Confirm", "change-list-background", function (inputColor) {
 					const validatedInput = validateInput("color", inputColor)
 					if (validatedInput === null) {
 						return;
@@ -865,24 +744,25 @@ function createColorCard(color, listName) {
 
 
 	const swatchContainer = document.createElement("div");
-	swatchContainer.classList.add("swatch-container");
+	swatchContainer.classList.add("swatch-card");
 
 	const cardHeaderContainer = document.createElement("div")
-	cardHeaderContainer.classList.add("card-header-container");
+	cardHeaderContainer.classList.add("swatch-card-header-wrapper");
 
 	const cardBodyContainer = document.createElement("div")
-	cardBodyContainer.classList.add("card-body-container");
+	cardBodyContainer.classList.add("swatch-card-body-wrapper");
 
 	const cardEditContainer = document.createElement("div")
-	cardEditContainer.classList.add("card-edit-container")
+	cardEditContainer.classList.add("swatch-card-edit-wrapper")
+	const swatchColor = document.createElement("div");
 
 	if (color.cardBackgroundColor !== undefined) {
-		cardBodyContainer.style.backgroundColor = color.cardBackgroundColor;
+		swatchColor.style.borderColor = color.cardBackgroundColor;
 	}
 
-	const swatchColor = document.createElement("div");
 	swatchColor.classList.add("swatch-color");
 	cardBodyContainer.appendChild(swatchColor);
+
 
 	const hexValue = document.createElement("h5");
 	hexValue.classList.add("swatch-hex-value")
@@ -890,20 +770,21 @@ function createColorCard(color, listName) {
 	hexValue.textContent = color.hexValue;
 	cardHeaderContainer.appendChild(hexValue);
 
-	const hslValue = document.createElement("h5");
-	hslValue.classList.add("swatch-hsl-value")
-	hslValue.textContent = color.hslValue;
-	cardHeaderContainer.appendChild(hslValue);
-
 	const rgbaValue = document.createElement("h5");
 	rgbaValue.classList.add("swatch-rgba-value")
 	rgbaValue.textContent = color.rgbaValue;
 	cardHeaderContainer.appendChild(rgbaValue);
 
+	const hslValue = document.createElement("h5");
+	hslValue.classList.add("swatch-hsl-value")
+	hslValue.textContent = color.hslValue;
+	cardHeaderContainer.appendChild(hslValue);
+
 	const cssKeyword = document.createElement("h5");
 	cssKeyword.classList.add("swatch-css-keyword")
-	cssKeyword.textContent = color.cssKeyword;
+	cssKeyword.textContent = color.cssKeyword || "\u00A0";
 	cardHeaderContainer.appendChild(cssKeyword);
+
 
 	const customName = document.createElement("h6");
 	customName.classList.add("swatch-new-name");
@@ -966,7 +847,7 @@ function createColorCard(color, listName) {
 
 			case "Add Color Name":
 
-				const customNameTools = inputToolMaker(color.customName, getRandomItem(genericColorNames), "Confirm", "add-color-name", function (inputName) {
+				const customNameTools = inputToolMaker(color.customName, getRandomItem(Object.values(cssColors)), "Confirm", "add-color-name", function (inputName) {
 					const validatedInput = validateInput("name", inputName);
 					if (validatedInput === null) {
 						return;
@@ -1033,7 +914,7 @@ function createColorCard(color, listName) {
 
 			case "Change Color":
 
-				const editSwatchTools = inputToolMaker(color.hexValue, getRandomItem(genericColors), "Confirm", "edit-swatch", function (inputColor) {
+				const editSwatchTools = inputToolMaker(color.hexValue, getRandomItem(megaArray), "Confirm", "edit-swatch", function (inputColor) {
 					const validatedInput = validateInput("color", inputColor, listName);
 					if (validatedInput === null) {
 						return;
@@ -1087,7 +968,7 @@ function createColorCard(color, listName) {
 				break;
 
 			case "Change Card Background Color":
-				const changeCardBackgroundTool = inputToolMaker(color.cardBackgroundColor || "", getRandomItem(genericColors), "Confirm", "change-card-background", function (inputColor) {
+				const changeCardBackgroundTool = inputToolMaker(color.cardBackgroundColor || "", getRandomItem(megaArray), "Confirm", "change-card-background", function (inputColor) {
 					const validatedInput = validateInput("color", inputColor);
 					if (validatedInput === null) {
 						return;

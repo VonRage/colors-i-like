@@ -47,12 +47,6 @@ h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
 }
 
-/*
-  10. Create a root stacking context
-*/
-#root, #__next {
-  isolation: isolate;
-}
 
 /* End of CSS Reset */
 
@@ -91,12 +85,6 @@ submit respectively */
 	gap: 0.625rem;
 }
 
-/* children of static input wrapper */
-/* no children */
-
-.static-submit {
-	width: 12.5rem;
-}
 /* children of page header */
 /* no children */
 .page-title,
@@ -128,14 +116,35 @@ submit respectively */
 .swatch-container {
   border: 0.125rem solid #ce8dad;
   border-radius: 0.3125rem;
+  background-color:#f1d9f4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 12.5rem;
 }
+
+
+
+
+.card-header-container{
+  border-bottom: 0.125rem solid #b787a4;
+  border-radius: 0.3125rem;
   
-/* child of swatch container */
+  
+}
+/* all the children of swatch container */
+.swatch-container > * {
+  flex-grow: 1;
+}
+/* child of swatch body */
 /* no children */
 .swatch-color {
   height: 6.25rem;
   width: 6.25rem;
-  margin: 0.625rem;
+  border: 1.25rem solid transparent;
+  background-clip: padding-box;
+  
 }
 
 /* parent of list header container and list edit div */
@@ -147,6 +156,9 @@ submit respectively */
   background-color: #f1d9f4;
   border-top: 0.3125rem solid #e2e6f8;
   border-bottom: 0.3125rem solid #cdd5f5;
+  margin: 1.25rem;
+  border-radius: 0.9375rem;
+  max-width: 95%;
 
 }
 /* parent of list header and list edit div  */
@@ -166,6 +178,7 @@ submit respectively */
 }
 
 .static-base-color-picker-container,
+.static-add-color-container,
 .list-rename-container,
 .list-add-color-container,
 .change-list-background-container,
@@ -178,35 +191,19 @@ submit respectively */
 		
 }
 
-
-
-/* no children */
-.static-add-color-input,
-.static-base-color-picker-input,
-.list-add-color-input,
-.edit-swatch-input,
-.static-input {
-  width: 6.25rem;
-}
-
-.list-rename-input,
-.new-list-input {
-  width: 12.5rem;
-	
-}
-
-
 input,
 button {
   border: none;
   border-radius: 0.3125rem;
   text-align: center;
+  width: 18.75rem;
 }
 
 
 button {
   background-color: #c297f2;
   color: #102344;
+
 }
 
 button:hover {
@@ -218,6 +215,7 @@ button:hover {
 input {
   background-color: #f6e7f8;
   color: #1f4687;
+
 }
 
 input:hover {
@@ -226,16 +224,10 @@ input:hover {
 }
 
 :focus {
-  outline: 0.125rem solid #37b0f7;
+  outline: 0.125rem solid #f3b7f5;
 }
 
-
-.static-edit-menu-option,
-.static-base-color-picker-menu-option,
-.edit-swatch-menu-option,
-.edit-list-menu-option,
-.move-to-existing-list-menu-option,
-.copy-to-list-menu-option {
+[class$="-menu-option"] {
   display: none;
   background-color: #fdcfff;
   color: #194f95;
@@ -243,47 +235,25 @@ input:hover {
 }
 
 
-.static-edit-menu-placeholder,
-.static-base-color-picker-menu-placeholder,
-.edit-swatch-menu-placeholder,
-.edit-list-menu-placeholder,
-.move-to-existing-list-menu-placeholder,
-.copy-to-list-menu-placeholder {
+[class$="-menu-placeholder"] {
   background-color: #f3b7f5;
   color: #1f4076;
   border-radius: 0.3125rem;
 
 }
 
-
-.static-edit-menu.open .static-edit-menu-option,
-.static-base-color-picker-menu.open .static-base-color-picker-menu-option,
-.edit-swatch-menu.open .edit-swatch-menu-option,
-.edit-list-menu.open .edit-list-menu-option,
-.move-to-existing-list-menu.open .move-to-existing-list-menu-option,
-.copy-to-list-menu.open .copy-to-list-menu-option {
+[class$="-menu"].open [class$="-menu-option"] {
   display: block;
 }
 
 
-.static-edit-menu-placeholder:hover,
-.static-base-color-picker-menu-placeholder:hover, 
-.edit-swatch-menu-placeholder:hover, 
-.edit-list-menu-placeholder:hover, 
-.move-to-existing-list-menu-placeholder:hover,
-.copy-to-list-menu-placeholder:hover {
+[class$="-menu-placeholder"]:hover {
   background-color: #ce8dad;
   color: #102344;
   cursor: pointer;
 }
 
-
-.static-edit-menu-option:hover,
-.static-base-color-picker-menu-option:hover,
-.edit-swatch-menu-option:hover,
-.edit-list-menu-option:hover,
-.move-to-existing-list-menu-option:hover,
-.copy-to-list-menu-option:hover {
+[class$="-menu-option"]:hover {
   background-color: #d7a8c5;
   color: #1d3058;
   cursor: pointer;
