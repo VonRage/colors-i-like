@@ -67,69 +67,6 @@ const genericColors = {
 	"pink": "#ffc0cb",
 }
 
-
-
-function getRandomItem(arr) {
-	return arr[Math.floor(Math.random() * arr.length)];
-}
-
-function customDropDownMenuMaker(arr, callbackFunction, classPrefix) {
-	const dropDownMenu = document.createElement("div")
-	dropDownMenu.classList.add(classPrefix + "-menu")
-	const dropDownMenuPlaceholder = document.createElement("div")
-	dropDownMenuPlaceholder.textContent = arr[0];
-	dropDownMenuPlaceholder.classList.add(classPrefix + "-menu-placeholder")
-	dropDownMenu.appendChild(dropDownMenuPlaceholder)
-
-	dropDownMenuPlaceholder.addEventListener("click", function () {
-		dropDownMenu.classList.toggle("open")
-	})
-
-
-	arr.slice(1).forEach(item => {
-		const dropDownOption = document.createElement("div")
-		dropDownOption.classList.add(classPrefix + "-menu-option")
-		dropDownOption.textContent = item
-		dropDownMenu.appendChild(dropDownOption)
-
-		dropDownOption.addEventListener("click", function () {
-			callbackFunction(item)
-		})
-	})
-
-	return dropDownMenu;
-}
-
-
-function inputToolMaker(initialValue, placeholderText, buttonText, classPrefix, callbackFunction,) {
-
-	const inputToolContainer = document.createElement("div");
-	inputToolContainer.classList.add(classPrefix + "-container");
-
-	const inputToolInput = document.createElement("input");
-	inputToolInput.classList.add(classPrefix + "-input");
-	inputToolInput.placeholder = placeholderText;
-	inputToolInput.value = initialValue;
-
-	const inputToolButton = document.createElement("button");
-	inputToolButton.classList.add(classPrefix + "-button");
-	inputToolButton.textContent = buttonText;
-	inputToolContainer.appendChild(inputToolInput);
-	inputToolContainer.appendChild(inputToolButton);
-
-	inputToolButton.addEventListener("click", function () {
-		callbackFunction(inputToolInput.value)
-	})
-
-	inputToolInput.addEventListener("keydown", function (e) {
-		if (e.key === "Enter") {
-			callbackFunction(inputToolInput.value)
-		}
-	});
-
-	return inputToolContainer;
-}
-
 let addYourOwnColorEditListMenu = document.querySelector("#add-your-own-color-edit-list-menu")
 let pickYourOwnColorDiv = document.querySelector("#add-your-own-color")
 let pickBaseColorInputToolsDiv = document.querySelector("#pick-base-color-input-tools")
