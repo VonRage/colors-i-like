@@ -44,7 +44,7 @@ let pageBackgroundColor = localStorage.getItem("pageBackgroundColor") || "";
 const addYourOwnColorInputTools = inputToolMaker({
 	levelOfNesting: 6,
 	buttonText: `Add to ${defaultList}`,
-	styleClass: "page ac-input ",
+	styleClass: "page ac-input",
 	callbackFunction: function (inputColor) {
 
 		addColor(defaultList, inputColor)
@@ -59,7 +59,7 @@ pickYourOwnColorDiv.appendChild(addYourOwnColorInputTools);
 const staticEditDropDownMenu = customDropDownMenuMaker({
 	options: staticEditDropDownMenuItem,
 	levelOfNesting: 6,
-	styleClass: "page ac-menu ",
+	styleClass: "page ac-menu",
 	callbackFunction: function (item) {
 
 		let action = item;
@@ -106,7 +106,7 @@ const staticEditDropDownMenu = customDropDownMenuMaker({
 				const createNewListTools = inputToolMaker({
 					placeholderText: getRandomItem(genericListNames),
 					levelOfNesting: 6,
-					styleClass: "edit ac-edit ",
+					styleClass: "edit ac-edit",
 					callbackFunction: function (newListName) {
 
 						const validatedInput = validateInput("list", newListName);
@@ -128,7 +128,7 @@ const staticEditDropDownMenu = customDropDownMenuMaker({
 
 				const changePageBackgroundColorInputTools = inputToolMaker({
 					levelOfNesting: 6,
-					styleClass: "edit ac-edit ",
+					styleClass: "edit ac-edit",
 					callbackFunction: function (inputColor) {
 
 						const validatedInput = validateInput("color", inputColor);
@@ -212,7 +212,7 @@ addYourOwnColorEditListMenu.appendChild(staticEditDropDownMenu)
 
 const baseColorPickerInputTools = inputToolMaker({
 	levelOfNesting: 6,
-	styleClass: "page bc-input ",
+	styleClass: "page bc-input",
 	buttonText: `Add to ${defaultList}`,
 	callbackFunction: function (inputColor) {
 
@@ -230,7 +230,7 @@ pickerInput.readOnly = true;
 const baseColorPickerDropDownMenu = customDropDownMenuMaker({
 	options: baseColorPickerDropDownMenuOptions,
 	levelOfNesting: 6,
-	styleClass: "page bc-menu ",
+	styleClass: "page bc-menu",
 	callbackFunction: function (baseColor) {
 
 
@@ -473,7 +473,7 @@ function createListHeader(listName) {
 	const listHeaderDropDownMenu = customDropDownMenuMaker({
 		options: listHeaderMenuItem,
 		levelOfNesting: 6,
-		styleClass: "list menu ",
+		styleClass: "list menu",
 		callbackFunction: function (item) {
 
 			let action = item;
@@ -522,7 +522,7 @@ function createListHeader(listName) {
 					const editListNameInputTools = inputToolMaker({
 						placeholderText: getRandomItem(genericListNames),
 						levelOfNesting: 5,
-						styleClass: "edit list-input ",
+						styleClass: "edit list-input",
 						callbackFunction: function (newName) {
 
 							const validatedInput = validateInput("list", newName, listName);
@@ -560,7 +560,7 @@ function createListHeader(listName) {
 
 					const addColorToListInputTools = inputToolMaker({
 						levelOfNesting: 5,
-						styleClass: "edit list-input ",
+						styleClass: "edit list-input",
 						callbackFunction: function (inputColor) {
 
 							addColor(listName, inputColor);
@@ -632,7 +632,7 @@ function createListHeader(listName) {
 					const changeListBackgroundInputTools = inputToolMaker({
 						levelOfNesting: 5,
 						initialValue: listBackgroundColors[listName] || "",
-						styleClass: "edit list-input ",
+						styleClass: "edit list-input",
 						callbackFunction: function (inputColor) {
 
 							const validatedInput = validateInput("color", inputColor)
@@ -724,7 +724,7 @@ function createColorCard(color, listName) {
 	const editSwatchDropDownMenu = customDropDownMenuMaker({
 		options: swatchMenuItem,
 		levelOfNesting: 4,
-		styleClass: "swatch menu ",
+		styleClass: "swatch menu",
 		callbackFunction: function (item) {
 
 			let action = item;
@@ -765,7 +765,7 @@ function createColorCard(color, listName) {
 						levelOfNesting: 4,
 						initialValue: color.customName,
 						placeholderText: getRandomItem(Object.values(cssColors)),
-						styleClass: "edit swatch-input ",
+						styleClass: "edit swatch-input",
 						callbackFunction: function (inputName) {
 
 							const validatedInput = validateInput("name", inputName);
@@ -838,7 +838,7 @@ function createColorCard(color, listName) {
 					const editSwatchTools = inputToolMaker({
 						levelOfNesting: 4,
 						initialValue: color.hexValue,
-						styleClass: "edit swatch-input ",
+						styleClass: "edit swatch-input",
 						callbackFunction: function (inputColor) {
 
 							const validatedInput = validateInput("color", inputColor, listName);
@@ -862,7 +862,7 @@ function createColorCard(color, listName) {
 					const moveToNewListTools = inputToolMaker({
 						levelOfNesting: 4,
 						placeholderText: getRandomItem(genericListNames),
-						styleClass: "edit swatch-input ",
+						styleClass: "edit swatch-input",
 						callbackFunction: function (newListName) {
 
 							const validatedInput = validateInput("list", newListName);
@@ -888,7 +888,7 @@ function createColorCard(color, listName) {
 					]
 					const listMoveDropDownMenu = customDropDownMenuMaker({
 						options: listMoveMenuItem,
-						styleClass: "edit swatch-menu ",
+						styleClass: "edit swatch-menu",
 						levelOfNesting: 4,
 						callbackFunction: function (item) {
 
@@ -908,7 +908,7 @@ function createColorCard(color, listName) {
 					const changeCardBackgroundTool = inputToolMaker({
 						levelOfNesting: 4,
 						initialValue: color.cardBackgroundColor,
-						styleClass: "edit swatch-input ",
+						styleClass: "edit swatch-input",
 						callbackFunction: function (inputColor) {
 
 							const validatedInput = validateInput("color", inputColor);
@@ -932,7 +932,7 @@ function createColorCard(color, listName) {
 
 					const copyToListDropDownMenu = customDropDownMenuMaker({
 						options: copyToListMenuItem,
-						styleClass: "edit swatch-menu ",
+						styleClass: "edit swatch-menu",
 						levelOfNesting: 4,
 						callbackFunction: function (item) {
 

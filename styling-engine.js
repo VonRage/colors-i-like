@@ -303,11 +303,11 @@ function customDropDownMenuMaker({
 	levelOfNesting = null
 } = {}) {
 	const makeClass = findSuffixAndPath(styleClass, levelOfNesting);
-	const dropDownMenu = document.createElement("div")
+	const dropDownMenu = document.createElement("ul")
 	dropDownMenu.className = `${styleClass} ${makeClass.containerClassSuffix}`;
 
 	options.forEach(item => {
-		const dropDownOption = document.createElement("div")
+		const dropDownOption = document.createElement("li")
 		dropDownOption.className = `${styleClass} ${makeClass.childrenClassSuffix}`;
 
 		if (item.startsWith("--")) {
@@ -329,7 +329,41 @@ function customDropDownMenuMaker({
 				callbackFunction(item)
 			})
 		}
-	})
+		dropDownOption.tabIndex = 0;
+
+		dropDownOption.addEventListener("keydown", function (e) {
+			switch (e.key) {
+				case "Enter":
+					dropDownOption.click();
+					break;
+
+				case "Escape":
+					dropDownMenu.classList.toggle("open")
+					break;
+				case "ArrowDown":
+					e.preventDefault();
+					if (dropDownOption.nextElementSibling) {
+						dropDownOption.nextElementSibling.focus();
+
+					} else {
+						dropDownMenu.firstElementChild.focus();
+					}
+
+					break;
+				case "ArrowUp":
+					e.preventDefault();
+					if (dropDownOption.previousElementSibling) {
+						dropDownOption.previousElementSibling.focus()
+					} else {
+						dropDownMenu.lastElementChild.focus();
+					}
+					break;
+				default:
+					break;
+			}
+
+		});
+	}); 
 
 	return dropDownMenu;
 }

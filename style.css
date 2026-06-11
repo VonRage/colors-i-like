@@ -136,8 +136,7 @@ input:hover {
 /* - Has children: .page.title.item, .page.subtitle.item, .page.left.wrapper, .page.right.wrapper, .page.section-title.or-block.item */
 /* - What it does: Aligns the page header and page inputs into flex containers centered horizontally and vertically */
 /* - Associated JS variables: headerSkeleton, inputSkeleton (static HTML elements) */
-.page.header.skeleton,
-.page.input.skeleton {
+.page.skeleton {
   display: flex;
   flex-wrap: wrap;
 	gap: 0.625rem;
@@ -170,8 +169,7 @@ input:hover {
 /* - Has children: section title elements, input tool divs, dropdown menu divs */
 /* - What it does: Forms vertically aligned columns with gap spacing for the left and right input sections */
 /* - Associated JS variables: leftWrapper, rightWrapper (static HTML elements) */
-.page.left.wrapper,
-.page.right.wrapper {
+.page.wrapper  {
 	display: flex;
 	flex-direction: column;
 	gap: 0.625rem;
@@ -208,7 +206,7 @@ input:hover {
 /* - Has children: .list.header.plugin, .swatch.color.plugin */
 /* - What it does: Applies a border and sets up a row wrap display for the list content */
 /* - Associated JS variables: listFrame (inside createList) */
-.list.color.frame {
+/* .list.color.frame {
   border:0.3125rem solid #a8b5e1;
 	display: flex;
 	flex-wrap: wrap;
@@ -216,7 +214,7 @@ input:hover {
 	gap: 0.625rem;
   padding:0.3125rem;
   flex-grow: 1;
-}
+} */
 
 /* Block: .list.color.frame (Second occurrence) */
 /* - Child of: .list.color.framework */
@@ -330,12 +328,7 @@ input:hover {
 /* - Has children: dropdown option/item/leaf elements */
 /* - What it does: Stacks dropdown menu components vertically in a column flex configuration */
 /* - Associated JS variables: staticEditDropDownMenu, baseColorPickerDropDownMenu, listHeaderDropDownMenu, editSwatchDropDownMenu */
-.page.ac-menu.subsection,
-.page.bc-menu.subsection,
-.edit.list-menu.receptacle, 
-.edit.swatch-menu.bin,
-.list.menu.division,
-.swatch.menu.carrier {
+ul:has(.placeholder)  {
 		display: flex;
 		flex-direction: column; 
 		
@@ -348,12 +341,7 @@ input:hover {
 /* - Has children: Text nodes */
 /* - What it does: Hides clickable dropdown menu options by default, applying background, text, and border styles */
 /* - Associated JS variables: dropDownOption (inside customDropDownMenuMaker) */
-.page.ac-menu.item:not(:first-child),
-.page.bc-menu.item:not(:first-child),
-.list.menu.asset:not(:first-child),
-.edit.list-menu.leaf:not(:first-child),
-.edit.swatch-menu.leaf:not(:first-child),
-.swatch.menu.asset:not(:first-child) {
+li:not(:first-child) {
   display: none;
   background-color: #fdcfff;
   color: #194f95;
@@ -365,13 +353,7 @@ input:hover {
 /* - Has children: Text nodes */
 /* - What it does: Styles dropdown placeholder list options (non-selectable header options) */
 /* - Associated JS variables: dropDownMenuPlaceholder / dropDownOption (inside customDropDownMenuMaker) */
-.page.ac-menu.item.placeholder,
-.page.bc-menu.item.placeholder,
-.list.menu.asset.placeholder,
-.edit.list-menu.leaf.placeholder,
-.edit.swatch-menu.leaf.placeholder,
-.swatch.menu.asset.placeholder
-{
+.placeholder {
   background-color: #f3b7f5;
   color: #1f4076;
   border-radius: 0.3125rem;
@@ -383,12 +365,7 @@ input:hover {
 /* - Has children: dropdown menu leaf option elements */
 /* - What it does: Reveals and displays options inside dropdown menus when the parent menu has the 'open' class applied */
 /* - Associated JS variables: N/A */
-.page.ac-menu.subsection.open .page.ac-menu.item,
-.page.bc-menu.subsection.open .page.bc-menu.item,
-.list.menu.division.open .list.menu.asset,
-.edit.list-menu.receptacle.open .edit.list-menu.leaf,
-.edit.swatch-menu.bin.open .edit.swatch-menu.leaf,
-.swatch.menu.carrier.open .swatch.menu.asset {
+.open li {
   display: block;
 }
 
@@ -398,12 +375,8 @@ input:hover {
 /* - What it does: Applies hover styling and updates cursor style for placeholder dropdown items */
 /* - Associated JS variables: N/A */
 
-.page.ac-menu.item.placeholder:hover,
-.page.bc-menu.item.placeholder:hover,
-.list.menu.asset.placeholder:hover,
-.edit.list-menu.leaf.placeholder:hover,
-.edit.swatch-menu.leaf.placeholder:hover,
-.swatch.menu.asset.placeholder:hover {
+.placeholder:hover,
+.placeholder:focus {
   background-color: #ce8dad;
   color: #102344;
   cursor: pointer;
@@ -414,12 +387,8 @@ input:hover {
 /* - Has children: None */
 /* - What it does: Updates background, text colors, and cursor pointer when hovering over a selectable dropdown menu option */
 /* - Associated JS variables: N/A */
-.page.ac-menu.item.clickable:hover,
-.page.bc-menu.item.clickable:hover,
-.list.menu.asset.clickable:hover,
-.edit.list-menu.leaf.clickable:hover,
-.edit.swatch-menu.leaf.clickable:hover,
-.swatch.menu.asset.clickable:hover {
+.clickable:hover,
+.clickable:focus {
   background-color: #d7a8c5;
   color: #1d3058;
   cursor: pointer;
