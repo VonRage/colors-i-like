@@ -61,6 +61,12 @@ h1, h2, h3, h4, h5, h6 {
 /* - Associated JS variables: document.body */
 body {
   background-color: #f1d9f4;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Block: input, button */
@@ -71,7 +77,7 @@ body {
 input,
 button {
   border: none;
-  border-radius: 0.3125rem;
+  border-radius: 0.9375rem;
   text-align: center;
   width: 18.75rem;
 }
@@ -125,7 +131,7 @@ input:hover {
 /* - What it does: Applies a customized pink outline to focused inputs or buttons to indicate active focus state */
 /* - Associated JS variables: N/A */
 :focus {
-  outline: 0.125rem solid #f3b7f5;
+  outline: 0.3125rem inset #47f6ff; 
 }
 
 
@@ -188,6 +194,32 @@ input:hover {
 }
 
 
+.page.subsection {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.page.errors.item {
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 1.5rem;
+  background-color: #f2cbf1;
+  margin-left: auto;
+  margin-right: auto;
+  color: red;
+  border-radius: 0.9375rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 2%;
+  
+
+  }
+
+
 /* list */
 
 /* Block: .list.color.framework */
@@ -198,25 +230,11 @@ input:hover {
 .list.color.framework {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column
+  flex-direction: column;
+  gap: 0.625rem;
 }
 
-/* Block: .list.color.frame (First occurrence) */
-/* - Child of: .list.color.framework */
-/* - Has children: .list.header.plugin, .swatch.color.plugin */
-/* - What it does: Applies a border and sets up a row wrap display for the list content */
-/* - Associated JS variables: listFrame (inside createList) */
-/* .list.color.frame {
-  border:0.3125rem solid #a8b5e1;
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: row;
-	gap: 0.625rem;
-  padding:0.3125rem;
-  flex-grow: 1;
-} */
-
-/* Block: .list.color.frame (Second occurrence) */
+/* Block: .list.color.frame */
 /* - Child of: .list.color.framework */
 /* - Has children: .list.header.plugin, .swatch.color.plugin */
 /* - What it does: Sets margins, background colors, custom borders, and rounded corners for the list card framework elements */
@@ -226,11 +244,14 @@ input:hover {
   flex-direction: column;
   flex-wrap: wrap;
   background-color: #f1d9f4;
-  border-top: 0.3125rem solid #e2e6f8;
-  border-bottom: 0.3125rem solid #cdd5f5;
-  margin: 1.25rem;
+  border: 0.3125rem solid #cdd5f5;  
   border-radius: 0.9375rem;
   max-width: 95%;
+  flex-basis: 100%;
+  flex-shrink: 1;
+  flex-grow: 1;
+  margin-left: 10%;
+  margin-right: 10%;
 
 }
 
@@ -243,6 +264,7 @@ input:hover {
   display: flex;
   flex-direction: column;
   border: 0.3125rem solid #bcc7f5;
+  border-radius: 0.9375rem;
 }
 
 /* Block: .list.edit.division */
@@ -272,6 +294,8 @@ input:hover {
   flex-direction: row;
   flex-wrap: wrap;
   gap: 0.625rem;
+  border-radius: 0.9375rem;
+  border: 0.3125rem solid #bcc7f5;  
 }
 
 /* Block: .swatch.color.division */
@@ -281,7 +305,7 @@ input:hover {
 /* - Associated JS variables: swatchColor (inside createColorCard) */
 .swatch.color.division {
   border: 0.125rem solid #ce8dad;
-  border-radius: 0.3125rem;
+  border-radius: 0.9375rem;
   background-color:#f1d9f4;
   display: flex;
   flex-direction: column;
@@ -331,6 +355,10 @@ input:hover {
 ul:has(.placeholder)  {
 		display: flex;
 		flex-direction: column; 
+    list-style: none;
+    padding:0;
+    margin:0;
+
 		
 }
 
@@ -345,7 +373,7 @@ li:not(:first-child) {
   display: none;
   background-color: #fdcfff;
   color: #194f95;
-  border-radius: 0.3125rem;
+  border-radius: 0.9375rem;
 }
 
 /* Block: .edit.menu.leaf.placeholder */
@@ -356,7 +384,7 @@ li:not(:first-child) {
 .placeholder {
   background-color: #f3b7f5;
   color: #1f4076;
-  border-radius: 0.3125rem;
+  border-radius: 0.9375rem;
 
 }
 
