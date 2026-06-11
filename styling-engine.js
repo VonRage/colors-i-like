@@ -1,55 +1,139 @@
 const SCHEMES = {
 	"industrial": {
 		1: "leaf",
-		2: "part",
+		2: "partition",
 		3: "packet",
-		4: "box",
-		5: "bin",
-		6: "receptacle",
-		7: "partition",
-		8: "container",
-		9: "crate",
-		10: "widget",
-		11: "shell"
+		4: "bin",
+		5: "receptacle",
+		6: "container",
+		7: "crate",
+		8: "widget",
+		9: "shell"
+
 	},
 	"document": {
 		1: "item",
-		2: "element",
-		3: "bundle",
-		4: "frame",
-		5: "block",
-		6: "support",
-		7: "area",
-		8: "subsection",
-		9: "section",
-		10: "wrapper",
-		11: "skeleton"
+		2: "bundle",
+		3: "block",
+		4: "area",
+		5: "support",
+		6: "subsection",
+		7: "section",
+		8: "wrapper",
+		9: "skeleton"
 	},
 	"collection": {
 		1: "asset",
-		2: "component",
-		3: "package",
-		4: "holder",
-		5: "case",
-		6: "carrier",
-		7: "bundle",
-		8: "subdivision",
-		9: "division",
-		10: "plugin",
-		11: "framework"
-	},
-
+		2: "package",
+		3: "case",
+		4: "carrier",
+		5: "subdivision",
+		6: "division",
+		7: "plugin",
+		8: "frame",
+		9: "framework"
+	}
 }
 
-function generate({
-	path = "industrial",
-	level = 1,
-	children = [],
-	className = "",
-	tag = "div",
-	content = "",
-	callbackFunction = null
-} = {}) {
+
+const genericListNames = [
+	"Bathroom",
+	"Kitchen",
+	"Bedroom",
+	"Living Room",
+	"Dining Room",
+	"Office",
+	"Exterior",
+	"Garage",
+	"Laundry Room",
+	"Nursery",
+	"Patio",
+	"webDesign"
+];
+
+
+const genericColors = {
+	"red": "#ff0000",
+	"orange": "#ff7f00",
+	"yellow": "#ffff00",
+	"green": "#7fff00",
+	"lime": "#00ff00",
+	"springgreen": "#00ff7f",
+	"cyan": "#00ffff",
+	"blue": "#007fff",
+	"midnightblue": "#0000ff",
+	"blueviolet": "#7f00ff",
+	"indigo": "#4b0082",
+	"purple": "#800080",
+	"violet": "#ee82ee",
+	"fuchsia": "#ff00ff",
+	"hotpink": "#ff69b4",
+	"deeppink": "#ff007f",
+	"pink": "#ffc0cb",
+}
+
+const staticEditDropDownMenuItem = [
+	"--Edit Page--",
+	"Create New List",
+	"Change Page Background Color",
+	"Revert To Default",
+	"Export Page to CSS (WIP)",
+	"--Delete Options--",
+	"Revert All to Default",
+	"Delete All Lists",
+	"Delete All Colors",
+	"Delete All Colors And Lists",
+	"--Just For Fun--",
+	"Randomize All Colors (WIP)",
+	"Random Theme (WIP)",
+
+];
+
+const baseColorPickerDropDownMenuOptions = [
+	"--Pick A Color--",
+	...Object.keys(genericColors),
+]
+
+const listHeaderMenuItem = [
+	"--Edit List--",
+	"Rename List",
+	"Add Color to List",
+	"Move List",
+	"Change List Background Color",
+	"Revert to Default",
+	"Export List to CSS (WIP)",
+	"Delete List"
+];
+
+const swatchMenuItem = [
+	"--Edit Color--",
+	"Add Color Name",
+	"Change Color",
+	"Move Color",
+	"Change Card Background Color",
+	"Revert to Default",
+	"Suggested Color Palettes (WIP)",
+	"Contrast Checker (WIP)",
+	"Copy to List",
+	"Move to New List",
+	"Move to Existing List",
+	"Delete Color"
+];
+
+function generate(config = {}) {
+	if (config instanceof HTMLElement) {
+		return config;
+	}
+
+	const {
+		path = "industrial",
+		level = 1,
+		children = [],
+		className = "",
+		tag = "div",
+		content = "",
+		callbackFunction = null
+	} = config;
 
 	if (level === 1) {
 		return level1({ tag, className, content, callbackFunction });
@@ -167,79 +251,112 @@ function level5(config) {
 	return generate({ ...config, level: 5 });
 }
 
-function level6(config) {
-
-	return generate({ ...config, level: 6 });
-}
-
-function level7(config) {
-
-	return generate({ ...config, level: 7 });
-}
-
-function level8(config) {
-
-	return generate({ ...config, level: 8 });
-}
-
-function level9(config) {
-
-	return generate({ ...config, level: 9 });
-}
-
-function level10(config) {
-
-	return generate({ ...config, level: 10 });
-}
-
-function level11(config) {
-
-	return generate({ ...config, level: 11 });
-}
-
 function getRandomItem(arr) {
 	return arr[Math.floor(Math.random() * arr.length)];
 }
 
-function customDropDownMenuMaker(arr, callbackFunction, classPrefix) {
+function findSuffixAndPath(styleClass, levelOfNesting) {
+	if (!styleClass) {
+		styleClass = "edit menu";
+	}
+	const scope = styleClass.split(" ")[0];
+	let path;
+
+
+	switch (scope) {
+		case "page":
+			path = "document";
+			break;
+		case "list":
+			path = "collection";
+			break;
+		case "swatch":
+			path = "collection";
+			break;
+		case "edit":
+			path = "industrial";
+			break;
+		default:
+			path = "industrial";
+	}
+	if (!levelOfNesting) {
+
+		if (scope === "edit") {
+			levelOfNesting = 3
+		} else {
+			levelOfNesting = 2
+		}
+	}
+
+	const containerClassSuffix = SCHEMES[path][levelOfNesting];
+	const childrenClassSuffix = SCHEMES[path][1];
+	return { containerClassSuffix, childrenClassSuffix };
+
+}
+
+
+
+function customDropDownMenuMaker({
+	options = [],
+	callbackFunction = null,
+	styleClass = "",
+	levelOfNesting = null
+} = {}) {
+	const makeClass = findSuffixAndPath(styleClass, levelOfNesting);
 	const dropDownMenu = document.createElement("div")
-	dropDownMenu.classList.add(classPrefix + "-menu")
-	const dropDownMenuPlaceholder = document.createElement("div")
-	dropDownMenuPlaceholder.textContent = arr[0];
-	dropDownMenuPlaceholder.classList.add(classPrefix + "-menu-placeholder")
-	dropDownMenu.appendChild(dropDownMenuPlaceholder)
+	dropDownMenu.className = `${styleClass} ${makeClass.containerClassSuffix}`;
 
-	dropDownMenuPlaceholder.addEventListener("click", function () {
-		dropDownMenu.classList.toggle("open")
-	})
-
-
-	arr.slice(1).forEach(item => {
+	options.forEach(item => {
 		const dropDownOption = document.createElement("div")
-		dropDownOption.classList.add(classPrefix + "-menu-option")
+		dropDownOption.className = `${styleClass} ${makeClass.childrenClassSuffix}`;
+
+		if (item.startsWith("--")) {
+			dropDownOption.classList.add("placeholder");
+		} else {
+			dropDownOption.classList.add("clickable");
+		}
+
+		if (dropDownOption.classList.contains("placeholder")) {
+			dropDownOption.addEventListener("click", function () {
+				dropDownMenu.classList.toggle("open");
+			})
+		} 
 		dropDownOption.textContent = item
 		dropDownMenu.appendChild(dropDownOption)
+		if (dropDownOption.classList.contains("clickable")) {
 
-		dropDownOption.addEventListener("click", function () {
-			callbackFunction(item)
-		})
+			dropDownOption.addEventListener("click", function () {
+				callbackFunction(item)
+			})
+		}
 	})
 
 	return dropDownMenu;
 }
 
-function inputToolMaker(initialValue, placeholderText, buttonText, classPrefix, callbackFunction,) {
+
+
+
+function inputToolMaker({
+	initialValue = "",
+	placeholderText = getRandomItem(megaArray),
+	buttonText = "Confirm",
+	styleClass = "",
+	levelOfNesting = null,
+	callbackFunction = null
+} = {}) {
+	const makeClass = findSuffixAndPath(styleClass, levelOfNesting);
 
 	const inputToolContainer = document.createElement("div");
-	inputToolContainer.classList.add(classPrefix + "-container");
+	inputToolContainer.className = `${styleClass} ${makeClass.containerClassSuffix}`;
 
 	const inputToolInput = document.createElement("input");
-	inputToolInput.classList.add(classPrefix + "-input");
+	inputToolInput.className = `${styleClass} ${makeClass.childrenClassSuffix}`;
 	inputToolInput.placeholder = placeholderText;
 	inputToolInput.value = initialValue;
 
 	const inputToolButton = document.createElement("button");
-	inputToolButton.classList.add(classPrefix + "-button");
+	inputToolButton.className = `${styleClass} ${makeClass.childrenClassSuffix}`;
 	inputToolButton.textContent = buttonText;
 	inputToolContainer.appendChild(inputToolInput);
 	inputToolContainer.appendChild(inputToolButton);

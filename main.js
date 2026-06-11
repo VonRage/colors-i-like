@@ -2,8 +2,6 @@
 // this line will retrieve the saved array from local storage
 // localStorage.clear()
 
-const cssColors = { "#f0f8ff": "aliceblue", "#faebd7": "antiquewhite", "#00ffff": "aqua", "#7fffd4": "aquamarine", "#f0ffff": "azure", "#f5f5dc": "beige", "#ffe4c4": "bisque", "#000000": "black", "#ffebcd": "blanchedalmond", "#0000ff": "blue", "#8a2be2": "blueviolet", "#a52a2a": "brown", "#deb887": "burlywood", "#5f9ea0": "cadetblue", "#7fff00": "chartreuse", "#d2691e": "chocolate", "#ff7f50": "coral", "#6495ed": "cornflowerblue", "#fff8dc": "cornsilk", "#dc143c": "crimson", "#00008b": "darkblue", "#008b8b": "darkcyan", "#b8860b": "darkgoldenrod", "#a9a9a9": "darkgray", "#006400": "darkgreen", "#bdb76b": "darkkhaki", "#8b008b": "darkmagenta", "#556b2f": "darkolivegreen", "#ff8c00": "darkorange", "#9932cc": "darkorchid", "#8b0000": "darkred", "#e9967a": "darksalmon", "#8fbc8f": "darkseagreen", "#483d8b": "darkslateblue", "#2f4f4f": "darkslategray", "#00ced1": "darkturquoise", "#9400d3": "darkviolet", "#ff1493": "deeppink", "#00bfff": "deepskyblue", "#696969": "dimgray", "#1e90ff": "dodgerblue", "#b22222": "firebrick", "#fffaf0": "floralwhite", "#228b22": "forestgreen", "#ff00ff": "fuchsia", "#dcdcdc": "gainsboro", "#f8f8ff": "ghostwhite", "#ffd700": "gold", "#daa520": "goldenrod", "#808080": "gray", "#008000": "green", "#adff2f": "greenyellow", "#f0fff0": "honeydew", "#ff69b4": "hotpink", "#cd5c5c": "indianred", "#4b0082": "indigo", "#fffff0": "ivory", "#f0e68c": "khaki", "#e6e6fa": "lavender", "#fff0f5": "lavenderblush", "#7cfc00": "lawngreen", "#fffacd": "lemonchiffon", "#add8e6": "lightblue", "#f08080": "lightcoral", "#e0ffff": "lightcyan", "#fafad2": "lightgoldenrodyellow", "#d3d3d3": "lightgray", "#90ee90": "lightgreen", "#ffb6c1": "lightpink", "#ffa07a": "lightsalmon", "#20b2aa": "lightseagreen", "#87cefa": "lightskyblue", "#778899": "lightslategray", "#b0c4de": "lightsteelblue", "#ffffe0": "lightyellow", "#00ff00": "lime", "#32cd32": "limegreen", "#faf0e6": "linen", "#ff00ff": "magenta", "#800000": "maroon", "#66cdaa": "mediumaquamarine", "#0000cd": "mediumblue", "#ba55d3": "mediumorchid", "#9370db": "mediumpurple", "#3cb371": "mediumseagreen", "#7b68ee": "mediumslateblue", "#00fa9a": "mediumspringgreen", "#48d1cc": "mediumturquoise", "#c71585": "mediumvioletred", "#191970": "midnightblue", "#f5fffa": "mintcream", "#ffe4e1": "mistyrose", "#ffe4b5": "moccasin", "#ffdead": "navajowhite", "#000080": "navy", "#fdf5e6": "oldlace", "#808000": "olive", "#6b8e23": "olivedrab", "#ffa500": "orange", "#ff4500": "orangered", "#da70d6": "orchid", "#eee8aa": "palegoldenrod", "#98fb98": "palegreen", "#afeeee": "paleturquoise", "#db7093": "palevioletred", "#ffefd5": "papayawhip", "#ffdab9": "peachpuff", "#cd853f": "peru", "#ffc0cb": "pink", "#dda0dd": "plum", "#b0e0e6": "powderblue", "#800080": "purple", "#663399": "rebeccapurple", "#ff0000": "red", "#bc8f8f": "rosybrown", "#4169e1": "royalblue", "#8b4513": "saddlebrown", "#fa8072": "salmon", "#f4a460": "sandybrown", "#2e8b57": "seagreen", "#fff5ee": "seashell", "#a0522d": "sienna", "#c0c0c0": "silver", "#87ceeb": "skyblue", "#6a5acd": "slateblue", "#708090": "slategray", "#fffafa": "snow", "#00ff7f": "springgreen", "#4682b4": "steelblue", "#d2b48c": "tan", "#008080": "teal", "#d8bfd8": "thistle", "#ff6347": "tomato", "#40e0d0": "turquoise", "#ee82ee": "violet", "#f5deb3": "wheat", "#ffffff": "white", "#f5f5f5": "whitesmoke", "#ffff00": "yellow", "#9acd32": "yellowgreen" };
-const megaArray = [...Object.values(cssColors), ...Object.keys(cssColors)];
 let colorsILike;
 let listBackgroundColors;
 let defaultList;
@@ -31,41 +29,6 @@ if (localStorage.getItem("defaultList") !== null) {
 	defaultList = "My Colors";
 }
 
-const genericListNames = [
-	"Bathroom",
-	"Kitchen",
-	"Bedroom",
-	"Living Room",
-	"Dining Room",
-	"Office",
-	"Exterior",
-	"Garage",
-	"Laundry Room",
-	"Nursery",
-	"Patio",
-	"webDesign"
-];
-
-
-const genericColors = {
-	"red": "#ff0000",
-	"orange": "#ff7f00",
-	"yellow": "#ffff00",
-	"green": "#7fff00",
-	"lime": "#00ff00",
-	"springgreen": "#00ff7f",
-	"cyan": "#00ffff",
-	"blue": "#007fff",
-	"midnightblue": "#0000ff",
-	"blueviolet": "#7f00ff",
-	"indigo": "#4b0082",
-	"purple": "#800080",
-	"violet": "#ee82ee",
-	"fuchsia": "#ff00ff",
-	"hotpink": "#ff69b4",
-	"deeppink": "#ff007f",
-	"pink": "#ffc0cb",
-}
 
 let addYourOwnColorEditListMenu = document.querySelector("#add-your-own-color-edit-list-menu")
 let pickYourOwnColorDiv = document.querySelector("#add-your-own-color")
@@ -73,202 +36,212 @@ let pickBaseColorInputToolsDiv = document.querySelector("#pick-base-color-input-
 let baseColorPickerDropDownMenuDiv = document.querySelector("#base-color-picker")
 
 let mainDisplay = document.querySelector("#colors-display");
-let swatchBox = document.querySelector(".swatch-box");
 
 let listEditToolsDiv = document.querySelector("#list-edit-tools");
 
 let pageBackgroundColor = localStorage.getItem("pageBackgroundColor") || "";
 
-const addYourOwnColorInputTools = inputToolMaker("", getRandomItem(megaArray), `Add to ${defaultList}`, "static-add-color", function (inputColor) {
+const addYourOwnColorInputTools = inputToolMaker({
+	levelOfNesting: 6,
+	buttonText: `Add to ${defaultList}`,
+	styleClass: "page ac-input ",
+	callbackFunction: function (inputColor) {
 
-	addColor(defaultList, inputColor)
+		addColor(defaultList, inputColor)
+	}
 })
-input = addYourOwnColorInputTools.querySelector(".static-add-color-input");
-addYourOwnColor = addYourOwnColorInputTools.querySelector(".static-add-color-button");
+input = addYourOwnColorInputTools.querySelector("input");
+addYourOwnColor = addYourOwnColorInputTools.querySelector("button");
 pickYourOwnColorDiv.appendChild(addYourOwnColorInputTools);
 
-const staticEditDropDownMenuItem = [
-	"--Colors I Like Options--",
-	"Create New List",
-	"Change Page Background Color",
-	"Revert To Default",
-	"Export Page to CSS (WIP)",
-	"--Delete Options--",
-	"Revert All to Default",
-	"Delete All Lists",
-	"Delete All Colors",
-	"Delete All Colors And Lists",
-	"--Just For Fun--",
-	"Randomize All Colors (WIP)",
-	"Random Theme (WIP)",
 
-];
 
-const staticEditDropDownMenu = customDropDownMenuMaker(staticEditDropDownMenuItem, function (item) {
-	let action = item;
-	listEditToolsDiv.textContent = ""
+const staticEditDropDownMenu = customDropDownMenuMaker({
+	options: staticEditDropDownMenuItem,
+	levelOfNesting: 6,
+	styleClass: "page ac-menu ",
+	callbackFunction: function (item) {
 
-	switch (action) {
+		let action = item;
+		listEditToolsDiv.textContent = ""
 
-		case "Revert All to Default":
+		switch (action) {
 
-			const userConfirmedRevertAllToDefault = confirm("Are you sure you want to revert to default settings? This action cannot be undone.");
-			if (!userConfirmedRevertAllToDefault) {
-				return;
-			}
+			case "Revert All to Default":
 
-			Object.keys(colorsILike).forEach(listName => {
-				colorsILike[listName].forEach(color => {
-					delete color.cardBackgroundColor;
-				})
-			})
-
-			listBackgroundColors = {};
-			localStorage.setItem("listBackgroundColors", JSON.stringify(listBackgroundColors))
-
-			pageBackgroundColor = "";
-			localStorage.setItem("pageBackgroundColor", pageBackgroundColor)
-
-			renderAndSync();
-
-			break;
-
-		case "Export Page to CSS":
-
-			break;
-
-		case "Randomize All Colors":
-
-			break;
-		case "Random Theme":
-
-			break;
-
-		case "Create New List":
-
-			const createNewListTools = inputToolMaker("", getRandomItem(genericListNames), "Confirm", "create-new-list", function (newListName) {
-
-				const validatedInput = validateInput("list", newListName);
-				if (validatedInput === null) {
+				const userConfirmedRevertAllToDefault = confirm("Are you sure you want to revert to default settings? This action cannot be undone.");
+				if (!userConfirmedRevertAllToDefault) {
 					return;
 				}
-				colorsILike[validatedInput] = [];
-				localStorage.setItem("colorsILike", JSON.stringify(colorsILike))
-				localStorage.setItem("listBackgroundColors", JSON.stringify(listBackgroundColors))
-				renderAndSync();
 
-			})
-
-			listEditToolsDiv.appendChild(createNewListTools);
-
-			break;
-		case "Change Page Background Color":
-
-			const changePageBackgroundColorInputTools = inputToolMaker("", getRandomItem(megaArray), "Confirm", "change-page-background-color", function (inputColor) {
-				const validatedInput = validateInput("color", inputColor);
-				if (validatedInput === null) {
-					return;
-				}
-				pageBackgroundColor = validatedInput.hexValue;
-				localStorage.setItem("pageBackgroundColor", pageBackgroundColor);
-				renderAndSync();
-			})
-
-			listEditToolsDiv.appendChild(changePageBackgroundColorInputTools);
-
-			break;
-		case "Revert To Default":
-
-			pageBackgroundColor = "";
-			localStorage.setItem("pageBackgroundColor", pageBackgroundColor)
-			renderAndSync();
-
-			break;
-		case "Delete All Lists":
-
-			const userConfirmedDeleteAllLists = confirm("Are you sure you want to delete all lists? This action cannot be undone.");
-
-			if (userConfirmedDeleteAllLists) {
-				colorsILike = {};
-				localStorage.setItem("colorsILike", JSON.stringify(colorsILike))
-				renderAndSync();
-			} else {
-				return;
-			}
-
-			break;
-		case "Delete All Colors":
-
-			const userConfirmedDeleteAllColors = confirm("Are you sure you want to delete all colors? This action cannot be undone.");
-			if (userConfirmedDeleteAllColors === null) {
-				return;
-			}
-			if (userConfirmedDeleteAllColors === true) {
 				Object.keys(colorsILike).forEach(listName => {
-					colorsILike[listName] = [];
-				});
-				localStorage.setItem("colorsILike", JSON.stringify(colorsILike))
-				renderAndSync();
-			} else {
-				return;
-			}
+					colorsILike[listName].forEach(color => {
+						delete color.cardBackgroundColor;
+					})
+				})
 
-			break;
-		case "Delete All Colors And Lists":
-
-			const userInputForDeleteAllColorsAndLists = prompt("Are you sure you want to delete all colors and lists? This action cannot be undone. Type 'yes' to confirm.");
-			if (userInputForDeleteAllColorsAndLists === null) {
-				return;
-			}
-			if (userInputForDeleteAllColorsAndLists.trim().toLowerCase() === "yes") {
-				colorsILike = {};
 				listBackgroundColors = {};
-				localStorage.setItem("colorsILike", JSON.stringify(colorsILike))
 				localStorage.setItem("listBackgroundColors", JSON.stringify(listBackgroundColors))
+
+				pageBackgroundColor = "";
+				localStorage.setItem("pageBackgroundColor", pageBackgroundColor)
+
 				renderAndSync();
-			} else {
-				return;
-			}
+
+				break;
+
+			case "Export Page to CSS":
+
+				break;
+
+			case "Randomize All Colors":
+
+				break;
+			case "Random Theme":
+
+				break;
+
+			case "Create New List":
+
+				const createNewListTools = inputToolMaker({
+					placeholderText: getRandomItem(genericListNames),
+					levelOfNesting: 6,
+					styleClass: "edit ac-edit ",
+					callbackFunction: function (newListName) {
+
+						const validatedInput = validateInput("list", newListName);
+						if (validatedInput === null) {
+							return;
+						}
+						colorsILike[validatedInput] = [];
+						localStorage.setItem("colorsILike", JSON.stringify(colorsILike))
+						localStorage.setItem("listBackgroundColors", JSON.stringify(listBackgroundColors))
+						renderAndSync();
+
+					}
+				})
+
+				listEditToolsDiv.appendChild(createNewListTools);
+
+				break;
+			case "Change Page Background Color":
+
+				const changePageBackgroundColorInputTools = inputToolMaker({
+					levelOfNesting: 6,
+					styleClass: "edit ac-edit ",
+					callbackFunction: function (inputColor) {
+
+						const validatedInput = validateInput("color", inputColor);
+						if (validatedInput === null) {
+							return;
+						}
+						pageBackgroundColor = validatedInput.hexValue;
+						localStorage.setItem("pageBackgroundColor", pageBackgroundColor);
+						renderAndSync();
+					}
+				})
+
+				listEditToolsDiv.appendChild(changePageBackgroundColorInputTools);
 
 			break;
+			case "Revert To Default":
 
-		default:
+				pageBackgroundColor = "";
+				localStorage.setItem("pageBackgroundColor", pageBackgroundColor)
+				renderAndSync();
 
-			break;
+				break;
+			case "Delete All Lists":
+
+				const userConfirmedDeleteAllLists = confirm("Are you sure you want to delete all lists? This action cannot be undone.");
+
+				if (userConfirmedDeleteAllLists) {
+					colorsILike = {};
+					localStorage.setItem("colorsILike", JSON.stringify(colorsILike))
+					renderAndSync();
+				} else {
+					return;
+				}
+
+				break;
+			case "Delete All Colors":
+
+				const userConfirmedDeleteAllColors = confirm("Are you sure you want to delete all colors? This action cannot be undone.");
+				if (userConfirmedDeleteAllColors === null) {
+					return;
+				}
+				if (userConfirmedDeleteAllColors === true) {
+					Object.keys(colorsILike).forEach(listName => {
+						colorsILike[listName] = [];
+					});
+					localStorage.setItem("colorsILike", JSON.stringify(colorsILike))
+					renderAndSync();
+				} else {
+					return;
+				}
+
+				break;
+			case "Delete All Colors And Lists":
+
+				const userInputForDeleteAllColorsAndLists = prompt("Are you sure you want to delete all colors and lists? This action cannot be undone. Type 'yes' to confirm.");
+				if (userInputForDeleteAllColorsAndLists === null) {
+					return;
+				}
+				if (userInputForDeleteAllColorsAndLists.trim().toLowerCase() === "yes") {
+					colorsILike = {};
+					listBackgroundColors = {};
+					localStorage.setItem("colorsILike", JSON.stringify(colorsILike))
+					localStorage.setItem("listBackgroundColors", JSON.stringify(listBackgroundColors))
+					renderAndSync();
+				} else {
+					return;
+				}
+
+				break;
+
+			default:
+
+				break;
+
+		}
 
 	}
-
-}, "static-edit")
+})
 
 addYourOwnColorEditListMenu.appendChild(staticEditDropDownMenu)
 
-const baseColorPickerInputTools = inputToolMaker("", getRandomItem(megaArray), `Add to ${defaultList}`, "static-base-color-picker", function (inputColor) {
+const baseColorPickerInputTools = inputToolMaker({
+	levelOfNesting: 6,
+	styleClass: "page bc-input ",
+	buttonText: `Add to ${defaultList}`,
+	callbackFunction: function (inputColor) {
 
-	addColor(defaultList, inputColor);
+		addColor(defaultList, inputColor);
 
+	}
 })
 
 
 pickBaseColorInputToolsDiv.appendChild(baseColorPickerInputTools)
-addBaseColor = baseColorPickerInputTools.querySelector(".static-base-color-picker-button")
+addBaseColor = baseColorPickerInputTools.querySelector("button");
+const pickerInput = baseColorPickerInputTools.querySelector("input")
+pickerInput.readOnly = true; 
+
+const baseColorPickerDropDownMenu = customDropDownMenuMaker({
+	options: baseColorPickerDropDownMenuOptions,
+	levelOfNesting: 6,
+	styleClass: "page bc-menu ",
+	callbackFunction: function (baseColor) {
 
 
-const baseColorPickerDropDownMenuOptions = [
-	"--Pick A Color--",
-	...Object.keys(genericColors),
-]
+		if (baseColor === "--Pick A Color--") {
+			return;
+		}
+		pickerInput.value = genericColors[baseColor];
+		pickerInput.focus();
 
-const baseColorPickerDropDownMenu = customDropDownMenuMaker(baseColorPickerDropDownMenuOptions, function (baseColor) {
-
-	const pickerInput = baseColorPickerInputTools.querySelector(".static-base-color-picker-input")
-	pickerInput.readOnly = true;
-	if (baseColor === "--Pick A Color--") {
-		return;
 	}
-	pickerInput.value = genericColors[baseColor];
-	pickerInput.focus();
-
-}, "static-base-color-picker")
+})
 
 baseColorPickerDropDownMenuDiv.appendChild(baseColorPickerDropDownMenu)
 let errorsDisplay = document.querySelector("#errors-display")
@@ -483,195 +456,207 @@ function addColor(selectedList, selectedColor) {
 function createListHeader(listName) {
 
 	const listHeaderContainer = document.createElement("div")
-	listHeaderContainer.classList.add("list-header-container")
+	listHeaderContainer.className = "list header plugin";
 
 	const listHeader = document.createElement("h4");
 	listHeader.textContent = listName;
-	listHeader.classList.add("list-header");
+	listHeader.className = "list header asset";
 	listHeaderContainer.appendChild(listHeader)
 
 	const listEditDiv = document.createElement("div")
-	listEditDiv.classList.add("edit-list-container")
+	listEditDiv.className = "list edit division";
 	listHeaderContainer.appendChild(listEditDiv);
 
-	const listHeaderMenuItem = [
-		"--Edit List--",
-		"Rename List",
-		"Add Color to List",
-		"Move List",
-		"Change List Background Color",
-		"Revert to Default",
-		"Export List to CSS (WIP)",
-		"Delete List"
-	];
 
 
-	const listHeaderDropDownMenu = customDropDownMenuMaker(listHeaderMenuItem, function (item) {
-		let action = item;
 
-		listEditDiv.textContent = ""
+	const listHeaderDropDownMenu = customDropDownMenuMaker({
+		options: listHeaderMenuItem,
+		levelOfNesting: 6,
+		styleClass: "list menu ",
+		callbackFunction: function (item) {
 
-		switch (action) {
-			case "Export List to CSS":
+			let action = item;
 
-				break;
+			listEditDiv.textContent = ""
 
-			case "Revert to Default":
+			switch (action) {
+				case "Export List to CSS":
 
-				delete listBackgroundColors[listName];
-				localStorage.setItem("listBackgroundColors", JSON.stringify(listBackgroundColors));
-				renderAndSync();
+					break;
 
-				break;
+				case "Revert to Default":
+
+					delete listBackgroundColors[listName];
+					localStorage.setItem("listBackgroundColors", JSON.stringify(listBackgroundColors));
+					renderAndSync();
+
+					break;
 
 
-			case "Delete List":
+				case "Delete List":
 
-				const userConfirmedDeleteList = confirm(`Are you sure you want to delete the list ${listName}?`);
+					const userConfirmedDeleteList = confirm(`Are you sure you want to delete the list ${listName}?`);
 
-				if (!userConfirmedDeleteList) {
-					return;
-				}
-
-				if (listName === defaultList) {
-					defaultList = "My Colors";
-					localStorage.setItem("defaultList", JSON.stringify(defaultList));
-					addYourOwnColor.textContent = "Add to My Colors";
-					addBaseColor.textContent = "Add to My Colors";
-				}
-
-				delete colorsILike[listName];
-				delete listBackgroundColors[listName];
-				localStorage.setItem("colorsILike", JSON.stringify(colorsILike))
-				localStorage.setItem("listBackgroundColors", JSON.stringify(listBackgroundColors))
-				renderAndSync();
-
-				break;
-
-			case "Rename List":
-
-				const editListNameInputTools = inputToolMaker(listName, getRandomItem(genericListNames), "Confirm", "list-rename", function (newName) {
-
-					const validatedInput = validateInput("list", newName, listName);
-					if (validatedInput === null) {
+					if (!userConfirmedDeleteList) {
 						return;
 					}
-					if (validatedInput !== listName) {
-						// this line is replacing the key value 
-						colorsILike[newName] = colorsILike[listName];
-						delete colorsILike[listName];
 
-						listBackgroundColors[newName] = listBackgroundColors[listName];
-						delete listBackgroundColors[listName];
-						localStorage.setItem("colorsILike", JSON.stringify(colorsILike))
-						localStorage.setItem("listBackgroundColors", JSON.stringify(listBackgroundColors))
-						if (listName === defaultList) {
-							defaultList = newName;
-							localStorage.setItem("defaultList", JSON.stringify(defaultList));
-							addYourOwnColor.textContent = `Add to ${newName}`;
-							addBaseColor.textContent = `Add to ${newName}`;
+					if (listName === defaultList) {
+						defaultList = "My Colors";
+						localStorage.setItem("defaultList", JSON.stringify(defaultList));
+						addYourOwnColor.textContent = "Add to My Colors";
+						addBaseColor.textContent = "Add to My Colors";
+					}
+
+					delete colorsILike[listName];
+					delete listBackgroundColors[listName];
+					localStorage.setItem("colorsILike", JSON.stringify(colorsILike))
+					localStorage.setItem("listBackgroundColors", JSON.stringify(listBackgroundColors))
+					renderAndSync();
+
+					break;
+
+				case "Rename List":
+
+					const editListNameInputTools = inputToolMaker({
+						placeholderText: getRandomItem(genericListNames),
+						levelOfNesting: 5,
+						styleClass: "edit list-input ",
+						callbackFunction: function (newName) {
+
+							const validatedInput = validateInput("list", newName, listName);
+							if (validatedInput === null) {
+								return;
+							}
+							if (validatedInput !== listName) {
+								// this line is replacing the key value 
+								colorsILike[newName] = colorsILike[listName];
+								delete colorsILike[listName];
+
+								listBackgroundColors[newName] = listBackgroundColors[listName];
+								delete listBackgroundColors[listName];
+								localStorage.setItem("colorsILike", JSON.stringify(colorsILike))
+								localStorage.setItem("listBackgroundColors", JSON.stringify(listBackgroundColors))
+								if (listName === defaultList) {
+									defaultList = newName;
+									localStorage.setItem("defaultList", JSON.stringify(defaultList));
+									addYourOwnColor.textContent = `Add to ${newName}`;
+									addBaseColor.textContent = `Add to ${newName}`;
+								}
+
+							}
+
+							renderAndSync()
+
+						}
+					})
+
+					listEditDiv.appendChild(editListNameInputTools);
+
+					break;
+
+				case "Add Color to List":
+
+					const addColorToListInputTools = inputToolMaker({
+						levelOfNesting: 5,
+						styleClass: "edit list-input ",
+						callbackFunction: function (inputColor) {
+
+							addColor(listName, inputColor);
+
+						}
+					})
+
+					listEditDiv.appendChild(addColorToListInputTools);
+
+					break;
+
+				case "Move List":
+
+					const keys = Object.keys(colorsILike);
+
+					const moveListToolsDiv = document.createElement("div");
+					moveListToolsDiv.className = "edit list-move receptacle";
+
+					const moveUpButton = document.createElement("button");
+					moveUpButton.textContent = "▲ Move Up";
+					moveUpButton.className = "edit list-move leaf";
+
+					const moveDownButton = document.createElement("button");
+					moveDownButton.textContent = "Move Down ▼";
+					moveDownButton.className = "edit list-move leaf";
+
+					moveUpButton.addEventListener("click", () => {
+						let listIndex = keys.indexOf(listName);
+						let holdList = listName;
+						if (listIndex === 0) {
+							moveUpButton.disabled = true;
+							return;
 						}
 
-					}
+						keys[listIndex] = keys[listIndex - 1];
+						keys[listIndex - 1] = holdList;
+						const tempObj = {}
+						keys.forEach(key => {
+							tempObj[key] = colorsILike[key];
+						})
+						colorsILike = tempObj;
+						renderAndSync();
+					});
 
-					renderAndSync()
+					moveDownButton.addEventListener("click", () => {
+						let listIndex = keys.indexOf(listName);
+						let holdList = listName;
+						if (listIndex === keys.length - 1) {
+							moveDownButton.disabled = true;
+							return;
+						}
+						keys[listIndex] = keys[listIndex + 1];
+						keys[listIndex + 1] = holdList;
+						const tempObj = {}
+						keys.forEach(key => {
+							tempObj[key] = colorsILike[key];
+						})
+						colorsILike = tempObj;
+						renderAndSync();
+					});
+					moveListToolsDiv.appendChild(moveUpButton);
+					moveListToolsDiv.appendChild(moveDownButton);
+					listEditDiv.appendChild(moveListToolsDiv);
+					break;
 
-				})
+				case "Change List Background Color":
 
-				listEditDiv.appendChild(editListNameInputTools);
 
-				break;
+					const changeListBackgroundInputTools = inputToolMaker({
+						levelOfNesting: 5,
+						initialValue: listBackgroundColors[listName] || "",
+						styleClass: "edit list-input ",
+						callbackFunction: function (inputColor) {
 
-			case "Add Color to List":
+							const validatedInput = validateInput("color", inputColor)
+							if (validatedInput === null) {
+								return;
+							}
+							listBackgroundColors[listName] = validatedInput.hexValue;
+							localStorage.setItem("listBackgroundColors", JSON.stringify(listBackgroundColors))
+							renderAndSync()
 
-				const addColorToListInputTools = inputToolMaker("", getRandomItem(megaArray), "Confirm", "list-add-color", function (inputColor) {
-
-					addColor(listName, inputColor);
-
-				})
-
-				listEditDiv.appendChild(addColorToListInputTools);
-
-				break;
-
-			case "Move List":
-
-				const keys = Object.keys(colorsILike);
-
-				const moveListToolsDiv = document.createElement("div");
-				moveListToolsDiv.classList.add("move-list-tools-div");
-
-				const moveUpButton = document.createElement("button");
-				moveUpButton.textContent = "▲ Move Up";
-				moveUpButton.classList.add("move-up-button");
-
-				const moveDownButton = document.createElement("button");
-				moveDownButton.textContent = "Move Down ▼";
-				moveDownButton.classList.add("move-down-button");
-
-				moveUpButton.addEventListener("click", () => {
-					let listIndex = keys.indexOf(listName);
-					let holdList = listName;
-					if (listIndex === 0) {
-						moveUpButton.disabled = true;
-						return;
-					}
-
-					keys[listIndex] = keys[listIndex - 1];
-					keys[listIndex - 1] = holdList;
-					const tempObj = {}
-					keys.forEach(key => {
-						tempObj[key] = colorsILike[key];
+						}
 					})
-					colorsILike = tempObj;
-					renderAndSync();
-				});
 
-				moveDownButton.addEventListener("click", () => {
-					let listIndex = keys.indexOf(listName);
-					let holdList = listName;
-					if (listIndex === keys.length - 1) {
-						moveDownButton.disabled = true;
-						return;
-					}
-					keys[listIndex] = keys[listIndex + 1];
-					keys[listIndex + 1] = holdList;
-					const tempObj = {}
-					keys.forEach(key => {
-						tempObj[key] = colorsILike[key];
-					})
-					colorsILike = tempObj;
-					renderAndSync();
-				});
-				moveListToolsDiv.appendChild(moveUpButton);
-				moveListToolsDiv.appendChild(moveDownButton);
-				listEditDiv.appendChild(moveListToolsDiv);
-				break;
+					listEditDiv.appendChild(changeListBackgroundInputTools);
 
-			case "Change List Background Color":
+					break;
 
+				default:
 
-				const changeListBackgroundInputTools = inputToolMaker(listBackgroundColors[listName] || "", getRandomItem(megaArray), "Confirm", "change-list-background", function (inputColor) {
-					const validatedInput = validateInput("color", inputColor)
-					if (validatedInput === null) {
-						return;
-					}
-					listBackgroundColors[listName] = validatedInput.hexValue;
-					localStorage.setItem("listBackgroundColors", JSON.stringify(listBackgroundColors))
-					renderAndSync()
+					break;
 
-				})
-
-				listEditDiv.appendChild(changeListBackgroundInputTools);
-
-				break;
-
-			default:
-
-				break;
-
+			}
 		}
-	}, "edit-list")
+	})
 
 	listHeaderContainer.appendChild(listHeaderDropDownMenu);
 	return listHeaderContainer;
@@ -681,50 +666,50 @@ function createColorCard(color, listName) {
 
 
 	const swatchContainer = document.createElement("div");
-	swatchContainer.classList.add("swatch-card");
+	swatchContainer.className = "swatch color division";
 
 	const cardHeaderContainer = document.createElement("div")
-	cardHeaderContainer.classList.add("swatch-card-header-wrapper");
+	cardHeaderContainer.className = "swatch header subdivision";
 
 	const cardBodyContainer = document.createElement("div")
-	cardBodyContainer.classList.add("swatch-card-body-wrapper");
+	cardBodyContainer.className = "swatch body subdivision";
 
 	const cardEditContainer = document.createElement("div")
-	cardEditContainer.classList.add("swatch-card-edit-wrapper")
+	cardEditContainer.className = "swatch edit subdivision";
 	const swatchColor = document.createElement("div");
 
 	if (color.cardBackgroundColor !== undefined) {
 		swatchColor.style.borderColor = color.cardBackgroundColor;
 	}
 
-	swatchColor.classList.add("swatch-color");
+	swatchColor.className = "swatch preview asset";
 	cardBodyContainer.appendChild(swatchColor);
 
 
 	const hexValue = document.createElement("h5");
-	hexValue.classList.add("swatch-hex-value")
+	hexValue.className = "swatch value asset";
 	swatchColor.style.backgroundColor = color.hexValue
 	hexValue.textContent = color.hexValue;
 	cardHeaderContainer.appendChild(hexValue);
 
 	const rgbaValue = document.createElement("h5");
-	rgbaValue.classList.add("swatch-rgba-value")
+	rgbaValue.className = "swatch value asset";
 	rgbaValue.textContent = color.rgbaValue;
 	cardHeaderContainer.appendChild(rgbaValue);
 
 	const hslValue = document.createElement("h5");
-	hslValue.classList.add("swatch-hsl-value")
+	hslValue.className = "swatch value asset";
 	hslValue.textContent = color.hslValue;
 	cardHeaderContainer.appendChild(hslValue);
 
 	const cssKeyword = document.createElement("h5");
-	cssKeyword.classList.add("swatch-css-keyword")
+	cssKeyword.className = "swatch value asset";
 	cssKeyword.textContent = color.cssKeyword || "\u00A0";
 	cardHeaderContainer.appendChild(cssKeyword);
 
 
 	const customName = document.createElement("h6");
-	customName.classList.add("swatch-new-name");
+	customName.className = "swatch custom-name asset";
 	customName.textContent = "\u00A0"
 	cardHeaderContainer.appendChild(customName);
 
@@ -734,210 +719,239 @@ function createColorCard(color, listName) {
 	}
 	cardBodyContainer.appendChild(swatchColor);
 
-	const swatchMenuItem = [
-		"--Edit Color--",
-		"Add Color Name",
-		"Change Color",
-		"Move Color",
-		"Change Card Background Color",
-		"Revert to Default",
-		"Suggested Color Palettes (WIP)",
-		"Contrast Checker (WIP)",
-		"Copy to List",
-		"Move to New List",
-		"Move to Existing List",
-		"Delete Color"
-	];
-
-	const editSwatchDropDownMenu = customDropDownMenuMaker(swatchMenuItem, function (item) {
-		let action = item;
-		cardEditContainer.textContent = ""
 
 
-		switch (action) {
-			case "Contrast Checker":
+	const editSwatchDropDownMenu = customDropDownMenuMaker({
+		options: swatchMenuItem,
+		levelOfNesting: 4,
+		styleClass: "swatch menu ",
+		callbackFunction: function (item) {
 
-				break;
-
-			case "Suggested Color Palettes":
-
-				break;
-
-			case "Revert to Default":
-				delete color.cardBackgroundColor;
-				renderAndSync();
-
-				break;
-
-			case "Delete Color":
-
-				const userConfirmedDeleteColor = confirm(`Are you sure you want to delete the color ${color.customName || color.hexValue} from the list ${listName}?`);
+			let action = item;
+			cardEditContainer.textContent = ""
 
 
-				if (!userConfirmedDeleteColor) {
-					return;
-				}
-				colorsILike[listName].splice(colorsILike[listName].indexOf(color), 1);
-				renderAndSync();
+			switch (action) {
+				case "Contrast Checker":
 
-				break;
+					break;
 
-			case "Add Color Name":
+				case "Suggested Color Palettes":
 
-				const customNameTools = inputToolMaker(color.customName, getRandomItem(Object.values(cssColors)), "Confirm", "add-color-name", function (inputName) {
-					const validatedInput = validateInput("name", inputName);
-					if (validatedInput === null) {
-						return;
-					}
-					color.customName = validatedInput;
+					break;
+
+				case "Revert to Default":
+					delete color.cardBackgroundColor;
 					renderAndSync();
 
-				});
-				cardEditContainer.appendChild(customNameTools);
+					break;
 
-				break;
+				case "Delete Color":
 
-			case "Move Color":
+					const userConfirmedDeleteColor = confirm(`Are you sure you want to delete the color ${color.customName || color.hexValue} from the list ${listName}?`);
 
 
-				const moveColorToolsDiv = document.createElement("div");
-				moveColorToolsDiv.classList.add("move-color-tools-div");
-
-				const moveLeftButton = document.createElement("button");
-				moveLeftButton.textContent = "◀ Move Left";
-				moveLeftButton.classList.add("move-left-button");
-
-				const moveRightButton = document.createElement("button");
-				moveRightButton.textContent = "Move Right ▶";
-				moveRightButton.classList.add("move-right-button");
-
-				let colorIndex = colorsILike[listName].indexOf(color);
-
-				moveLeftButton.addEventListener("click", function () {
-					const swatchList = colorsILike[listName];
-
-					if (colorIndex === 0) {
-						moveLeftButton.disabled = true;
+					if (!userConfirmedDeleteColor) {
 						return;
 					}
-
-					let holdColor = swatchList[colorIndex];
-
-					swatchList[colorIndex] = swatchList[colorIndex - 1];
-					swatchList[colorIndex - 1] = holdColor;
-					renderAndSync();
-				})
-
-				moveRightButton.addEventListener("click", function () {
-					const swatchList = colorsILike[listName];
-
-					if (colorIndex === swatchList.length - 1) {
-						moveRightButton.disabled = true;
-						return;
-					}
-
-					let holdColor = swatchList[colorIndex];
-
-					swatchList[colorIndex] = swatchList[colorIndex + 1];
-					swatchList[colorIndex + 1] = holdColor;
-					renderAndSync();
-				})
-
-				moveColorToolsDiv.appendChild(moveLeftButton);
-				moveColorToolsDiv.appendChild(moveRightButton);
-				cardEditContainer.appendChild(moveColorToolsDiv);
-
-				break;
-
-			case "Change Color":
-
-				const editSwatchTools = inputToolMaker(color.hexValue, getRandomItem(megaArray), "Confirm", "edit-swatch", function (inputColor) {
-					const validatedInput = validateInput("color", inputColor, listName);
-					if (validatedInput === null) {
-						return;
-					}
-					color.hexValue = validatedInput.hexValue;
-					color.hslValue = validatedInput.hslValue;
-					color.rgbaValue = validatedInput.rgbaValue;
-					color.cssKeyword = validatedInput.cssKeyword;
-					renderAndSync();
-				});
-
-
-				cardEditContainer.appendChild(editSwatchTools);
-				break;
-
-			case "Move to New List":
-
-				const moveToNewListTools = inputToolMaker("", getRandomItem(genericListNames), "Confirm", "move-to-new-list", function (newListName) {
-
-					const validatedInput = validateInput("list", newListName);
-					if (validatedInput === null) {
-						return;
-					}
-					colorsILike[newListName] = [];
-					colorsILike[listName].splice(colorsILike[listName].indexOf(color), 1);
-					colorsILike[newListName].push(structuredClone(color));
-					renderAndSync();
-
-				});
-				cardEditContainer.appendChild(moveToNewListTools);
-
-				break;
-
-			case "Move to Existing List":
-
-				const listMoveMenuItem = [
-					"--Pick One--",
-					...Object.keys(colorsILike)
-				]
-				const listMoveDropDownMenu = customDropDownMenuMaker(listMoveMenuItem, function (item) {
-
-					const newList = item;
-					colorsILike[newList].push(structuredClone(color));
 					colorsILike[listName].splice(colorsILike[listName].indexOf(color), 1);
 					renderAndSync();
 
-				}, "move-to-existing-list")
+					break;
 
-				cardEditContainer.appendChild(listMoveDropDownMenu);
+				case "Add Color Name":
 
-				break;
+					const customNameTools = inputToolMaker({
+						levelOfNesting: 4,
+						initialValue: color.customName,
+						placeholderText: getRandomItem(Object.values(cssColors)),
+						styleClass: "edit swatch-input ",
+						callbackFunction: function (inputName) {
 
-			case "Change Card Background Color":
-				const changeCardBackgroundTool = inputToolMaker(color.cardBackgroundColor || "", getRandomItem(megaArray), "Confirm", "change-card-background", function (inputColor) {
-					const validatedInput = validateInput("color", inputColor);
-					if (validatedInput === null) {
-						return;
-					}
-					color.cardBackgroundColor = validatedInput.hexValue;
-					renderAndSync();
-				})
+							const validatedInput = validateInput("name", inputName);
+							if (validatedInput === null) {
+								return;
+							}
+							color.customName = validatedInput;
+							renderAndSync();
 
-				cardEditContainer.appendChild(changeCardBackgroundTool);
+						}
+					});
+					cardEditContainer.appendChild(customNameTools);
 
-				break;
-			case "Copy to List":
+					break;
 
-				const copyToListMenuItem = [
-					"--Pick One--",
-					...Object.keys(colorsILike)
-				]
+				case "Move Color":
 
-				const copyToListDropDownMenu = customDropDownMenuMaker(copyToListMenuItem, function (item) {
-					const newList = item;
-					colorsILike[newList].push(structuredClone(color));
-					renderAndSync();
 
-				}, "copy-to-list")
+					const moveColorToolsDiv = document.createElement("div");
+					moveColorToolsDiv.className = "edit swatch-move bin";
 
-				cardEditContainer.appendChild(copyToListDropDownMenu);
-				break;
+					const moveLeftButton = document.createElement("button");
+					moveLeftButton.textContent = "◀ Move Left";
+					moveLeftButton.className = "edit swatch-move leaf";
 
-			default:
-				break;
+					const moveRightButton = document.createElement("button");
+					moveRightButton.textContent = "Move Right ▶";
+					moveRightButton.className = "edit swatch-move leaf";
+
+					let colorIndex = colorsILike[listName].indexOf(color);
+
+					moveLeftButton.addEventListener("click", function () {
+						const swatchList = colorsILike[listName];
+
+						if (colorIndex === 0) {
+							moveLeftButton.disabled = true;
+							return;
+						}
+
+						let holdColor = swatchList[colorIndex];
+
+						swatchList[colorIndex] = swatchList[colorIndex - 1];
+						swatchList[colorIndex - 1] = holdColor;
+						renderAndSync();
+					})
+
+					moveRightButton.addEventListener("click", function () {
+						const swatchList = colorsILike[listName];
+
+						if (colorIndex === swatchList.length - 1) {
+							moveRightButton.disabled = true;
+							return;
+						}
+
+						let holdColor = swatchList[colorIndex];
+
+						swatchList[colorIndex] = swatchList[colorIndex + 1];
+						swatchList[colorIndex + 1] = holdColor;
+						renderAndSync();
+					})
+
+					moveColorToolsDiv.appendChild(moveLeftButton);
+					moveColorToolsDiv.appendChild(moveRightButton);
+					cardEditContainer.appendChild(moveColorToolsDiv);
+
+					break;
+
+				case "Change Color":
+
+					const editSwatchTools = inputToolMaker({
+						levelOfNesting: 4,
+						initialValue: color.hexValue,
+						styleClass: "edit swatch-input ",
+						callbackFunction: function (inputColor) {
+
+							const validatedInput = validateInput("color", inputColor, listName);
+							if (validatedInput === null) {
+								return;
+							}
+							color.hexValue = validatedInput.hexValue;
+							color.hslValue = validatedInput.hslValue;
+							color.rgbaValue = validatedInput.rgbaValue;
+							color.cssKeyword = validatedInput.cssKeyword;
+							renderAndSync();
+						}
+					});
+
+
+					cardEditContainer.appendChild(editSwatchTools);
+					break;
+
+				case "Move to New List":
+
+					const moveToNewListTools = inputToolMaker({
+						levelOfNesting: 4,
+						placeholderText: getRandomItem(genericListNames),
+						styleClass: "edit swatch-input ",
+						callbackFunction: function (newListName) {
+
+							const validatedInput = validateInput("list", newListName);
+							if (validatedInput === null) {
+								return;
+							}
+							colorsILike[newListName] = [];
+							colorsILike[listName].splice(colorsILike[listName].indexOf(color), 1);
+							colorsILike[newListName].push(structuredClone(color));
+							renderAndSync();
+
+						}
+					});
+					cardEditContainer.appendChild(moveToNewListTools);
+
+					break;
+
+				case "Move to Existing List":
+
+					const listMoveMenuItem = [
+						"--Pick One--",
+						...Object.keys(colorsILike)
+					]
+					const listMoveDropDownMenu = customDropDownMenuMaker({
+						options: listMoveMenuItem,
+						styleClass: "edit swatch-menu ",
+						levelOfNesting: 4,
+						callbackFunction: function (item) {
+
+							const newList = item;
+							colorsILike[newList].push(structuredClone(color));
+							colorsILike[listName].splice(colorsILike[listName].indexOf(color), 1);
+							renderAndSync();
+
+						}
+					});
+
+					cardEditContainer.appendChild(listMoveDropDownMenu);
+
+					break;
+
+				case "Change Card Background Color":
+					const changeCardBackgroundTool = inputToolMaker({
+						levelOfNesting: 4,
+						initialValue: color.cardBackgroundColor,
+						styleClass: "edit swatch-input ",
+						callbackFunction: function (inputColor) {
+
+							const validatedInput = validateInput("color", inputColor);
+							if (validatedInput === null) {
+								return;
+							}
+							color.cardBackgroundColor = validatedInput.hexValue;
+							renderAndSync();
+						}
+					})
+
+					cardEditContainer.appendChild(changeCardBackgroundTool);
+
+					break;
+				case "Copy to List":
+
+					const copyToListMenuItem = [
+						"--Pick One--",
+						...Object.keys(colorsILike)
+					]
+
+					const copyToListDropDownMenu = customDropDownMenuMaker({
+						options: copyToListMenuItem,
+						styleClass: "edit swatch-menu ",
+						levelOfNesting: 4,
+						callbackFunction: function (item) {
+
+							const newList = item;
+							colorsILike[newList].push(structuredClone(color));
+							renderAndSync();
+
+						}
+					});
+
+					cardEditContainer.appendChild(copyToListDropDownMenu);
+					break;
+
+				default:
+					break;
+			}
+
 		}
-	}, "edit-swatch")
+	});
 
 	cardBodyContainer.appendChild(editSwatchDropDownMenu);
 
@@ -952,7 +966,7 @@ function createColorCard(color, listName) {
 function createColorList(listName) {
 
 	const listDiv = document.createElement("div");
-	listDiv.classList.add("list-div");
+	listDiv.className = "list color frame";
 
 	if (listBackgroundColors[listName] !== undefined) {
 		listDiv.style.backgroundColor = listBackgroundColors[listName];
@@ -964,7 +978,7 @@ function createColorList(listName) {
 
 
 	const swatchContainerWrapper = document.createElement("div")
-	swatchContainerWrapper.classList.add("swatch-container-wrapper")
+	swatchContainerWrapper.className = "swatch color plugin";
 
 	colorsILike[listName].forEach(color => {
 

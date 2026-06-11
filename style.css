@@ -51,16 +51,93 @@ h1, h2, h3, h4, h5, h6 {
 /* End of CSS Reset */
 
 /* Added styles */
-/* child of html */
+
+/* html elements */
+
+/* Block: body */
+/* - Child of: html */
+/* - Has children: .page.header.skeleton, .page.input.skeleton, .list.color.framework */
+/* - What it does: Sets the base background color for the entire webpage */
+/* - Associated JS variables: document.body */
 body {
   background-color: #f1d9f4;
 }
-/* parents of page title and page 
-subtitle and static input and static 
-submit respectively */
-/* child of body */
-.page-header,
-.static-input-wrapper {
+
+/* Block: input, button */
+/* - Child of: various input tool containers */
+/* - Has children: Text nodes */
+/* - What it does: Resets borders, sets border-radius, aligns text inside input fields/buttons, and defines a standard width */
+/* - Associated JS variables: inputToolInput, inputToolButton (inside inputToolMaker) */
+input,
+button {
+  border: none;
+  border-radius: 0.3125rem;
+  text-align: center;
+  width: 18.75rem;
+}
+
+/* Block: button */
+/* - Child of: various button containers */
+/* - Has children: Text nodes */
+/* - What it does: Styles default background and text colors for all buttons */
+/* - Associated JS variables: buttons created dynamically or statically (e.g. inputToolButton) */
+button {
+  background-color: #c297f2;
+  color: #102344;
+
+}
+
+/* Block: button:hover */
+/* - Child of: N/A (pseudo-state) */
+/* - Has children: None */
+/* - What it does: Modifies colors and changes cursor to a pointer when hovering over a button */
+/* - Associated JS variables: N/A */
+button:hover {
+  background-color: #937ee7;
+  color: #01081a;
+  cursor: pointer;
+}
+
+/* Block: input */
+/* - Child of: input container wrapper */
+/* - Has children: Text content */
+/* - What it does: Defines base background and text colors for form input fields */
+/* - Associated JS variables: inputToolInput */
+input {
+  background-color: #f6e7f8;
+  color: #1f4687;
+
+}
+
+/* Block: input:hover */
+/* - Child of: N/A (pseudo-state) */
+/* - Has children: None */
+/* - What it does: Changes input background color and sets cursor to pointer on hover */
+/* - Associated JS variables: N/A */
+input:hover {
+  background-color:#f2cbf1;
+  cursor: pointer;
+}
+
+/* Block: :focus */
+/* - Child of: N/A (pseudo-state) */
+/* - Has children: None */
+/* - What it does: Applies a customized pink outline to focused inputs or buttons to indicate active focus state */
+/* - Associated JS variables: N/A */
+:focus {
+  outline: 0.125rem solid #f3b7f5;
+}
+
+
+/* page  */
+
+/* Block: .page.header.skeleton, .page.input.skeleton */
+/* - Child of: body */
+/* - Has children: .page.title.item, .page.subtitle.item, .page.left.wrapper, .page.right.wrapper, .page.section-title.or-block.item */
+/* - What it does: Aligns the page header and page inputs into flex containers centered horizontally and vertically */
+/* - Associated JS variables: headerSkeleton, inputSkeleton (static HTML elements) */
+.page.header.skeleton,
+.page.input.skeleton {
   display: flex;
   flex-wrap: wrap;
 	gap: 0.625rem;
@@ -68,41 +145,70 @@ submit respectively */
   align-items: center;
 }
 
-.page-header {
+/* Block: .page.header.skeleton */
+/* - Child of: body */
+/* - Has children: .page.title.item, .page.subtitle.item */
+/* - What it does: Stacks the title and subtitle vertically */
+/* - Associated JS variables: headerSkeleton (static HTML element) */
+.page.header.skeleton {
   flex-direction: column;
   
 }
 
-.static-input-wrapper {
+/* Block: .page.input.skeleton */
+/* - Child of: body */
+/* - Has children: .page.left.wrapper, .page.right.wrapper, .page.section-title.or-block.item */
+/* - What it does: Positions the left and right wrappers side-by-side horizontally */
+/* - Associated JS variables: inputSkeleton (static HTML element) */
+.page.input.skeleton {
   flex-direction: row;
 	
 }
 
-.left-section-header,
-.right-section-header {
+/* Block: .page.left.wrapper, .page.right.wrapper */
+/* - Child of: .page.input.skeleton */
+/* - Has children: section title elements, input tool divs, dropdown menu divs */
+/* - What it does: Forms vertically aligned columns with gap spacing for the left and right input sections */
+/* - Associated JS variables: leftWrapper, rightWrapper (static HTML elements) */
+.page.left.wrapper,
+.page.right.wrapper {
 	display: flex;
 	flex-direction: column;
 	gap: 0.625rem;
 }
 
-/* children of page header */
-/* no children */
-.page-title,
-.page-subtitle {
+/* Block: .page.title.item, .page.subtitle.item */
+/* - Child of: .page.header.skeleton */
+/* - Has children: Text nodes */
+/* - What it does: Flex-centers the text content of the page title and subtitle elements */
+/* - Associated JS variables: None (static HTML elements) */
+.page.title.item,
+.page.subtitle.item {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-/* parent of swatch container wrapper, list div, header container */
-/* child of body */
-.display {
+
+
+/* list */
+
+/* Block: .list.color.framework */
+/* - Child of: body */
+/* - Has children: .list.color.frame */
+/* - What it does: Stacks the color list frames vertically in a flex container */
+/* - Associated JS variables: listsContainer (static HTML element) */
+.list.color.framework {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column
 }
-/* parent of swatch container and list header container  */
-/* child of display */
-.swatch-container-wrapper {
+
+/* Block: .list.color.frame (First occurrence) */
+/* - Child of: .list.color.framework */
+/* - Has children: .list.header.plugin, .swatch.color.plugin */
+/* - What it does: Applies a border and sets up a row wrap display for the list content */
+/* - Associated JS variables: listFrame (inside createList) */
+.list.color.frame {
   border:0.3125rem solid #a8b5e1;
 	display: flex;
 	flex-wrap: wrap;
@@ -111,45 +217,13 @@ submit respectively */
   padding:0.3125rem;
   flex-grow: 1;
 }
-/* parent of swatch color, swatch header, swatch drop down menu */
-/* child of swatch container wrapper */
-.swatch-container {
-  border: 0.125rem solid #ce8dad;
-  border-radius: 0.3125rem;
-  background-color:#f1d9f4;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 12.5rem;
-}
 
-
-
-
-.card-header-container{
-  border-bottom: 0.125rem solid #b787a4;
-  border-radius: 0.3125rem;
-  
-  
-}
-/* all the children of swatch container */
-.swatch-container > * {
-  flex-grow: 1;
-}
-/* child of swatch body */
-/* no children */
-.swatch-color {
-  height: 6.25rem;
-  width: 6.25rem;
-  border: 1.25rem solid transparent;
-  background-clip: padding-box;
-  
-}
-
-/* parent of list header container and list edit div */
-/* child of display */
-.list-div {
+/* Block: .list.color.frame (Second occurrence) */
+/* - Child of: .list.color.framework */
+/* - Has children: .list.header.plugin, .swatch.color.plugin */
+/* - What it does: Sets margins, background colors, custom borders, and rounded corners for the list card framework elements */
+/* - Associated JS variables: listFrame (inside createList) */
+.list.color.frame {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -161,99 +235,191 @@ submit respectively */
   max-width: 95%;
 
 }
-/* parent of list header and list edit div  */
-/* child of list div */
-.list-header-container {
+
+/* Block: .list.header.plugin */
+/* - Child of: .list.color.frame */
+/* - Has children: .list.header.asset, .list.menu.division, .list.edit.division */
+/* - What it does: Formats the list header container with a solid border and vertical column flex alignment */
+/* - Associated JS variables: listHeaderContainer (inside createListHeader) */
+.list.header.plugin {
   display: flex;
   flex-direction: column;
   border: 0.3125rem solid #bcc7f5;
 }
-/* parent of edit list input, edit list submit button, edit list cancel button */
-/* child of list div */
-.edit-list-menu {
+
+/* Block: .list.edit.division */
+/* - Child of: .list.header.plugin */
+/* - Has children: .edit.list-menu.receptacle, .edit.list-input.receptacle, .edit.list-move.receptacle */
+/* - What it does: Configures the list editing section wrapper to stack its input/button tools vertically at a fixed width */
+/* - Associated JS variables: listEditDiv (inside createListHeader) */
+.list.edit.division {
   display: flex;
   flex-direction: column;
   width: 12.5rem;
   
 }
 
-.static-base-color-picker-container,
-.static-add-color-container,
-.list-rename-container,
-.list-add-color-container,
-.change-list-background-container,
-.edit-swatch-container,
-.new-list-container,
-.change-card-background-container,
-.add-color-name-container  {
+.list.menu.division {
+  width: 12.5rem;
+}
+
+
+/* swatch */
+
+/* child of list color frame */
+/* has children swatch color division */
+/* controls the layout of the swatches in the list */
+.swatch.color.plugin {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+
+/* Block: .swatch.color.division */
+/* - Child of: .swatch.color.plugin */
+/* - Has children: .swatch.header.subdivision, .swatch.body.subdivision, .swatch.edit.subdivision */
+/* - What it does: Styles the individual color cards with a border, rounded corners, background color, fixed width, and flex-center column layout */
+/* - Associated JS variables: swatchColor (inside createColorCard) */
+.swatch.color.division {
+  border: 0.125rem solid #ce8dad;
+  border-radius: 0.3125rem;
+  background-color:#f1d9f4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 12.5rem;
+}
+
+/* Block: .swatch.edit.subdivision */
+/* - Child of: .swatch.color.division */
+/* - Has children: .edit.swatch-menu.bin, .edit.swatch-input.bin, .edit.swatch-move.bin */
+/* - What it does: Applies a bottom border and rounded corners to the swatch card's editing section container */
+/* - Associated JS variables: cardEditContainer (inside createColorCard) */
+.swatch.edit.subdivision  {
+  border-bottom: 0.125rem solid #b787a4;
+  border-radius: 0.3125rem;
+  
+  
+}
+
+/* Block: .swatch.preview.asset */
+/* - Child of: .swatch.body.subdivision */
+/* - Has children: None (empty color display block) */
+/* - What it does: Configures the color preview card dimensions, transparent border spacing, and clipping */
+/* - Associated JS variables: colorPreview (inside createColorCard) */
+.swatch.preview.asset {
+  height: 6.25rem;
+  width: 6.25rem;
+  border: 1.25rem solid transparent;
+  background-clip: padding-box;
+  
+}
+
+
+/* edit */
+
+
+
+/* multi  */
+
+
+/* Block: .page.ac-menu.subsection, .page.bc-menu.subsection, .edit.list-menu.recptacle, .edit.swatch-menu.bin */
+/* - Child of: .page.ac-menu.section, .page.bc-menu.section, .list.edit.division, .swatch.edit.subdivision */
+/* - Has children: dropdown option/item/leaf elements */
+/* - What it does: Stacks dropdown menu components vertically in a column flex configuration */
+/* - Associated JS variables: staticEditDropDownMenu, baseColorPickerDropDownMenu, listHeaderDropDownMenu, editSwatchDropDownMenu */
+.page.ac-menu.subsection,
+.page.bc-menu.subsection,
+.edit.list-menu.receptacle, 
+.edit.swatch-menu.bin,
+.list.menu.division,
+.swatch.menu.carrier {
 		display: flex;
-		flex-direction: column;
+		flex-direction: column; 
 		
 }
 
-input,
-button {
-  border: none;
-  border-radius: 0.3125rem;
-  text-align: center;
-  width: 18.75rem;
-}
 
 
-button {
-  background-color: #c297f2;
-  color: #102344;
-
-}
-
-button:hover {
-  background-color: #937ee7;
-  color: #01081a;
-  cursor: pointer;
-}
-
-input {
-  background-color: #f6e7f8;
-  color: #1f4687;
-
-}
-
-input:hover {
-  background-color:#f2cbf1;
-  cursor: pointer;
-}
-
-:focus {
-  outline: 0.125rem solid #f3b7f5;
-}
-
-[class*="-menu-option"] {
+/* Block: .edit.menu.leaf.clickable */
+/* - Child of: dropdown container blocks */
+/* - Has children: Text nodes */
+/* - What it does: Hides clickable dropdown menu options by default, applying background, text, and border styles */
+/* - Associated JS variables: dropDownOption (inside customDropDownMenuMaker) */
+.page.ac-menu.item:not(:first-child),
+.page.bc-menu.item:not(:first-child),
+.list.menu.asset:not(:first-child),
+.edit.list-menu.leaf:not(:first-child),
+.edit.swatch-menu.leaf:not(:first-child),
+.swatch.menu.asset:not(:first-child) {
   display: none;
   background-color: #fdcfff;
   color: #194f95;
   border-radius: 0.3125rem;
 }
 
-
-[class*="-menu-placeholder"] {
+/* Block: .edit.menu.leaf.placeholder */
+/* - Child of: dropdown container blocks */
+/* - Has children: Text nodes */
+/* - What it does: Styles dropdown placeholder list options (non-selectable header options) */
+/* - Associated JS variables: dropDownMenuPlaceholder / dropDownOption (inside customDropDownMenuMaker) */
+.page.ac-menu.item.placeholder,
+.page.bc-menu.item.placeholder,
+.list.menu.asset.placeholder,
+.edit.list-menu.leaf.placeholder,
+.edit.swatch-menu.leaf.placeholder,
+.swatch.menu.asset.placeholder
+{
   background-color: #f3b7f5;
   color: #1f4076;
   border-radius: 0.3125rem;
 
 }
 
-[class*="-menu"].open [class*="-menu-option"] {
+/* Block: .edit.menu.bin.open .edit.menu.leaf, .edit.menu.receptacle.open .edit.menu.leaf */
+/* - Child of: open dropdown wrapper states */
+/* - Has children: dropdown menu leaf option elements */
+/* - What it does: Reveals and displays options inside dropdown menus when the parent menu has the 'open' class applied */
+/* - Associated JS variables: N/A */
+.page.ac-menu.subsection.open .page.ac-menu.item,
+.page.bc-menu.subsection.open .page.bc-menu.item,
+.list.menu.division.open .list.menu.asset,
+.edit.list-menu.receptacle.open .edit.list-menu.leaf,
+.edit.swatch-menu.bin.open .edit.swatch-menu.leaf,
+.swatch.menu.carrier.open .swatch.menu.asset {
   display: block;
 }
 
+/* Block: .edit.menu.leaf.placeholder:hover */
+/* - Child of: N/A (pseudo-state) */
+/* - Has children: None */
+/* - What it does: Applies hover styling and updates cursor style for placeholder dropdown items */
+/* - Associated JS variables: N/A */
 
-[class*="-menu-placeholder"]:hover {
+.page.ac-menu.item.placeholder:hover,
+.page.bc-menu.item.placeholder:hover,
+.list.menu.asset.placeholder:hover,
+.edit.list-menu.leaf.placeholder:hover,
+.edit.swatch-menu.leaf.placeholder:hover,
+.swatch.menu.asset.placeholder:hover {
   background-color: #ce8dad;
   color: #102344;
   cursor: pointer;
 }
 
-[class*="-menu-option"]:hover {
+/* Block: .edit.menu.leaf.clickable:hover */
+/* - Child of: N/A (pseudo-state) */
+/* - Has children: None */
+/* - What it does: Updates background, text colors, and cursor pointer when hovering over a selectable dropdown menu option */
+/* - Associated JS variables: N/A */
+.page.ac-menu.item.clickable:hover,
+.page.bc-menu.item.clickable:hover,
+.list.menu.asset.clickable:hover,
+.edit.list-menu.leaf.clickable:hover,
+.edit.swatch-menu.leaf.clickable:hover,
+.swatch.menu.asset.clickable:hover {
   background-color: #d7a8c5;
   color: #1d3058;
   cursor: pointer;

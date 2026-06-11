@@ -1,36 +1,44 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Colors I Like</title>
-		<link rel="stylesheet" href="./style.css" />
-		<script src="./styling-engine.js" defer></script>
-		<script src="./main.js" defer></script>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Colors I Like</title>
+	<link rel="stylesheet" href="./style.css" />
+	<script src="./styling-engine.js" defer></script>
+	<script src="./colors-dictionary.js" defer></script>
+	<script src="./main.js" defer></script>
 	</head>
-	<body>
-		<div class="page-header">
-			<h1 class="page-title">Colors I Like</h1>
-			<h2 class="page-subtitle">Pretty colors in Hex, RGB, and HSL</h2>
-		</div>
 
-		<div class="static-input-wrapper">
-			<div class="left-section-header">
-				<h3 class="section-title">Add Your Own Color</h3>
-				<div id="add-your-own-color" class="add-your-own-color"></div>
-				<div id="add-your-own-color-edit-list-menu" class="add-your-own-color-edit-list-menu"></div>
-				<div id="list-edit-tools" class="list-edit-tools"></div>
-			</div>
-			<div class="structural-or-block"><strong>or</strong></div>
-			<div class="right-section-header">
-				<h3 class="section-title">Pick a Base Color</h3>
-				<div id="pick-base-color-input-tools" class="pick-base-color-input-tools"></div>
-				<div id="base-color-picker" class="base-color-picker"></div>
-				</div>
-				<div id="errors-display" class="errors-display"></div>
-		</div>
-		<div id="colors-display" class="display"></div>
+<body>
+	<div class="page header skeleton">
+		<h1 class="page title item">Colors I Like</h1>
+		<h2 class="page subtitle item">Pretty colors in Hex, RGB, and HSL</h2>
+	</div>
+
+	<div class="page input skeleton">
 	
+		<div class="page left wrapper">
+			<h3 class="page section-title item">Add Your Own Color</h3>
+			<!-- these two have static children in the js  -->
+			<div id="add-your-own-color" class="page ac-input section"></div>
+			<div id="add-your-own-color-edit-list-menu" class="page ac-menu section"></div>
+			<!-- this is conditionally displayed -->
+			<div id="list-edit-tools" class="page ac-edit section"></div>
+		</div>
+		<div class="page section-title or-block item"><strong>or</strong></div>
+		
+		<div class="page right wrapper">
+			<h3 class="page section-title item">Pick a Base Color</h3>
+			<div id="pick-base-color-input-tools" class="page bc-input section"></div>
+			<div id="base-color-picker" class="page bc-menu section"></div>
+		</div>
+		<div id="errors-display" class="page errors item"></div>
+		</div>
+	<div id="colors-display" class="list color framework"></div>
 
-	</body>
+
+</body>
+
 </html>
