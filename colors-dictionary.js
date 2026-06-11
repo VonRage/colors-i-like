@@ -140,3 +140,7 @@ const cssColors = {
   "#ffff00": "yellow",
   "#9acd32": "yellowgreen"
 };
+const megaArray = [
+  ...Object.values(cssColors),
+  ...Object.keys(cssColors)
+];
